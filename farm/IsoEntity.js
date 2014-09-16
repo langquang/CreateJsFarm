@@ -1,5 +1,5 @@
-this.createjs = this.createjs || {};
-this.stage = this.stage || {};
+//this.createjs = this.createjs || {};
+//this.stage = this.stage || {};
 
 var IsoEntity = function (entityId, texture) {
     this.initialize(entityId, texture);
@@ -10,16 +10,34 @@ var p = IsoEntity.prototype;
 p.entityId = "";
 p.texture = "";
 p.sprite = null;
+p._x = 0;
+p._y = 0;
+p.loader = null;
+
+
+p.setPosition = function (x, y) {
+    if (this.sprite != null) {
+        this.sprite.x = x;
+        this.sprite.y = y;
+    }
+    else {
+        this._x = x;
+        this._y = y;
+    }
+};
+
 
 // this != this
 p.handleEvt = function (evt) {
     if (evt.type == "rollover") {
         this.sprite.scaleX = 1.1;
         this.sprite.scaleY = 1.1;
+        canpan = false;
     }
     else if (evt.type == "rollout") {
         this.sprite.scaleX = 1.0;
         this.sprite.scaleY = 1.0;
+        canpan = true;
     }
     else if (evt.type == "mousedown") {
         this.sprite.scaleX = 1.0;
@@ -34,15 +52,21 @@ p.handleEvt = function (evt) {
 
 // this != this
 p.loadDataCompleted = function (evt) {
-    document.getElementById("loader").className = "";
+//    document.getElementById("loader").className = "";
     // Define a spritesheet. Note that this data was exported by Zoë.
-    var ss = new createjs.SpriteSheet(loader.getResult("building"));
+    var ss = new createjs.SpriteSheet(this.loader.getResult(this.entityId));
     this.sprite = new createjs.Sprite(ss);
-    this.sprite.x = 360;
-    this.sprite.y = 200;
+    this.sprite.x = this._x;
+    this.sprite.y = this._y;
     this.sprite.gotoAndPlay(0);
-    // Add sprite to the stage, and add it as a listener to Ticker to get updates each frame.
-    stage.addChild(this.sprite);
+
+//    this.sprite = new createjs.Shape();
+//    this.sprite .graphics.beginFill("red").drawCircle(0, 0, 50);
+//    this.sprite .x = this._x;
+//    this.sprite .y = this._y;
+
+    // Add sprite to the isoContainer, and add it as a listener to Ticker to get updates each frame.
+    isoContainer.addChild(this.sprite);
 
     this.sprite.on("click", this.handleEvt, this);
     this.sprite.on("dblclick", this.handleEvt, this);
@@ -55,13 +79,13 @@ p.loadDataCompleted = function (evt) {
 
 p.loadData = function () {
     var manifest = [
-        {src: this.texture, id: "building"}
+        {src: this.texture, id: this.entityId}
     ];
 
     // loader is global
-    loader = new createjs.LoadQueue(false);
-    var listener = loader.on("complete", this.loadDataCompleted, this);
-    loader.loadManifest(manifest);
+    this.loader = new createjs.LoadQueue();
+    this.loader.on("complete", this.loadDataCompleted, this);
+    this.loader.loadManifest(manifest);
 };
 
 p.initialize = function (entityId, texture) {
