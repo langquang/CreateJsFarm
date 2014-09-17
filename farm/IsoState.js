@@ -13,6 +13,7 @@ p.isoContainer = null;
 // ============
 p._isoLastMouseDown = null;
 p._isoIsPanning = false;
+p.children = [];
 
 // =========================== functions ======================================
 p.handleOnStageMove = function (evt) {
@@ -47,19 +48,27 @@ p.registerEvents = function () {
 
 p.createEnities = function () {
 
-    for(var i = 0; i< 50; i++)
-    {
-        var  entity = new IsoEntity("butin", "assets/building.json");
-        entity.setPosition(Math.random()*800, Math.random()*600);
+    var id = 0;
+    for (var i = 20; i >0; i--) {
+        for(var j = 0; j < 10; j++)
+        {
+            var entity = new IsoEntity("butin" + id, "assets/building.json");
+            entity.setIsoPosition(1000 + j*70, -500+ i*70);
+            this.children.push(entity);
+            id++;
+        }
+
     }
-
-
-    var  entity2 = new IsoEntity("butin2", "assets/runningGrant.json");
-    entity2.setPosition(600, 600);
-
-    var  entity3 = new IsoEntity("butin", "assets/building.json");
-    entity3.setPosition(400, 600);
+//
+//    var entity = new IsoEntity("butin0", "assets/building.json");
+//    entity.setIsoPosition(500,  0);
+//    this.children.push(entity);
+//
+//    var entity2 = new IsoEntity("butin1", "assets/building.json");
+//    entity2.setIsoPosition(600,  0);
+//    this.children.push(entity2);
 };
+
 
 p.initialize = function (rootContainer, background, isoContainer) {
     this.rootContainer = rootContainer;

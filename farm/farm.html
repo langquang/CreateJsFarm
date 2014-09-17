@@ -5,6 +5,21 @@
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <link href="assets/farmStyles.css" rel="stylesheet" type="text/css"/>
 
+    <style>
+
+        canvas {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        #farmCanvas {
+            border: 1px solid white;
+        }
+    </style>
+
     <!-- Note: All core EaselJS classes are listed here: -->
     <script type="text/javascript" src="../src/createjs/events/Event.js"></script>
     <script type="text/javascript" src="../src/createjs/events/EventDispatcher.js"></script>
@@ -46,6 +61,7 @@
 
     <script type="text/javascript" src="sylvester.src.js"></script>
     <script type="text/javascript" src="IsoEntity.js"></script>
+    <script type="text/javascript" src="Helper.js"></script>
     <script type="text/javascript" src="IsoState.js"></script>
 
 
@@ -98,7 +114,6 @@
 
             // ==================================== Instance =========================================
             isoState = new IsoState(gameContainer, background, isoContainer);
-
             // ===================================  stats ============================================
             stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "14px Arial", "#FFF");
             stageLocLabel.x = 10;
@@ -127,6 +142,7 @@
         }
 
         function tick(event) {
+            zorder(isoState.children);
             fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
             stage.update(event);
         }
@@ -145,7 +161,8 @@
 <div id="loader"></div>
 <header id="header" class="EaselJS">
 </header>
-
-<canvas id="farmCanvas" width="936" height="640"></canvas>
+<div id="content">
+    <canvas id="farmCanvas" width="1028" height="768"></canvas>
+</div>
 </body>
 </html>

@@ -10,28 +10,35 @@ var p = IsoEntity.prototype;
 p.entityId = "";
 p.texture = "";
 p.sprite = null;
-p._x = 0;
-p._y = 0;
+p.x = 0;
+p.y = 0;
+p.isoX = 0;
+p.isoY = 0;
 p.loader = null;
 
 
 p.setPosition = function (x, y) {
+    this.x = x;
+    this.y = y;
     if (this.sprite != null) {
         this.sprite.x = x;
         this.sprite.y = y;
     }
-    else {
-        this._x = x;
-        this._y = y;
-    }
+};
+
+p.setIsoPosition = function (x, y) {
+    this.isoX = x;
+    this.isoY = y;
+    var screenP = isoToScreen($V([x,y,0]));
+    this.setPosition(screenP.e(1), screenP.e(2));
 };
 
 
 // this != this
 p.handleEvt = function (evt) {
     if (evt.type == "rollover") {
-        this.sprite.scaleX = 1.1;
-        this.sprite.scaleY = 1.1;
+//        this.sprite.scaleX = 1.1;
+//        this.sprite.scaleY = 1.1;
         canpan = false;
     }
     else if (evt.type == "rollout") {
@@ -47,6 +54,14 @@ p.handleEvt = function (evt) {
     else if (evt.type == "pressmove") {
         this.sprite.x = evt.stageX + this.sprite.offset.x;
         this.sprite.y = evt.stageY + this.sprite.offset.y;
+
+        var screenP = $V([this.sprite.x, this.sprite.y, 0]);
+        var isoP = screenToIso(screenP);
+//        this.isoX = isoP.e(1);
+//        this.isoY = isoP.e(2);
+//        console.log(this.isoX,this.isoY);
+
+        this.setIsoPosition(isoP.e(1), isoP.e(2));
     }
 };
 
@@ -56,17 +71,13 @@ p.loadDataCompleted = function (evt) {
     // Define a spritesheet. Note that this data was exported by Zoë.
     var ss = new createjs.SpriteSheet(this.loader.getResult(this.entityId));
     this.sprite = new createjs.Sprite(ss);
-    this.sprite.x = this._x;
-    this.sprite.y = this._y;
+    this.sprite.x = this.x;
+    this.sprite.y = this.y;
     this.sprite.gotoAndPlay(0);
-
-//    this.sprite = new createjs.Shape();
-//    this.sprite .graphics.beginFill("red").drawCircle(0, 0, 50);
-//    this.sprite .x = this._x;
-//    this.sprite .y = this._y;
 
     // Add sprite to the isoContainer, and add it as a listener to Ticker to get updates each frame.
     isoContainer.addChild(this.sprite);
+    zorder(isoState.children);
 
     this.sprite.on("click", this.handleEvt, this);
     this.sprite.on("dblclick", this.handleEvt, this);

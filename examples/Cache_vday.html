@@ -102,7 +102,7 @@
 		for (var i=0; i<l; i++) {
 			var heart = container.getChildAt(i);
 			if (heart.y < -50) {
-				heart._x = Math.random()*w;
+				heart.x = Math.random()*w;
 				heart.y = h*(1+Math.random())+50;
 				heart.perX = (1+Math.random())*h;
 				heart.offX = Math.random()*h;
@@ -113,7 +113,7 @@
 				heart.alpha = Math.random();
 			}
 			heart.y += heart.velY;
-			heart.x = heart._x + Math.cos((heart.offX+heart.y)/heart.perX*Math.PI*2)*heart.ampX;
+			heart.x = heart.x + Math.cos((heart.offX+heart.y)/heart.perX*Math.PI*2)*heart.ampX;
 		}
 
 		captureContainer.updateCache("source-over");
