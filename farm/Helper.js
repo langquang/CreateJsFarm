@@ -1,13 +1,14 @@
 //this.createjs = this.createjs || {};
 
+var CELL_SIZE = 30;
+
 var dependency = {};
 var visited = {};
 var depth = 0;
 
 function zorder(children) {
 
-    if(children.length < 2)
-    {
+    if (children.length < 2) {
         return;
     }
 
@@ -17,8 +18,8 @@ function zorder(children) {
     for (i = 0; i < max; ++i) {
         var behind = [];
         var objA = children[i];
-        var rightA = objA.isoX;
-        var frontA = objA.isoY;
+        var rightA = objA.isoX + 60;
+        var frontA = objA.isoY + 60;
 
         for (var j = 0; j < max; ++j) {
             var objB = children[j];
@@ -51,22 +52,91 @@ function place(obj) {
         if (true != visited[inner.entityId])
             place(inner);
     }
-    if( obj.sprite != null ){
-        isoContainer.setChildIndex(obj.sprite, depth);
+    if (obj.sprite != null) {
+        gIsoContainer.setChildIndex(obj.sprite, depth);
         //console.log(obj.entityId, depth);
         ++depth;
     }
 
 }
 
-function screenToIso(screenPt){
-    var  y = screenPt.e(2) - screenPt.e(1) / 2;
-    var  x = screenPt.e(1) / 2 + screenPt.e(2);
-    return $V([x,y,0]);
+/**
+ *
+ * @param screenPt : Vector
+ * @returns {Vector}
+ */
+function screenToIso(screenPt) {
+    var y = screenPt.e(2) - screenPt.e(1) / 2;
+    var x = screenPt.e(1) / 2 + screenPt.e(2);
+    return $V([x, y, 0]);
 }
 
-function isoToScreen(isoPt){
-    var  y = (isoPt.e(1) + isoPt.e(2)) / 2;
-    var  x = isoPt.e(1) - isoPt.e(2);
-    return $V([x,y,0]);
+/**
+ *
+ * @param isoPt : Vector
+ * @returns {Vector}
+ */
+function isoToScreen(isoPt) {
+    var y = (isoPt.e(1) + isoPt.e(2)) / 2;
+    var x = isoPt.e(1) - isoPt.e(2);
+    return $V([x, y, 0]);
+}
+
+/**
+ *
+ * @param stageX : Number
+ * @param stageY : Number
+ * @returns {Vector}
+ */
+function stageToScreen(stageX, stageY) {
+    var sP = gIsoContainer.globalToLocal(stageX, stageY);
+    return $V([sP.x, sP.y, 0]);
+}
+
+/**
+ *
+ * @param stageX : Number
+ * @param stageY : Number
+ * @returns {Vector}
+ */
+function stageToIso(stageX, stageY) {
+    var sP = stageToScreen(stageX, stageY);
+    return screenToIso(sP);
+}
+
+/**
+ *
+ * @param stageX : Number
+ * @param stageY : Number
+ * @returns {Vector}
+ */
+function stageToCell(stageX, stageY) {
+    var isoP = stageToIso(stageX, stageY);
+    return $V([getCell(isoP.e(1)), getCell(isoP.e(2)), 0]);
+}
+
+/**
+ *
+ * @param iso : Number isometric position
+ * @returns {number} floor to Cell
+ */
+function getCell(iso) {
+    return Math.floor(iso / CELL_SIZE);
+}
+
+/**
+ *
+ * @param iso : Number isometric position
+ * @returns {number}: floor to Cell
+ */
+function snap(iso) {
+    var cell = getCell(iso);
+    return cell * CELL_SIZE;
+}
+
+
+function cellToScreen(cellX, cellY)
+{
+    var isoP =  $V([cellX*CELL_SIZE, cellY*CELL_SIZE, 0]);
+    return isoToScreen(isoP);
 }

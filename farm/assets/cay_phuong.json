@@ -3,17 +3,17 @@
     {
 	},
   "images": [
-    "assets/building.png"
+    "assets/cay_phuong.png"
   ],
   "frames": [
     [
       0,
       0,
-      135,
-      205,
+      159,
+      136,
       0,
-      60.5,
-      125.95
+      61.9,
+      71.5
     ]
   ]
 }

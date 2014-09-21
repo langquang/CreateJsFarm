@@ -1,0 +1,13 @@
+{
+    "animations":
+    {
+	},
+  "images": [
+    "assets/chua.png"
+  ],
+  "frames": [
+    [
+0,0,192,160,0,95.5,65.5
+    ]
+  ]
+}

@@ -70,81 +70,119 @@
 
     <script>
 
-        var canvas;
-        var stage;
+        var gCanvas;
+        var gStage;
         var fpsLabel;
         var loader;
         var stageLocLabel;
-        var background;
+        var stageLocLabel2;
+        var gBackground;
         // container
-        var gameContainer;
-        var isoContainer;
+        var gGameContainer;
+        var gGridContainer;
+        var gRoadsContainer;
+        var gIsoContainer;
+        var gCursorsContainer;
         // instance
-        var isoState;
-        var canpan = true;
+        var gIsoState;
+        var gCanpan = true;
         // constance
         var stageWidth, stageHeight;
+        var gAnchorX = 2452;
+        var gAnchorY = 856;
 
 
         function init() {
             //=================================== Stage =============================================
             //find canvas
-            canvas = document.getElementById("farmCanvas");
-            stageWidth = canpan.width;
-            stageHeight = canpan.height;
-            // create a new stage and point it at our canvas:
-            stage = new createjs.Stage(canvas);
-            // to get onMouseOver & onMouseOut events, we need to enable them on the stage:
-            stage.enableMouseOver();
+            gCanvas = document.getElementById("farmCanvas");
+            stageWidth = gCanvas.width;
+            stageHeight = gCanvas.height;
+            // create a new gStage and point it at our canvas:
+            gStage = new createjs.Stage(gCanvas);
+            // to get onMouseOver & onMouseOut events, we need to enable them on the gStage:
+            gStage.enableMouseOver();
             // mousemove
-            stage.mouseMoveOutside = true;
+            gStage.mouseMoveOutside = true;
 
-            //====================================== background ======================================
-            background = new createjs.Bitmap("assets/background.jpg");
+            //====================================== gBackground ======================================
+            gBackground = new createjs.Bitmap("assets/background.jpg");
 
             //===================================== container ========================================
             // layer 0
-            gameContainer = new createjs.Container();
-            stage.addChild(gameContainer);
+            gGameContainer = new createjs.Container();
+            gStage.addChild(gGameContainer);
             // layer 1
-            gameContainer.addChild(background);
+            gGameContainer.addChild(gBackground);
             // layer 2
-            isoContainer = new createjs.Container();
-            gameContainer.addChild(isoContainer);
+            gGridContainer = new createjs.Container();
+            gGridContainer.x = gAnchorX;
+            gGridContainer.y = gAnchorY;
+            gGameContainer.addChild(gGridContainer);
+            // layer 3
+            gRoadsContainer = new createjs.Container();
+            gRoadsContainer.x = gAnchorX;
+            gRoadsContainer.y = gAnchorY;
+            gGameContainer.addChild(gRoadsContainer);
+            // layer 4
+            gIsoContainer = new createjs.Container();
+            gIsoContainer.x = gAnchorX;
+            gIsoContainer.y = gAnchorY;
+            gGameContainer.addChild(gIsoContainer);
+            // layer 5
+            gCursorsContainer = new createjs.Container();
+            gCursorsContainer.x = gAnchorX;
+            gCursorsContainer.y = gAnchorY;
+            gGameContainer.addChild(gCursorsContainer);
 
             // ==================================== Instance =========================================
-            isoState = new IsoState(gameContainer, background, isoContainer);
+            gIsoState = new IsoState();
             // ===================================  stats ============================================
-            stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "14px Arial", "#FFF");
+            stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "bold 14px Arial", "#000");
             stageLocLabel.x = 10;
             stageLocLabel.y = 5;
-            stage.addChild(stageLocLabel);
+            stageLocLabel.outline = 4;
+            gStage.addChild(stageLocLabel);
+
+            var stageLocLabel2 = stageLocLabel.clone();
+            stageLocLabel2.outline = false;
+            stageLocLabel2.color = "#fff";
+            gStage.addChild(stageLocLabel2);
 
             // add a text object to output the current FPS:
             fpsLabel = new createjs.Text("-- fps", "bold 14px Arial", "#FFF");
-            stage.addChild(fpsLabel);
+            gStage.addChild(fpsLabel);
             fpsLabel.x = 10;
             fpsLabel.y = 20;
 
-            // start the tick and point it at the window so we can do some work before updating the stage:
+            // start the tick and point it at the window so we can do some work before updating the gStage:
             createjs.Ticker.setFPS(60);
             createjs.Ticker.addEventListener("tick", tick);
-            stage.on("stagemousemove", function (evt) {
-                stageLocLabel.text = "stageX/Y: " + evt.stageX + "," + evt.stageY; // always in bounds
+            gStage.on("stagemousemove", function (evt) {
+                stageLocLabel.text = "stage: " + evt.stageX + "," + evt.stageY + "\t\t";
+                var screenP = stageToScreen(evt.stageX, evt.stageY);
+                stageLocLabel.text += "screen: " + screenP.e(1) + "," + screenP.e(2) + "\t\t";
+                var isoP = stageToIso(evt.stageX, evt.stageY);
+                stageLocLabel.text += "iso: " + isoP.e(1) + "," + isoP.e(2) + "\t\t";
+                var cell = stageToCell(evt.stageX, evt.stageY);
+                stageLocLabel.text += "cell: " + cell.e(1) + "," + cell.e(2) + "\t\t";
+
+                stageLocLabel2.text = stageLocLabel.text;
+
             });
 
             // =================================== Global Event ===========================================
             // attach mouse handlers directly to the source canvas.
             // better than calling from canvas tag for cross browser compatibility:
-            stage.addEventListener("stagemousemove", moveCanvas);
-            stage.addEventListener("stagemousedown", clickCanvas);
+            gStage.addEventListener("stagemousemove", moveCanvas);
+            gStage.addEventListener("stagemousedown", clickCanvas);
 
         }
 
         function tick(event) {
-            zorder(isoState.children);
+            zorder(gIsoState.children);
             fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
-            stage.update(event);
+            gStage.update(event);
         }
 
         function clickCanvas(evt) {

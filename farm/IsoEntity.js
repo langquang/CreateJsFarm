@@ -39,12 +39,12 @@ p.handleEvt = function (evt) {
     if (evt.type == "rollover") {
 //        this.sprite.scaleX = 1.1;
 //        this.sprite.scaleY = 1.1;
-        canpan = false;
+        gCanpan = false;
     }
     else if (evt.type == "rollout") {
         this.sprite.scaleX = 1.0;
         this.sprite.scaleY = 1.0;
-        canpan = true;
+        gCanpan = true;
     }
     else if (evt.type == "mousedown") {
         this.sprite.scaleX = 1.0;
@@ -57,11 +57,7 @@ p.handleEvt = function (evt) {
 
         var screenP = $V([this.sprite.x, this.sprite.y, 0]);
         var isoP = screenToIso(screenP);
-//        this.isoX = isoP.e(1);
-//        this.isoY = isoP.e(2);
-//        console.log(this.isoX,this.isoY);
-
-        this.setIsoPosition(isoP.e(1), isoP.e(2));
+        this.setIsoPosition(snap(isoP.e(1)), snap(isoP.e(2)));
     }
 };
 
@@ -73,11 +69,11 @@ p.loadDataCompleted = function (evt) {
     this.sprite = new createjs.Sprite(ss);
     this.sprite.x = this.x;
     this.sprite.y = this.y;
-    this.sprite.gotoAndPlay(0);
+    this.sprite.gotoAndStop(0);
 
     // Add sprite to the isoContainer, and add it as a listener to Ticker to get updates each frame.
-    isoContainer.addChild(this.sprite);
-    zorder(isoState.children);
+    gIsoContainer.addChild(this.sprite);
+    zorder(gIsoState.children);
 
     this.sprite.on("click", this.handleEvt, this);
     this.sprite.on("dblclick", this.handleEvt, this);

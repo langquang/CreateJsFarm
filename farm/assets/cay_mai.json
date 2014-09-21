@@ -1,0 +1,13 @@
+{
+    "animations":
+    {
+	},
+  "images": [
+    "assets/cay_mai.png"
+  ],
+  "frames": [
+    [
+0,0,150,132,0,68.2,68.2
+    ]
+  ]
+}
