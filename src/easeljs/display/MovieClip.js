@@ -509,9 +509,9 @@ var p = MovieClip.prototype = new createjs.Container();
 
 		// update timeline position, ignoring actions if this is a graphic.
 		if (synched) {
-			tl.setPosition(this.startPosition + (this.mode==MovieClip.SINGLE_FRAME?0:this._synchOffset), createjs.Tween.NONE);
+			tl._setPosition(this.startPosition + (this.mode==MovieClip.SINGLE_FRAME?0:this._synchOffset), createjs.Tween.NONE);
 		} else {
-			tl.setPosition(this._prevPos < 0 ? 0 : this._prevPosition, this.actionsEnabled ? null : createjs.Tween.NONE);
+			tl._setPosition(this._prevPos < 0 ? 0 : this._prevPosition, this.actionsEnabled ? null : createjs.Tween.NONE);
 		}
 
 		this._prevPosition = tl._prevPosition;

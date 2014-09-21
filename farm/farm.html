@@ -62,6 +62,7 @@
     <script type="text/javascript" src="sylvester.src.js"></script>
     <script type="text/javascript" src="IsoEntity.js"></script>
     <script type="text/javascript" src="Helper.js"></script>
+    <script type="text/javascript" src="Cursor.js"></script>
     <script type="text/javascript" src="IsoState.js"></script>
 
 
@@ -86,6 +87,7 @@
         // instance
         var gIsoState;
         var gCanpan = true;
+        var gCursor;
         // constance
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
@@ -136,6 +138,7 @@
             gGameContainer.addChild(gCursorsContainer);
 
             // ==================================== Instance =========================================
+            gCursor = new Cursor();
             gIsoState = new IsoState();
             // ===================================  stats ============================================
             stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "bold 14px Arial", "#000");
@@ -174,8 +177,10 @@
             // =================================== Global Event ===========================================
             // attach mouse handlers directly to the source canvas.
             // better than calling from canvas tag for cross browser compatibility:
-            gStage.addEventListener("stagemousemove", moveCanvas);
-            gStage.addEventListener("stagemousedown", clickCanvas);
+            gStage.addEventListener("stagemousemove", onGameMove);
+            gStage.addEventListener("stagemousedown", onGameDown);
+            gStage.addEventListener("stagemouseup", onGameUp);
+            gStage.addEventListener("click", onGameclick);
 
         }
 
@@ -185,12 +190,23 @@
             gStage.update(event);
         }
 
-        function clickCanvas(evt) {
-
+        function onGameclick(evt) {
+            gCursor.handleOnStageClick(evt);
         }
 
-        function moveCanvas(evt) {
+        function onGameMove(evt) {
+            gIsoState.handleOnStageMove(evt);
+            gCursor.handleOnStageMove(evt);
+        }
 
+        function onGameDown(evt) {
+            gIsoState.handleOnStageMouseDown(evt);
+            gCursor.handleOnStageMouseDown(evt);
+        }
+
+        function onGameUp(evt) {
+            gIsoState.handleOnStageMouseUp(evt);
+            gCursor.handleOnStageMouseUp(evt);
         }
 
     </script>

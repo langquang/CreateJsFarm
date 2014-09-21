@@ -12,6 +12,7 @@ var p = IsoState.prototype;
 p._isoLastMouseDown = null;
 p._isoIsPanning = false;
 p.children = [];
+p._genId = 0;
 
 // =========================== functions ======================================
 p.handleOnStageMove = function (evt) {
@@ -46,34 +47,23 @@ p.handleOnStageMouseDown = function (evt) {
 
 p.handleOnStageMouseUp = function (evt) {
     this._isoLastMouseDown = null;
+    this._isoIsPanning = false;
 };
 
-p.registerEvents = function () {
-    gStage.on("stagemousemove", this.handleOnStageMove, this);
-    gStage.on("stagemousedown", this.handleOnStageMouseDown, this);
-    gStage.on("stagemouseup", this.handleOnStageMouseUp, this);
+p.isPanning = function(){
+  return this._isoIsPanning;
 };
 
 p.createEnities = function () {
-
-//    var id = 0;
-//    for (var i = 10; i >= 0; i--) {
-//        for (var j = 0; j < 10; j++) {
-//            var entity = new IsoEntity("butin" + id, "assets/house2136.json");
-//            entity.setIsoPosition(0 + j * 60, 0 + i * 60);
-//            this.children.push(entity);
-//            id++;
+//    for (var i = 20; i >= 0; i--) {
+//        for (var j = 20; j >= 0; j--) {
+//             this.createIsoEntity("building", i*2,j*2);
 //        }
 //
 //    }
-//
-//    var entity = new IsoEntity("butin0", "assets/building.json");
-//    entity.setIsoPosition(500,  0);
-//    this.children.push(entity);
-//
-//    var entity2 = new IsoEntity("butin1", "assets/building.json");
-//    entity2.setIsoPosition(600,  0);
-//    this.children.push(entity2);
+
+    var entity = this.createIsoEntity("building", 10,10);
+    gCursor.setCursor(entity);
 
     this.showGrid(true, 0, 0, 40);
 };
@@ -115,20 +105,36 @@ p.showGrid = function (isVisible, cellX, cellY, size) {
     }
 
     gGridContainer.addChild(s);
-    this.centerOnCell(0,0);
+    this.centerOnCell(0, 0);
 
 
 };
 
-p.centerOnCell = function(cellX, cellY){
+/**
+ *
+ * @param cellX : int
+ * @param cellY : int
+ */
+p.centerOnCell = function (cellX, cellY) {
     var screenP = cellToScreen(cellX, cellY);
-    gGameContainer.x = screenP.e(1) - gAnchorX + stageWidth/2;
-    gGameContainer.y = screenP.e(2) - gAnchorY + stageHeight/2;
+    gGameContainer.x = screenP.e(1) - gAnchorX + stageWidth / 2;
+    gGameContainer.y = screenP.e(2) - gAnchorY + stageHeight / 2;
 
+};
+
+/**
+ *
+ */
+p.createIsoEntity = function (building_type, cellX, cellY) {
+    this._genId++;
+    var entity = new IsoEntity(building_type, this._genId, "assets/" + building_type + ".json");
+    entity.setCellPosition(cellX, cellY);
+    gIsoContainer.addChild(entity);
+    this.children.push(entity);
+    return entity;
 };
 
 
 p.initialize = function () {
     this.createEnities();
-    this.registerEvents();
 };

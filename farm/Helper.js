@@ -52,12 +52,9 @@ function place(obj) {
         if (true != visited[inner.entityId])
             place(inner);
     }
-    if (obj.sprite != null) {
-        gIsoContainer.setChildIndex(obj.sprite, depth);
-        //console.log(obj.entityId, depth);
-        ++depth;
-    }
-
+    gIsoContainer.setChildIndex(obj, depth);
+    //console.log(obj.entityId, depth);
+    ++depth;
 }
 
 /**
@@ -135,8 +132,7 @@ function snap(iso) {
 }
 
 
-function cellToScreen(cellX, cellY)
-{
-    var isoP =  $V([cellX*CELL_SIZE, cellY*CELL_SIZE, 0]);
+function cellToScreen(cellX, cellY) {
+    var isoP = $V([cellX * CELL_SIZE, cellY * CELL_SIZE, 0]);
     return isoToScreen(isoP);
 }
