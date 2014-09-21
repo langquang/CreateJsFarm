@@ -1,6 +1,9 @@
 //this.createjs = this.createjs || {};
 //this.stage = this.stage || {};
 
+var ENTITY_TYPE_ROAD = "road";
+var ENTITY_TYPE_BUILDING = "buidling";
+
 var IsoEntity = function (buildingId, entityId, texture) {
     this.initialize(buildingId, entityId, texture);
 };
@@ -9,8 +12,9 @@ var p = IsoEntity.prototype = new createjs.Container();
 
 
 //============================== propertys
-p.buildingId;
-p.entityId = "";
+p.buildingId = 0;   // ref to Constance
+p.entityId = "";    // identify
+p.entityType = ENTITY_TYPE_BUILDING;
 p.texture = "";
 p.sprite = null;
 p.isoX = 0;
@@ -18,6 +22,12 @@ p.isoY = 0;
 p.cellX = 0;
 p.cellY = 0;
 p.loader = null;
+p.sizeX = 2;    // cell size
+p.sizeY = 2;    // cell size
+p.half_sizeX = 1;    // cell size
+p.half_sizeY = 1;    // cell size
+p._data = null; // constance data
+p._startFrame = 0;
 // ============================ function
 
 p._setPosition = function (x, y) {
@@ -68,9 +78,15 @@ p.handleEvt = function (evt) {
 
 // this != this
 p.loadDataCompleted = function (evt) {
-    var ss = new createjs.SpriteSheet(this.loader.getResult(this.entityId));
+    this._data = this.loader.getResult(this.entityId).data;
+    this.sizeX = this._data.width;
+    this.sizeY = this._data.height;
+    this.half_sizeX = this.sizeX / 2;
+    this.half_sizeY = this.sizeY / 2;
+    var animation_data = this.loader.getResult(this.entityId).anim;
+    var ss = new createjs.SpriteSheet(animation_data);
     this.sprite = new createjs.Sprite(ss);
-    this.sprite.gotoAndPlay(0);
+    this.sprite.gotoAndStop(this._startFrame);
     this.addChild(this.sprite);
 
 //    this.sprite.x = this.x;
@@ -88,6 +104,26 @@ p.loadDataCompleted = function (evt) {
 
 p.onCursorClick = function () {
     console.log("onCursorClick");
+};
+
+p.onCreatedByCursorClick = function (current_cursor) {
+    console.log("onCreatedByCursorClick");
+};
+
+p.gotoAndStop = function(frame_index){
+  this._startFrame = frame_index;
+  if( this.sprite != null ){
+      this.sprite.gotoAndStop(frame_index);
+  }
+};
+
+p.gotoAndPlay = function(frame_index){
+    if( this.sprite == null ){
+        this._startFrame = frame_index;
+    }else{
+        this.sprite.gotoAndPlay(frame_index);
+        this.sprite.update();
+    }
 };
 
 

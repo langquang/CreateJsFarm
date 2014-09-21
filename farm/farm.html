@@ -60,7 +60,10 @@
     <script type="text/javascript" src="../src/easeljs/filters/ColorMatrixFilter.js"></script>
 
     <script type="text/javascript" src="sylvester.src.js"></script>
+    <script type="text/javascript" src="HashTable.js"></script>
     <script type="text/javascript" src="IsoEntity.js"></script>
+    <script type="text/javascript" src="Road.js"></script>
+    <script type="text/javascript" src="Map.js"></script>
     <script type="text/javascript" src="Helper.js"></script>
     <script type="text/javascript" src="Cursor.js"></script>
     <script type="text/javascript" src="IsoState.js"></script>
@@ -88,6 +91,7 @@
         var gIsoState;
         var gCanpan = true;
         var gCursor;
+//        var gMap;
         // constance
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
@@ -138,6 +142,7 @@
             gGameContainer.addChild(gCursorsContainer);
 
             // ==================================== Instance =========================================
+//            gMap = new IsoMap();
             gCursor = new Cursor();
             gIsoState = new IsoState();
             // ===================================  stats ============================================
