@@ -7,7 +7,7 @@ var IsoRoad = function (buildingId, entityId, texture) {
     this.initialize(buildingId, entityId, texture);
 };
 
-var p = IsoRoad.prototype = IsoEntity.prototype;
+var p = IsoRoad.prototype = Object.create(IsoEntity.prototype);
 
 //======================================= override ================================
 IsoRoad.prototype.IsoEntity_onCreatedByCursorClick = p.onCreatedByCursorClick;

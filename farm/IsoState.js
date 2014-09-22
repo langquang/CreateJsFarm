@@ -63,10 +63,10 @@ p.createEnities = function () {
 //
 //    }
 
-    var entity = this.createIsoEntity(ENTITY_TYPE_ROAD, "road", 10, 10);
+    var entity = this.createIsoEntity(ENTITY_TYPE_BUILDING, "buildings_025_cottage", 10, 10);
     gCursor.setCursor(entity);
 
-//    this.showGrid(true, 0, 0, 40);
+    this.showGrid(true, 0, 0, 40);
 };
 
 /**
@@ -128,6 +128,10 @@ p.createIsoEntity = function (entity_type, building_type, cellX, cellY) {
     var entity = null;
     if (entity_type == ENTITY_TYPE_ROAD) {
         entity = new IsoRoad(building_type, this._genId, "assets/" + building_type + ".json");
+    }
+    else if( entity_type == ENTITY_TYPE_BUILDING )
+    {
+        entity = new IsoBuidling(building_type, this._genId, "assets/" + building_type + ".json");
     }
     else {
         entity = new IsoEntity(building_type, this._genId, "assets/" + building_type + ".json");

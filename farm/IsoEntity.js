@@ -89,6 +89,12 @@ p.loadDataCompleted = function (evt) {
     this.sprite.gotoAndStop(this._startFrame);
     this.addChild(this.sprite);
 
+    // move anchor o top-left
+//    var offset = $V([Math.floor((this.sizeX - 1) * CELL_SIZE / 2), Math.floor((this.sizeY - 1) * CELL_SIZE / 2)]);
+//    offset = isoToScreen(offset);
+//    this.sprite.x = +offset.e(1);
+//    this.sprite.y = +offset.e(2);
+
 //    this.sprite.x = this.x;
 //    this.sprite.y = this.y;
 //    gIsoContainer.addChild(this.sprite);
@@ -110,17 +116,17 @@ p.onCreatedByCursorClick = function (current_cursor) {
     console.log("onCreatedByCursorClick");
 };
 
-p.gotoAndStop = function(frame_index){
-  this._startFrame = frame_index;
-  if( this.sprite != null ){
-      this.sprite.gotoAndStop(frame_index);
-  }
+p.gotoAndStop = function (frame_index) {
+    this._startFrame = frame_index;
+    if (this.sprite != null) {
+        this.sprite.gotoAndStop(frame_index);
+    }
 };
 
-p.gotoAndPlay = function(frame_index){
-    if( this.sprite == null ){
+p.gotoAndPlay = function (frame_index) {
+    if (this.sprite == null) {
         this._startFrame = frame_index;
-    }else{
+    } else {
         this.sprite.gotoAndPlay(frame_index);
         this.sprite.update();
     }
