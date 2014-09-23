@@ -1,0 +1,205 @@
+{
+	"items":{
+		"1" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"2" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"3" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"4" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"5" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"6" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"7" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"8" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"9" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"10" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"11" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"12" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"13" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		},
+		"14" : {
+			"texture" : "buildings_025_cottage",
+			"name" : "cottage",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300
+		}
+	},
+  "tabs": {
+		"house": [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  },
+  "anim": {
+    "animations":
+    {
+	},
+    "images": [
+      "assets/window_shop.png"
+    ],
+    "frames": [
+  [
+    0,
+    0,
+    714,
+    494,
+    0,
+    357,
+    278.2
+  ],
+  [
+    714,
+    0,
+    152,
+    170,
+    0,
+    0,
+    -0.8000000000000114
+  ],
+  [
+    714,
+    170,
+    64,
+    51,
+    0,
+    0,
+    -6.800000000000011
+  ],
+  [
+    714,
+    221,
+    64,
+    51,
+    0,
+    0,
+    -5.800000000000011
+  ],
+  [
+    714,
+    272,
+    31,
+    65,
+    0,
+    15,
+    31.19999999999999
+  ],
+  [
+    714,
+    337,
+    31,
+    65,
+    0,
+    15,
+    31.19999999999999
+  ],
+  [
+    0,
+    494,
+    35,
+    37,
+    0,
+    17,
+    17.19999999999999
+  ],
+  [
+    35,
+    494,
+    35,
+    37,
+    0,
+    17,
+    17.19999999999999
+  ],
+  [
+    714,
+    402,
+    31,
+    65,
+    0,
+    15,
+    31.19999999999999
+  ],
+  [
+    714,
+    467,
+    31,
+    65,
+    0,
+    15,
+    31.19999999999999
+  ]
+]
+  }
+}

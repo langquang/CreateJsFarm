@@ -63,8 +63,8 @@ p.createEnities = function () {
 //
 //    }
 
-    var entity = this.createIsoEntity(ENTITY_TYPE_BUILDING, "buildings_025_cottage", 10, 10);
-    gCursor.setCursor(entity);
+//    var entity = this.createIsoEntity(ENTITY_TYPE_BUILDING, "buildings_025_cottage", 10, 10);
+//    gCursor.setCursor(entity);
 
     this.showGrid(true, 0, 0, 40);
 };

@@ -60,6 +60,10 @@
     <script type="text/javascript" src="../src/easeljs/filters/ColorMatrixFilter.js"></script>
 
     <script type="text/javascript" src="sylvester.src.js"></script>
+    <script type="text/javascript" src="easeljs-NEXT.min.js"></script>
+    <script type="text/javascript" src="Tween.js"></script>
+    <script type="text/javascript" src="Ease.js"></script>
+
     <script type="text/javascript" src="HashTable.js"></script>
     <script type="text/javascript" src="IsoEntity.js"></script>
     <script type="text/javascript" src="Road.js"></script>
@@ -68,6 +72,8 @@
     <script type="text/javascript" src="Helper.js"></script>
     <script type="text/javascript" src="Cursor.js"></script>
     <script type="text/javascript" src="IsoState.js"></script>
+    <script type="text/javascript" src="ShopItem.js"></script>
+    <script type="text/javascript" src="DialogShop.js"></script>
 
 
     <!-- We also provide hosted minified versions of all CreateJS libraries.
@@ -88,11 +94,12 @@
         var gRoadsContainer;
         var gIsoContainer;
         var gCursorsContainer;
+        var gUIContainer;
         // instance
         var gIsoState;
         var gCanpan = true;
         var gCursor;
-//        var gMap;
+        var gShop;
         // constance
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
@@ -116,7 +123,7 @@
             gBackground = new createjs.Bitmap("assets/background.jpg");
 
             //===================================== container ========================================
-            // layer 0
+            // layer 0 - Game
             gGameContainer = new createjs.Container();
             gStage.addChild(gGameContainer);
             // layer 1
@@ -141,11 +148,15 @@
             gCursorsContainer.x = gAnchorX;
             gCursorsContainer.y = gAnchorY;
             gGameContainer.addChild(gCursorsContainer);
+            // layer 6 - UI
+            gUIContainer = new createjs.Container();
+            gStage.addChild(gUIContainer);
 
             // ==================================== Instance =========================================
 //            gMap = new IsoMap();
             gCursor = new Cursor();
             gIsoState = new IsoState();
+            gShop = new DialogShop();
             // ===================================  stats ============================================
             stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "bold 14px Arial", "#000");
             stageLocLabel.x = 10;
@@ -187,6 +198,10 @@
             gStage.addEventListener("stagemousedown", onGameDown);
             gStage.addEventListener("stagemouseup", onGameUp);
             gStage.addEventListener("click", onGameclick);
+
+
+            //======================================= TEST INIT =============================================
+            gUIContainer.addChild(gShop);
 
         }
 
