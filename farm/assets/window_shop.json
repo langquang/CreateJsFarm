@@ -1,8 +1,8 @@
 {
 	"items":{
 		"1" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 1",
+			"texture" : "cottage",
+			"name" : "cottage",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
@@ -17,96 +17,112 @@
 			"type": "road"
 		},
 		"3" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 3",
+			"texture" : "boutique",
+			"name" : "boutique",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"4" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 4",
+			"texture" : "club",
+			"name" : "club",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"5" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 5",
+			"texture" : "concert_hall",
+			"name" : "concert_hall",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"6" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 6",
+			"texture" : "flower_shop",
+			"name" : "flower_shop",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"7" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 7",
+			"texture" : "hotel",
+			"name" : "hotel",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"8" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 8",
+			"texture" : "house",
+			"name" : "house",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"9" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 9",
+			"texture" : "mansion",
+			"name" : "mansion",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"10" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 10",
+			"texture" : "police",
+			"name" : "police",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"11" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 11",
+			"texture" : "school",
+			"name" : "school",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"12" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 12",
+			"texture" : "shop_shoes",
+			"name" : "shop_shoes",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"13" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 13",
+			"texture" : "slims_villa",
+			"name" : "slims_villa",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
 			"type": "building"
 		},
 		"14" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage 14",
+			"texture" : "tennis_court",
+			"name" : "tennis_court",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300,
+			"type": "building"
+		},
+		"15" : {
+			"texture" : "tokyo_tower",
+			"name" : "tokyo_tower",
+			"price" : 500,
+			"income" : 200,
+			"time" : 300,
+			"type": "building"
+		},
+		"16" : {
+			"texture" : "villa",
+			"name" : "villa",
 			"price" : 500,
 			"income" : 200,
 			"time" : 300,
@@ -114,7 +130,7 @@
 		}
 	},
   "tabs": {
-		"house": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+		"house": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
 		"decoration": [1,2,3,4,5,6,7,8,9]
   },
   "anim": {
