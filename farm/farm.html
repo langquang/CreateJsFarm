@@ -230,6 +230,14 @@
             gCursor.handleOnStageMouseUp(evt);
         }
 
+        function showIBShop(visible){
+            if( visible )
+                gUIContainer.addChild(gShop);
+            else
+                gUIContainer.removeChild(gShop);
+        }
+
+
     </script>
 </head>
 <body onload="init()">

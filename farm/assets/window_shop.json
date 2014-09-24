@@ -2,105 +2,120 @@
 	"items":{
 		"1" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 1",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"2" : {
-			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"texture" : "road",
+			"name" : "road 2",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "road"
 		},
 		"3" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 3",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"4" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 4",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"5" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 5",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"6" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 6",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"7" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 7",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"8" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 8",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"9" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 9",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"10" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 10",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"11" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 11",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"12" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 12",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"13" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 13",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		},
 		"14" : {
 			"texture" : "buildings_025_cottage",
-			"name" : "cottage",
+			"name" : "cottage 14",
 			"price" : 500,
 			"income" : 200,
-			"time" : 300
+			"time" : 300,
+			"type": "building"
 		}
 	},
   "tabs": {
-		"house": [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+		"house": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+		"decoration": [1,2,3,4,5,6,7,8,9]
   },
   "anim": {
     "animations":

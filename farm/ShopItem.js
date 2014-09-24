@@ -15,10 +15,10 @@ p._icon = null;
 p._data = null;
 p.loader = null;
 p._scale_rate = 1;
-p._filter_value =  [new createjs.BlurFilter(2,2,2), new createjs.ColorMatrixFilter(new createjs.ColorMatrix(0,0,-100,0))];
+p._filter_value = [new createjs.BlurFilter(2, 2, 2), new createjs.ColorMatrixFilter(new createjs.ColorMatrix(0, 0, -100, 0))];
 
 //======================================= Function ===========================
-p.setItem = function(item_data, anim_data){
+p.setItem = function (item_data, anim_data) {
     this._data = item_data;
     var ss = new createjs.SpriteSheet(anim_data);
     // background
@@ -37,7 +37,7 @@ p.setItem = function(item_data, anim_data){
     this._txtGold.y = 150;
     this.addChild(this._txtGold);
 
-    if( this._data != null ){
+    if (this._data != null) {
         this._txtName.text = this._data.name;
         this._txtGold.text = this._data.price;
     }
@@ -60,23 +60,32 @@ p.loadDataCompleted = function (evt) {
     var animation_data = this.loader.getResult(this._data.name).anim;
     var ss = new createjs.SpriteSheet(animation_data);
     this._icon = new createjs.Sprite(ss);
-    this._scale_rate = 100/this._icon.getBounds().width;
+    this._scale_rate = 100 / this._icon.getBounds().width;
     this._icon.scaleX = this._scale_rate;
     this._icon.scaleY = this._scale_rate;
     this._icon.x = 76;
     this._icon.y = 90;
-    this._icon.gotoAndStop(ss.getNumFrames() -1 );
+    this._icon.gotoAndStop(ss.getNumFrames() - 1);
     this.addChild(this._icon);
 
-    this.on("dblclick", this.handleEvt, this);
+    this.on("click", this.handleEvt, this);
     this.on("rollover", this.handleEvt, this);
     this.on("rollout", this.handleEvt, this);
 };
 
 p.handleEvt = function (evt) {
-    if (evt.type == "rollover") {
-        this._icon.scaleX = this._scale_rate*1.1;
-        this._icon.scaleY = this._scale_rate*1.1;
+
+    if (evt.type == "click") {
+        // hide ibshop
+        showIBShop(false);
+        // create cursor
+        var entity = gIsoState.createIsoEntity(this._data.type, this._data.id, 10, 10);
+        entity._startFrame = this._icon.currentFrame;
+        gCursor.setCursor(entity);
+    }
+    else if (evt.type == "rollover") {
+        this._icon.scaleX = this._scale_rate * 1.1;
+        this._icon.scaleY = this._scale_rate * 1.1;
     }
     else if (evt.type == "rollout") {
         this._icon.scaleX = this._scale_rate;

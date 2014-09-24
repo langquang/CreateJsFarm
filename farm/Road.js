@@ -15,6 +15,15 @@ IsoRoad.prototype.onCreatedByCursorClick = function (current_cursor) {
     gIsoState.execRoad(this, true);
 };
 
+IsoRoad.prototype.IsoEntity_loadDataCompleted = p.loadDataCompleted;
+IsoRoad.prototype.loadDataCompleted = function (evt) {
+    this.IsoEntity_loadDataCompleted(evt);
+    if( this._startFrame == 0 ){
+        this.sprite.gotoAndStop(this.sprite_sheet.getNumFrames() - 1);
+    }
+};
+
+
 // ====================================== Constructor =============================
 IsoRoad.prototype.IsoEntity_initialize = p.initialize;
 IsoRoad.prototype.initialize = function (buildingId, entityId, texture) {

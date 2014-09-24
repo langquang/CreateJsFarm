@@ -103,7 +103,7 @@ p.execRoad = function (road) {
     var left = this.getEntityAt(x - 1, y);
     var right = this.getEntityAt(x + 1, y);
 
-    console.log(x, y, top != null ? "top": "", bottom != null ? "bottom" : "", left != null ? "left": "", right != null ? "right" : "");
+    //console.log(x, y, top != null ? "top": "", bottom != null ? "bottom" : "", left != null ? "left": "", right != null ? "right" : "");
 
 
     if( left != null && top != null && right != null && bottom != null )

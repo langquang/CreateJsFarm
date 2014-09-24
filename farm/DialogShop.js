@@ -13,6 +13,7 @@ p._btnNext = null;
 p._btnPrev = null;
 p._btnclose = null;
 p._buildingContainer = null;
+p._decorationContainer = null;
 p._shopMask = null;
 
 p._data = null;
@@ -31,6 +32,10 @@ p._cur_tab_data = null;
 p._cur_tap_max_tween_index = 0;
 p._cur_tap_cur_tween_index = 0;
 p._cur_tween = null;
+
+p._tap_building = null;
+p._tap_decoration = null;
+
 //=======================================Functions =========================
 p.loadData = function () {
     var manifest = [
@@ -47,6 +52,11 @@ p.loadData = function () {
 p.loadDataCompleted = function (evt) {
     this._data = this.loader.getResult("window_shop");
     this._data_items = this._data.items;
+    // add id property to iteminfo
+    for (var key in this._data_items) {
+        this._data_items[key].id = key;
+    }
+
     var animation_data = this._data.anim;
     var ss = new createjs.SpriteSheet(animation_data);
     // background
@@ -77,6 +87,7 @@ p.loadDataCompleted = function (evt) {
     this._buildingContainer.x = this._tween_min;
     this._buildingContainer.y = -155;
     this._buildingContainer.mask = this._shopMask;  // set mask
+    this._buildingContainer.visible = false;
     this.addChild(this._buildingContainer);
     var tabBuidling = this._data.tabs.house;
     var off_x = 20;
@@ -87,6 +98,26 @@ p.loadDataCompleted = function (evt) {
         itemShop.x = off_x + column * this._tween_distance;
         itemShop.y = i % 2 == 0 ? 0 : 180;
         this._buildingContainer.addChild(itemShop);
+        if (i > 0 && i % 2 == 1) {
+            column++;
+        }
+    }
+    // decoration container
+    this._decorationContainer = new createjs.Container();
+    this._decorationContainer.x = this._tween_min;
+    this._decorationContainer.y = -155;
+    this._decorationContainer.mask = this._shopMask;  // set mask
+    this._decorationContainer.visible = false;
+    this.addChild(this._decorationContainer);
+    var tabDecoration = this._data.tabs.decoration;
+    off_x = 20;
+    column = 0;
+    for (var i = 0; i < tabDecoration.length; i++) {
+        var itemShop = new ShopItem();
+        itemShop.setItem(this._data_items[tabDecoration[i] + ""], animation_data);
+        itemShop.x = off_x + column * this._tween_distance;
+        itemShop.y = i % 2 == 0 ? 0 : 180;
+        this._decorationContainer.addChild(itemShop);
         if (i > 0 && i % 2 == 1) {
             column++;
         }
@@ -111,13 +142,53 @@ p.loadDataCompleted = function (evt) {
     this._btnPrev.on("rollout", this.handleBtnPrevEvent, this);
     this.addChild(this._btnPrev);
 
-    this._cur_tab_container = this._buildingContainer;
-    this._cur_tab_data = this._data.tabs.house;
-    this._cur_tap_cur_tween_index = 0;
-    this._cur_tap_max_tween_index = Math.ceil(this._cur_tab_data.length / 2) - 4;
+    // tap
+    ss = new createjs.SpriteSheet(animation_data);
+    this._tap_building = new createjs.Sprite(ss);
+    this._tap_building.gotoAndStop(2);
+    this._tap_building.x = -300;
+    this._tap_building.y = -225;
+    this._tap_building.on("click", this.handleTabBuildingEvent, this);
+    this._tap_building.on("rollover", this.handleTabBuildingEvent, this);
+    this._tap_building.on("rollout", this.handleTabBuildingEvent, this);
+    this.addChild(this._tap_building);
 
+    ss = new createjs.SpriteSheet(animation_data);
+    this._tap_decoration = new createjs.Sprite(ss);
+    this._tap_decoration.gotoAndStop(3);
+    this._tap_decoration.x = -230;
+    this._tap_decoration.y = -225;
+    this._tap_decoration.on("click", this.handleTabDecorationEvent, this);
+    this._tap_decoration.on("rollover", this.handleTabDecorationEvent, this);
+    this._tap_decoration.on("rollout", this.handleTabDecorationEvent, this);
+    this.addChild(this._tap_decoration);
+
+
+    this._showTap("building");
 
 };
+
+p._showTap = function(name){
+    if( name == "building" ){
+        this._cur_tab_container = this._buildingContainer;
+        this._cur_tab_data = this._data.tabs.house;
+        this._cur_tap_cur_tween_index = 0;
+        this._cur_tap_max_tween_index = Math.ceil(this._cur_tab_data.length / 2) - 4;
+    }else if( name == "decoration" ){
+        this._cur_tab_container = this._decorationContainer;
+        this._cur_tab_data = this._data.tabs.decoration;
+        this._cur_tap_cur_tween_index = 0;
+        this._cur_tap_max_tween_index = Math.ceil(this._cur_tab_data.length / 2) - 4;
+    }
+
+    this._cur_tap_cur_tween_index = 0;
+    this._buildingContainer.visible = false;
+    this._decorationContainer.visible = false;
+    this._cur_tab_container.visible = true;
+    this._cur_tab_container.x =  this._tween_min;
+
+};
+
 
 p.handleBtnCloseEvent = function (evt) {
     if (evt.type == "click") {
@@ -163,6 +234,30 @@ p.handleBtnPrevEvent = function (evt) {
         this._btnPrev.gotoAndStop(this._frame_prev_2);
     } else if (evt.type == "rollout") {
         this._btnPrev.gotoAndStop(this._frame_prev_1);
+    }
+};
+
+p.handleTabBuildingEvent = function (evt) {
+    if (evt.type == "click") {
+        this._showTap("building");
+    } else if (evt.type == "rollover") {
+        this._tap_building.scaleX = 1.1;
+        this._tap_building.scaleY = 1.1;
+    } else if (evt.type == "rollout") {
+        this._tap_building.scaleX = 1.0;
+        this._tap_building.scaleY = 1.0;
+    }
+};
+
+p.handleTabDecorationEvent = function (evt) {
+    if (evt.type == "click") {
+        this._showTap("decoration");
+    } else if (evt.type == "rollover") {
+        this._tap_decoration.scaleX = 1.1;
+        this._tap_decoration.scaleY = 1.1;
+    } else if (evt.type == "rollout") {
+        this._tap_decoration.scaleX = 1.0;
+        this._tap_decoration.scaleY = 1.0;
     }
 };
 

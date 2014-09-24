@@ -125,16 +125,17 @@ p.centerOnCell = function (cellX, cellY) {
  */
 p.createIsoEntity = function (entity_type, building_type, cellX, cellY) {
     this._genId++;
+    var entity_data = gShop._data_items[building_type];
     var entity = null;
     if (entity_type == ENTITY_TYPE_ROAD) {
-        entity = new IsoRoad(building_type, this._genId, "assets/" + building_type + ".json");
+        entity = new IsoRoad(building_type, this._genId, "assets/" + entity_data.texture + ".json");
     }
     else if( entity_type == ENTITY_TYPE_BUILDING )
     {
-        entity = new IsoBuidling(building_type, this._genId, "assets/" + building_type + ".json");
+        entity = new IsoBuidling(building_type, this._genId, "assets/" + entity_data.texture + ".json");
     }
     else {
-        entity = new IsoEntity(building_type, this._genId, "assets/" + building_type + ".json");
+        entity = new IsoEntity(building_type, this._genId, "assets/" + entity_data.texture + ".json");
     }
     entity.setCellPosition(cellX, cellY);
     this.add(entity);

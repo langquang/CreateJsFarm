@@ -28,6 +28,7 @@ p.half_sizeX = 1;    // cell size
 p.half_sizeY = 1;    // cell size
 p._data = null; // constance data
 p._startFrame = 0;
+p.sprite_sheet = null;
 // ============================ function
 
 p._setPosition = function (x, y) {
@@ -84,8 +85,8 @@ p.loadDataCompleted = function (evt) {
     this.half_sizeX = this.sizeX / 2;
     this.half_sizeY = this.sizeY / 2;
     var animation_data = this.loader.getResult(this.entityId).anim;
-    var ss = new createjs.SpriteSheet(animation_data);
-    this.sprite = new createjs.Sprite(ss);
+    this.sprite_sheet = new createjs.SpriteSheet(animation_data);
+    this.sprite = new createjs.Sprite(this.sprite_sheet);
     this.sprite.gotoAndStop(this._startFrame);
     this.addChild(this.sprite);
 
