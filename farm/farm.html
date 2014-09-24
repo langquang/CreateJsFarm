@@ -74,6 +74,7 @@
     <script type="text/javascript" src="IsoState.js"></script>
     <script type="text/javascript" src="ShopItem.js"></script>
     <script type="text/javascript" src="DialogShop.js"></script>
+    <script type="text/javascript" src="MainBar.js"></script>
 
 
     <!-- We also provide hosted minified versions of all CreateJS libraries.
@@ -100,6 +101,7 @@
         var gCanpan = true;
         var gCursor;
         var gShop;
+        var gMainBar;
         // constance
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
@@ -157,6 +159,7 @@
             gCursor = new Cursor();
             gIsoState = new IsoState();
             gShop = new DialogShop();
+            gMainBar = new MainBar();
             // ===================================  stats ============================================
             stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "bold 14px Arial", "#000");
             stageLocLabel.x = 10;
@@ -201,6 +204,7 @@
 
 
             //======================================= TEST INIT =============================================
+            gUIContainer.addChild(gMainBar);
             gUIContainer.addChild(gShop);
 
         }
