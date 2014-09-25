@@ -207,9 +207,8 @@ p.handleBtnNextEvent = function (evt) {
         if( this._cur_tap_cur_tween_index < this._cur_tap_max_tween_index ){
             this._cur_tap_cur_tween_index++;
             var toX = this._tween_min - this._cur_tap_cur_tween_index*this._tween_distance;
-            var time = Math.abs(toX - this._cur_tab_container.x)/this._tween_distance*300;
             createjs.Tween.removeTweens(this._cur_tab_container);
-            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, time).call(this.handleComplete);
+            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, 300).call(this.handleComplete);
         }
 
     } else if (evt.type == "rollover") {
@@ -225,9 +224,8 @@ p.handleBtnPrevEvent = function (evt) {
         if( this._cur_tap_cur_tween_index > 0 ){
             this._cur_tap_cur_tween_index--;
             var toX = this._tween_min - this._cur_tap_cur_tween_index*this._tween_distance;
-            var time = Math.abs(toX - this._cur_tab_container.x)/this._tween_distance*300;
             createjs.Tween.removeTweens(this._cur_tab_container);
-            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, time).call(this.handleComplete);
+            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, 300).call(this.handleComplete);
         }
 
     } else if (evt.type == "rollover") {

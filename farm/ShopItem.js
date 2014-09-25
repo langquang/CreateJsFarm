@@ -9,7 +9,7 @@ var ShopItem = function () {
 var p = ShopItem.prototype = new createjs.Container();
 //============================== propertys
 p._background = null;
-p._txtGold = null;
+p._txtLevel = null;
 p._txtName = null;
 p._icon = null;
 p._data = null;
@@ -32,14 +32,14 @@ p.setItem = function (item_data, anim_data) {
     this._txtName.y = 10;
     this.addChild(this._txtName);
     // txtName
-    this._txtGold = new createjs.Text("500", "bold 14px Arial", "#FFF");
-    this._txtGold.x = 55;
-    this._txtGold.y = 150;
-    this.addChild(this._txtGold);
+    this._txtLevel = new createjs.Text("500", "bold 14px Arial", "#FFF");
+    this._txtLevel.x = 55;
+    this._txtLevel.y = 150;
+    this.addChild(this._txtLevel);
 
     if (this._data != null) {
         this._txtName.text = this._data.name;
-        this._txtGold.text = this._data.price;
+        this._txtLevel.text = this._data.price;
     }
 
     this.loadData(this._data.texture);

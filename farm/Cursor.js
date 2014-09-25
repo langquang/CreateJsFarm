@@ -33,9 +33,13 @@ p.handleOnStageMouseUp = function (evt) {
 
 
 p.setCursor = function (sprite) {
-    this._sprite_cursor = sprite;
     gCursorsContainer.removeAllChildren();
-    gCursorsContainer.addChild(this._sprite_cursor);
+    this._sprite_cursor = sprite;
+    if( this._sprite_cursor != null ){
+        var isoP = stageToIso(gStage.mouseX, gStage.mouseY);
+        this._sprite_cursor.setCellPosition(getCell(isoP.e(1)), getCell(isoP.e(2)));
+        gCursorsContainer.addChild(this._sprite_cursor);
+    }
 };
 
 p.handleOnStageClick = function (evt) {
