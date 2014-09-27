@@ -130,35 +130,35 @@ p.createIsoEntity = function (entity_type, building_type, cellX, cellY) {
     if (entity_type == ENTITY_TYPE_ROAD) {
         entity = new IsoRoad(building_type, this._genId, "assets/" + entity_data.texture + ".json");
     }
-    else if( entity_type == ENTITY_TYPE_BUILDING )
-    {
+    else if (entity_type == ENTITY_TYPE_BUILDING) {
         entity = new IsoBuidling(building_type, this._genId, "assets/" + entity_data.texture + ".json");
     }
     else {
         entity = new IsoEntity(building_type, this._genId, "assets/" + entity_data.texture + ".json");
     }
     entity.setCellPosition(cellX, cellY);
-    this.add(entity);
     return entity;
 };
 
 p.canAdd = function (isoEntity) {
-    if (isoEntity.cellX - isoEntity.half_sizeX < 0) {
+    if (isoEntity.cellX - isoEntity.anchorX < 0) {
         return false;
     }
-    if (isoEntity.cellX + isoEntity.half_sizeX >= MAP_SIZE) {
+    if (isoEntity.cellX + isoEntity.anchorX >= MAP_SIZE) {
         return false;
     }
-    if (isoEntity.cellY - isoEntity.half_sizeY < 0) {
+    if (isoEntity.cellY - isoEntity.anchorY < 0) {
         return false;
     }
-    if (isoEntity.cellY + isoEntity.half_sizeY >= MAP_SIZE) {
+    if (isoEntity.cellY + isoEntity.anchorY >= MAP_SIZE) {
         return false;
     }
 
-    var i, j, maxX = isoEntity.cellX + isoEntity.half_sizeX, maxY = isoEntity.cellY + isoEntity.half_sizeY;
-    for (i = isoEntity.cellX - isoEntity.half_sizeX; i < maxX; i++) {
-        for (j = isoEntity.cellY - isoEntity.half_sizeY; j < maxY; j++) {
+    var i, j;
+    var maxX = isoEntity.cellX + isoEntity.anchorX;
+    var maxY = isoEntity.cellY + isoEntity.anchorY;
+    for (i = isoEntity.cellX - isoEntity.anchorX; i <= maxX; i++) {
+        for (j = isoEntity.cellY - isoEntity.anchorY; j <= maxY; j++) {
             if (this._data[i][j] > 0) {
                 return false;
             }
@@ -177,9 +177,11 @@ p.add = function (isoEntity) {
         return false;
     }
 
-    var i, j, maxX = isoEntity.cellX + isoEntity.half_sizeX, maxY = isoEntity.cellY + isoEntity.half_sizeY;
-    for (i = isoEntity.cellX - isoEntity.half_sizeX; i < maxX; i++) {
-        for (j = isoEntity.cellY - isoEntity.half_sizeY; j < maxY; j++) {
+    var i, j;
+    var maxX = isoEntity.cellX + isoEntity.anchorX;
+    var maxY = isoEntity.cellY + isoEntity.anchorY;
+    for (i = isoEntity.cellX - isoEntity.anchorX; i <= maxX; i++) {
+        for (j = isoEntity.cellY - isoEntity.anchorY; j <= maxY; j++) {
             this._data[i][j] = isoEntity.entityId;
         }
     }
@@ -193,9 +195,11 @@ p.add = function (isoEntity) {
 };
 
 p.remove = function (isoEntity) {
-    var i, j, maxX = isoEntity.cellX + isoEntity.half_sizeX, maxY = isoEntity.cellY + isoEntity.half_sizeY;
-    for (i = isoEntity.cellX - isoEntity.half_sizeX; i < maxX; i++) {
-        for (j = isoEntity.cellY - isoEntity.half_sizeY; j < maxY; j++) {
+    var i, j;
+    var maxX = isoEntity.cellX + isoEntity.anchorX;
+    var maxY = isoEntity.cellY + isoEntity.anchorY;
+    for (i = isoEntity.cellX - isoEntity.anchorX; i <= maxX; i++) {
+        for (j = isoEntity.cellY - isoEntity.anchorY; j <= maxY; j++) {
             this._data[i][j] = 0;
         }
     }

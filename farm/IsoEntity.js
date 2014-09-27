@@ -24,8 +24,8 @@ p.cellY = 0;
 p.loader = null;
 p.sizeX = 2;    // cell size
 p.sizeY = 2;    // cell size
-p.half_sizeX = 1;    // cell size
-p.half_sizeY = 1;    // cell size
+p.anchorX = 1;    // cell size
+p.anchorY = 1;    // cell size
 p._data = null; // constance data
 p._startFrame = 0;
 p.sprite_sheet = null;
@@ -53,14 +53,12 @@ p.setCellPosition = function (cellX, cellY) {
 // this != this
 p.handleEvt = function (evt) {
     if (evt.type == "rollover") {
-        this.sprite.scaleX = 1.1;
-        this.sprite.scaleY = 1.1;
-        gCanpan = false;
+        this.sprite.scaleX = 1.03;
+        this.sprite.scaleY = 1.03;
     }
     else if (evt.type == "rollout") {
         this.sprite.scaleX = 1.0;
         this.sprite.scaleY = 1.0;
-        gCanpan = true;
     }
     else if (evt.type == "mousedown") {
         this.sprite.scaleX = 1.0;
@@ -82,8 +80,8 @@ p.loadDataCompleted = function (evt) {
     this._data = this.loader.getResult(this.entityId).data;
     this.sizeX = this._data.width;
     this.sizeY = this._data.height;
-    this.half_sizeX = this.sizeX / 2;
-    this.half_sizeY = this.sizeY / 2;
+    this.anchorX = Math.floor(this.sizeX / 2);
+    this.anchorY = Math.floor(this.sizeY / 2);
     var animation_data = this.loader.getResult(this.entityId).anim;
     this.sprite_sheet = new createjs.SpriteSheet(animation_data);
     this.sprite = new createjs.Sprite(this.sprite_sheet);
@@ -101,8 +99,8 @@ p.loadDataCompleted = function (evt) {
 //    gIsoContainer.addChild(this.sprite);
 //    this.sprite.on("click", this.handleEvt, this);
 //    this.sprite.on("dblclick", this.handleEvt, this);
-//    this.sprite.on("rollover", this.handleEvt, this);
-//    this.sprite.on("rollout", this.handleEvt, this);
+    this.sprite.on("rollover", this.handleEvt, this);
+    this.sprite.on("rollout", this.handleEvt, this);
 //    this.sprite.on("mousedown", this.handleEvt, this);
 //    this.sprite.on("pressmove", this.handleEvt, this);
 

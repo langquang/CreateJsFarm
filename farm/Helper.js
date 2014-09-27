@@ -18,16 +18,16 @@ function zorder(children) {
     for (i = 0; i < max; ++i) {
         var behind = [];
         var objA = children[i];
-        var rightA = objA.cellX + objA.sizeX;
-        var frontA = objA.cellY + objA.sizeY;
+        var rightA = objA.cellX + objA.anchorX;
+        var frontA = objA.cellY + objA.anchorY;
 
         for (var j = 0; j < max; ++j) {
             var objB = children[j];
 
             // See if B should go behind A
             // simplest possible check, interpenetrations also count as "behind", which does do a bit more work later, but the inner loop tradeoff for a faster check makes up for it
-            if ((objB.cellX < rightA) &&
-                (objB.cellY < frontA) &&
+            if ((objB.cellX - objB.anchorX < rightA) &&
+                (objB.cellY - objB.anchorY < frontA) &&
                 (i !== j)) {
                 behind.push(objB);
             }
