@@ -18,7 +18,7 @@ p._genId = 0;
 // =========================== functions ======================================
 p.handleOnStageMove = function (evt) {
 
-    if (gCanpan == false || this._isoLastMouseDown == null) {
+    if (this._isoLastMouseDown == null) {
         return;
     }
     var curPos = $V([evt.stageX, evt.stageY, 0]);

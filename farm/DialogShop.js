@@ -193,7 +193,7 @@ p._showTap = function(name){
 p.handleBtnCloseEvent = function (evt) {
     if (evt.type == "click") {
         this._btnclose.gotoAndStop(this._frame_lose_1);
-        gUIContainer.removeChild(this);
+        showIBShop(false);
     } else if (evt.type == "rollover") {
         this._btnclose.gotoAndStop(this._frame_lose_2);
     } else if (evt.type == "rollout") {
@@ -208,7 +208,7 @@ p.handleBtnNextEvent = function (evt) {
             this._cur_tap_cur_tween_index++;
             var toX = this._tween_min - this._cur_tap_cur_tween_index*this._tween_distance;
             createjs.Tween.removeTweens(this._cur_tab_container);
-            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, 300).call(this.handleComplete);
+            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, 200).call(this.handleComplete);
         }
 
     } else if (evt.type == "rollover") {
@@ -225,7 +225,7 @@ p.handleBtnPrevEvent = function (evt) {
             this._cur_tap_cur_tween_index--;
             var toX = this._tween_min - this._cur_tap_cur_tween_index*this._tween_distance;
             createjs.Tween.removeTweens(this._cur_tab_container);
-            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, 300).call(this.handleComplete);
+            this._cur_tween = createjs.Tween.get(this._cur_tab_container).to({x: toX }, 200).call(this.handleComplete);
         }
 
     } else if (evt.type == "rollover") {

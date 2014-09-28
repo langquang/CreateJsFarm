@@ -201,13 +201,17 @@ p.loadDataCompleted = function (evt) {
     this._btnFriendPrev.on("rollover", this.handleBtnFriendPrevEvent, this);
     this._btnFriendPrev.on("rollout", this.handleBtnFriendPrevEvent, this);
     this.addChild(this._btnFriendPrev);
+
+    // set cursor icon
+    gCursor.setTexture(animation_data);
 };
 
 p.handleBtnShopEvent = function (evt) {
     if (evt.type == "click") {
         this._btnShop.gotoAndStop(this._frame_buy_1);
         showIBShop(true);
-
+        gCursor.setState(CURSOR_ARROW);
+        gCursor.attachIsoEntity(null);
     } else if (evt.type == "rollover") {
         this._btnShop.gotoAndStop(this._frame_buy_2);
     } else if (evt.type == "rollout") {
@@ -242,7 +246,8 @@ p.handleBtnDeleteEvent = function (evt) {
 p.handleBtnMoveEvent = function (evt) {
     if (evt.type == "click") {
         this._btnMove.gotoAndStop(this._frame_move_1);
-
+        gCursor.setState(CURSOR_MOVE);
+        gCursor.attachIsoEntity(null);
     } else if (evt.type == "rollover") {
         this._btnMove.gotoAndStop(this._frame_move_2);
     } else if (evt.type == "rollout") {
@@ -290,8 +295,9 @@ p.handleBtnFriendPrevEvent = function (evt) {
 
 p.handleBtnStopEvent = function (evt) {
     if (evt.type == "click") {
-        this._btnStop.gotoAndStop(this._frame_stop_1);
+        this._btnArrow.gotoAndStop(this._frame_arrow_1);
         gCursor.attachIsoEntity(null);
+        gCursor.setState(CURSOR_ARROW);
 
     } else if (evt.type == "rollover") {
         this._btnStop.gotoAndStop(this._frame_stop_2);

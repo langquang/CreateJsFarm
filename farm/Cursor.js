@@ -21,6 +21,9 @@ p._grid_anchorX = 0;
 p._grid_anchorY = 0;
 p._isoLastMouseDown = null;
 p.state = CURSOR_ARROW;
+p._icon = null;
+p._frame_move = 25;
+p._frame_remove = 24;
 
 p.handleOnStageMove = function (evt) {
     if (this._sprite_cursor != null) {
@@ -37,7 +40,6 @@ p.handleOnStageMove = function (evt) {
         }
         this.updatePositionOfGrid();
 
-
         // change frame if Road
         if (this._sprite_cursor.entityType == ENTITY_TYPE_ROAD) {
 //            gMap.execRoad(this._sprite_cursor);
@@ -46,10 +48,33 @@ p.handleOnStageMove = function (evt) {
 
         }
     }
+
+    if( this._icon != null && this._icon.visible == true){
+        var screenP = stageToScreen(gStage.mouseX, gStage.mouseY);
+        this._icon.x = screenP.e(1);
+        this._icon.y = screenP.e(2);
+    }
 };
 
 p.setState = function( state ){
     this.state = state;
+    if( this._icon != null )
+    {
+        this._icon.visible = false;
+        switch (state)
+        {
+            case CURSOR_MOVE:
+                this._icon.gotoAndStop(this._frame_move);
+                this._icon.visible = true;
+                gCursorsContainer.addChild(this._icon);
+                break;
+            case CURSOR_REMOVE:
+                this._icon.gotoAndStop(this._frame_remove);
+                this._icon.visible = true;
+                gCursorsContainer.addChild(this._icon);
+                break;
+        }
+    }
 };
 
 p.handleOnStageMouseDown = function (evt) {
@@ -76,8 +101,12 @@ p.attachIsoEntity = function (sprite) {
         gCursorsContainer.addChild(this._grid_red);
         gCursorsContainer.addChild(this._grid_green);
         gCursorsContainer.addChild(this._sprite_cursor);
+        // prevent this.handleOnStageClick function call immediate
+        this._isoLastMouseDown = null;
+    }
 
-    }else{
+    if( this._icon != null ){
+        gCursorsContainer.addChild(this._icon);
     }
 };
 
@@ -86,12 +115,42 @@ p.handleOnStageClick = function (evt) {
     if (this._sprite_cursor != null && this._isoLastMouseDown != null) {
         var curPos = $V([evt.stageX, evt.stageY, 0]);
         if (curPos.distanceFrom(this._isoLastMouseDown) <= 5) {
-            this._sprite_cursor.onCursorClick();
+            // click to buy
             if( this.state == CURSOR_BUY ){
-                var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
-                gIsoState.add(new_instance);
-                new_instance.onCreatedByCursorClick(this._sprite_cursor);
+                if( gIsoState.canAdd(this._sprite_cursor) ){
+                    if( this._sprite_cursor.entityType == ENTITY_TYPE_BUILDING ){
+                        // add attach buidling to map
+                        gIsoState.add(this._sprite_cursor);
+                        this._sprite_cursor.alpha = 1.0; // revert alpha value
+                        // clear cursor
+                        this.attachIsoEntity(null);
+                        this.setState(CURSOR_ARROW);
+                    }else if( this._sprite_cursor.entityType == ENTITY_TYPE_ROAD  ){
+                        var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
+                        gIsoState.add(new_instance);
+                        new_instance.onCreatedByCursorClick(this._sprite_cursor);
+                    }
+
+
+                }
             }
+            // click to move
+            else if( this.state == CURSOR_MOVE )
+            {
+                if( this._sprite_cursor != null )
+                {
+                    // add attach buidling to map
+                    this._sprite_cursor.alpha = 1.0; // revert alpha value
+                    if( gIsoState.add(this._sprite_cursor)){
+                        // clear cursor
+                        this.attachIsoEntity(null);
+                    }
+
+                }
+            }
+
+           // this._sprite_cursor.onCursorClick();
+
 
         }
     }
@@ -161,6 +220,12 @@ p.updatePositionOfGrid = function () {
     this._grid_red.y = this._sprite_cursor.y - pos.e(2);
     this._grid_green.x = this._grid_red.x;
     this._grid_green.y = this._grid_red.y;
+};
+
+
+p.setTexture = function( animationData ){
+    this.sprite_sheet = new createjs.SpriteSheet(animationData);
+    this._icon = new createjs.Sprite(this.sprite_sheet);
 };
 
 //======================================= Constructor==========================

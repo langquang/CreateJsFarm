@@ -67,6 +67,15 @@ p.handleEvt = function (evt) {
         {
             gIsoState.remove(this);
         }
+        else if(gCursor.state == CURSOR_MOVE)
+        {
+            if( gCursor._sprite_cursor == null )
+            {
+                // attach current building to cursor
+                gIsoState.remove(this);
+                gCursor.attachIsoEntity(this);
+            }
+        }
     }
 };
 

@@ -76,6 +76,8 @@
     <script type="text/javascript" src="DialogShop.js"></script>
     <script type="text/javascript" src="FriendListItem.js"></script>
     <script type="text/javascript" src="MainBar.js"></script>
+    <script type="text/javascript" src="Hub.js"></script>
+    <script type="text/javascript" src="DarkLock.js"></script>
 
 
     <!-- We also provide hosted minified versions of all CreateJS libraries.
@@ -97,12 +99,13 @@
         var gIsoContainer;
         var gCursorsContainer;
         var gUIContainer;
+        var gDarkLock;
         // instance
         var gIsoState;
-        var gCanpan = true;
         var gCursor;
         var gShop;
         var gMainBar;
+        var gHud;
         // constance
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
@@ -155,14 +158,17 @@
             gUIContainer = new createjs.Container();
             gStage.addChild(gUIContainer);
 
+
             // ==================================== Instance =========================================
 //            gMap = new IsoMap();
             gCursor = new Cursor();
             gIsoState = new IsoState();
             gShop = new DialogShop();
             gMainBar = new MainBar();
+            gHud = new Hub();
+            gDarkLock = new DarkLock();
             // ===================================  stats ============================================
-            stageLocLabel = new createjs.Text("Test press, click, doubleclick, mouseover, and mouseout", "bold 14px Arial", "#000");
+            stageLocLabel = new createjs.Text("", "bold 14px Arial", "#000");
             stageLocLabel.x = 10;
             stageLocLabel.y = 5;
             stageLocLabel.outline = 4;
@@ -185,11 +191,11 @@
             gStage.on("stagemousemove", function (evt) {
                 stageLocLabel.text = "stage: " + evt.stageX + "," + evt.stageY + "\t\t";
                 var screenP = stageToScreen(evt.stageX, evt.stageY);
-                stageLocLabel.text += "screen: " + screenP.e(1) + "," + screenP.e(2) + "\t\t";
+//                stageLocLabel.text += "screen: " + screenP.e(1) + "," + screenP.e(2) + "\t\t";
                 var isoP = stageToIso(evt.stageX, evt.stageY);
-                stageLocLabel.text += "iso: " + isoP.e(1) + "," + isoP.e(2) + "\t\t";
+//                stageLocLabel.text += "iso: " + isoP.e(1) + "," + isoP.e(2) + "\t\t";
                 var cell = stageToCell(evt.stageX, evt.stageY);
-                stageLocLabel.text += "cell: " + cell.e(1) + "," + cell.e(2) + "\t\t";
+//                stageLocLabel.text += "cell: " + cell.e(1) + "," + cell.e(2) + "\t\t";
 
                 stageLocLabel2.text = stageLocLabel.text;
 
@@ -206,7 +212,8 @@
 
             //======================================= TEST INIT =============================================
             gUIContainer.addChild(gMainBar);
-            gUIContainer.addChild(gShop);
+//            gUIContainer.addChild(gShop);
+            gUIContainer.addChild(gHud);
 
         }
 
@@ -217,30 +224,43 @@
         }
 
         function onGameclick(evt) {
-            gCursor.handleOnStageClick(evt);
+            if( !isHitUI(evt.stageX, evt.stageY) ){
+                gCursor.handleOnStageClick(evt);
+            }
         }
 
         function onGameMove(evt) {
-            gIsoState.handleOnStageMove(evt);
-            gCursor.handleOnStageMove(evt);
+            if( !isHitUI(evt.stageX, evt.stageY) ){
+                gIsoState.handleOnStageMove(evt);
+                gCursor.handleOnStageMove(evt);
+            }
         }
 
         function onGameDown(evt) {
-            gIsoState.handleOnStageMouseDown(evt);
-            gCursor.handleOnStageMouseDown(evt);
+            if( !isHitUI(evt.stageX, evt.stageY) ){
+                gIsoState.handleOnStageMouseDown(evt);
+                gCursor.handleOnStageMouseDown(evt);
+            }
         }
 
         function onGameUp(evt) {
-            gIsoState.handleOnStageMouseUp(evt);
-            gCursor.handleOnStageMouseUp(evt);
+            if( !isHitUI(evt.stageX, evt.stageY) ){
+                gIsoState.handleOnStageMouseUp(evt);
+                gCursor.handleOnStageMouseUp(evt);
+            }
         }
 
         function showIBShop(visible){
-            if( visible )
+            if( visible ) {
+                gDarkLock.show(true);
                 gUIContainer.addChild(gShop);
-            else
+            }
+            else {
+                gDarkLock.show(false);
                 gUIContainer.removeChild(gShop);
+            }
         }
+
 
 
     </script>

@@ -136,3 +136,25 @@ function cellToScreen(cellX, cellY) {
     var isoP = $V([cellX * CELL_SIZE, cellY * CELL_SIZE, 0]);
     return isoToScreen(isoP);
 }
+
+/**
+ * check hitUI
+ */
+function isHitUI(stageX, stageY){
+
+    if( gDarkLock.isShowing()){
+        return true;
+    }
+
+    var localP = gShop.globalToLocal(stageX, stageY);
+    if( gShop._background != null && gUIContainer.contains(gShop) && gShop._background.hitTest(localP.x, localP.y) ){
+        return true;
+    }
+
+    localP = gMainBar.globalToLocal(stageX, stageY);
+    if( gMainBar._background != null && gMainBar._background.hitTest(localP.x, localP.y) ){
+        return true;
+    }
+
+    return false;
+}
