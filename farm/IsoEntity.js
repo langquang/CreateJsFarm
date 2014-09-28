@@ -2,20 +2,21 @@
 //this.stage = this.stage || {};
 
 var ENTITY_TYPE_ROAD = "road";
-var ENTITY_TYPE_BUILDING = "buidling";
+var ENTITY_TYPE_BUILDING = "building";
 
-var IsoEntity = function (buildingId, entityId, texture) {
-    this.initialize(buildingId, entityId, texture);
+var IsoEntity = function (shop_data, entityId) {
+    this.initialize(shop_data, entityId);
 };
 
 var p = IsoEntity.prototype = new createjs.Container();
 
 
 //============================== propertys
-p.buildingId = 0;   // ref to Constance
+p.shop_id = 0;   // ref to Constance
 p.entityId = "";    // identify
 p.entityType = ENTITY_TYPE_BUILDING;
 p.texture = "";
+p.shop_data = null;
 p.sprite = null;
 p.isoX = 0;
 p.isoY = 0;
@@ -26,8 +27,8 @@ p.sizeX = 2;    // cell size
 p.sizeY = 2;    // cell size
 p.anchorX = 1;    // cell size
 p.anchorY = 1;    // cell size
-p._data = null; // constance data
-p._startFrame = 0;
+p._building_data = null; // constance data
+p.startFrame = 0;
 p.sprite_sheet = null;
 // ============================ function
 
@@ -77,15 +78,11 @@ p.handleEvt = function (evt) {
 
 // this != this
 p.loadDataCompleted = function (evt) {
-    this._data = this.loader.getResult(this.entityId).data;
-    this.sizeX = this._data.width;
-    this.sizeY = this._data.height;
-    this.anchorX = Math.floor(this.sizeX / 2);
-    this.anchorY = Math.floor(this.sizeY / 2);
+    this._building_data = this.loader.getResult(this.entityId).data;
     var animation_data = this.loader.getResult(this.entityId).anim;
     this.sprite_sheet = new createjs.SpriteSheet(animation_data);
     this.sprite = new createjs.Sprite(this.sprite_sheet);
-    this.sprite.gotoAndStop(this._startFrame);
+    this.sprite.gotoAndStop(this.startFrame);
     this.addChild(this.sprite);
 
     // move anchor o top-left
@@ -116,7 +113,7 @@ p.onCreatedByCursorClick = function (current_cursor) {
 };
 
 p.gotoAndStop = function (frame_index) {
-    this._startFrame = frame_index;
+    this.startFrame = frame_index;
     if (this.sprite != null) {
         this.sprite.gotoAndStop(frame_index);
     }
@@ -124,7 +121,7 @@ p.gotoAndStop = function (frame_index) {
 
 p.gotoAndPlay = function (frame_index) {
     if (this.sprite == null) {
-        this._startFrame = frame_index;
+        this.startFrame = frame_index;
     } else {
         this.sprite.gotoAndPlay(frame_index);
         this.sprite.update();
@@ -134,7 +131,7 @@ p.gotoAndPlay = function (frame_index) {
 
 p.loadData = function () {
     var manifest = [
-        {src: this.texture, id: this.entityId}
+        {src: "assets/" + this.texture + ".json", id: this.entityId}
     ];
 
     // loader is global
@@ -146,10 +143,15 @@ p.loadData = function () {
 //======================================= Override==========================
 //======================================= Constructor==========================
 IsoEntity.prototype.Container_initialize = p.initialize;
-IsoEntity.prototype.initialize = function (buildingId, entityId, texture) {
+IsoEntity.prototype.initialize = function (shop_data, entityId) {
     this.Container_initialize();
-    this.buildingId = buildingId;
+    this.shop_data = shop_data;
+    this.shop_id = this.shop_data.id;
     this.entityId = entityId;
-    this.texture = texture;
+    this.texture = this.shop_data.texture;
+    this.sizeX = this.shop_data.width;
+    this.sizeY = this.shop_data.height;
+    this.anchorX = Math.floor(this.sizeX / 2);
+    this.anchorY = Math.floor(this.sizeY / 2);
     this.loadData();
 };

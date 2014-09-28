@@ -10,7 +10,7 @@ var IsoMap = function () {
 var p = IsoMap.prototype;
 
 //========================== Propertys ====================
-p._data = null;
+p.shop_data = null;
 p._entities = new HashTable({});
 
 //========================== Functions ====================
@@ -32,7 +32,7 @@ p.canAdd = function (isoEntity) {
     var i, j;
     for (i = isoEntity.cellX - isoEntity.anchorX; i < isoEntity.sizeX; i++) {
         for (j = isoEntity.cellY - isoEntity.anchorY; i < isoEntity.sizeY; j++) {
-            if (this._data[i][j] > 0) {
+            if (this.shop_data[i][j] > 0) {
                 return false;
             }
         }
@@ -53,7 +53,7 @@ p.add = function (isoEntity) {
     var i, j;
     for (i = isoEntity.cellX - isoEntity.anchorX; i < isoEntity.sizeX; i++) {
         for (j = isoEntity.cellY - isoEntity.anchorY; i < isoEntity.sizeY; j++) {
-            this._data[i][j] = isoEntity.entityId;
+            this.shop_data[i][j] = isoEntity.entityId;
         }
     }
 
@@ -68,7 +68,7 @@ p.remove = function (isoEntity) {
     var i, j;
     for (i = isoEntity.cellX - isoEntity.anchorX; i < isoEntity.sizeX; i++) {
         for (j = isoEntity.cellY - isoEntity.anchorY; i < isoEntity.sizeY; j++) {
-            this._data[i][j] = 0;
+            this.shop_data[i][j] = 0;
         }
     }
 
@@ -78,7 +78,7 @@ p.remove = function (isoEntity) {
 
 p.getEntityAt = function (cellX, cellY) {
     if (this.validCell(cellX, cellY)) {
-        return this._entities.getItem(this._data[cellX][cellY]);
+        return this._entities.getItem(this.shop_data[cellX][cellY]);
     }
     return null;
 };
@@ -172,11 +172,11 @@ p.execRoad = function (road) {
 
 //========================== Constructor =================
 p.initialize = function () {
-    this._data = [];
+    this.shop_data = [];
     for (var i = 0; i < MAP_SIZE; i++) {
-        this._data[i] = [];
+        this.shop_data[i] = [];
         for (var j = 0; j < MAP_SIZE; j++) {
-            this._data[i][j] = 0;
+            this.shop_data[i][j] = 0;
         }
     }
 };

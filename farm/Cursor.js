@@ -10,7 +10,8 @@ var p = Cursor.prototype;
 
 
 p._sprite_cursor = null;
-p._grid = null;
+p._grid_red = null;
+p._grid_green = null;
 p._grid_anchorX = 0;
 p._grid_anchorY = 0;
 p._isoLastMouseDown = null;
@@ -20,7 +21,15 @@ p.handleOnStageMove = function (evt) {
         var isoP = stageToIso(gStage.mouseX, gStage.mouseY);
         this._sprite_cursor.setCellPosition(getCell(isoP.e(1)), getCell(isoP.e(2)));
         // render grid
-        this.renderGrid(this._sprite_cursor.sizeX + 6, this._sprite_cursor.sizeY + 6);
+        if( gIsoState.canAdd(this._sprite_cursor) )
+        {
+            this._grid_green.visible = true;
+            this._grid_red.visible = false;
+        }
+        else{
+            this._grid_green.visible = false;
+            this._grid_red.visible = true;
+        }
         this.updatePositionOfGrid();
 
 
@@ -51,11 +60,14 @@ p.setCursor = function (sprite) {
         this._sprite_cursor.setCellPosition(getCell(isoP.e(1)), getCell(isoP.e(2)));
         this._sprite_cursor.alpha = 0.6;
         // render grid
-        this.renderGrid(this._sprite_cursor.sizeX + 0, this._sprite_cursor.sizeY + 0);
+        this.renderGrid(this._sprite_cursor.sizeX + 6, this._sprite_cursor.sizeY + 6);
         this.updatePositionOfGrid();
+        this._grid_green.visible = false;
 
-        gCursorsContainer.addChild(this._grid);
+        gCursorsContainer.addChild(this._grid_red);
+        gCursorsContainer.addChild(this._grid_green);
         gCursorsContainer.addChild(this._sprite_cursor);
+
     }
 };
 
@@ -65,9 +77,9 @@ p.handleOnStageClick = function (evt) {
         var curPos = $V([evt.stageX, evt.stageY, 0]);
         if (curPos.distanceFrom(this._isoLastMouseDown) <= 5) {
             this._sprite_cursor.onCursorClick();
-            var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.entityType, this._sprite_cursor.buildingId, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
-            new_instance.onCreatedByCursorClick(this._sprite_cursor);
+            var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
             gIsoState.add(new_instance);
+            new_instance.onCreatedByCursorClick(this._sprite_cursor);
         }
     }
 
@@ -80,7 +92,7 @@ p.renderGrid = function (width, height) {
     this._grid_anchorX = Math.floor(width / 2);
     this._grid_anchorY = Math.floor(height / 2);
 
-    var g = this._grid.graphics;
+    var g = this._grid_red.graphics;
     g.clear();
     g.beginStroke("#F00");
     // draw x
@@ -104,16 +116,44 @@ p.renderGrid = function (width, height) {
         i++;
     }
     g.endStroke();
+
+    // Green
+    g = this._grid_green.graphics;
+    g.clear();
+    g.beginStroke("#0F0");
+    // draw x
+    i = 0;
+    while (i <= height) {
+        vbegin = cellToScreen(0, i);
+        vend = cellToScreen(width, i);
+        g.moveTo(vbegin.e(1), vbegin.e(2));
+        g.lineTo(vend.e(1), vend.e(2));
+        i++;
+    }
+
+    i = 0;
+    while (i <= width) {
+        vbegin = cellToScreen(i, 0);
+        vend = cellToScreen(i, height);
+        g.moveTo(vbegin.e(1), vbegin.e(2));
+        g.lineTo(vend.e(1), vend.e(2));
+        i++;
+    }
+    g.endStroke();
 };
 
 p.updatePositionOfGrid = function () {
     var pos = isoToScreen($V([this._grid_anchorX * CELL_SIZE, this._grid_anchorY * CELL_SIZE, 0]));
-    this._grid.x = this._sprite_cursor.x - pos.e(1);
-    this._grid.y = this._sprite_cursor.y - pos.e(2);
+    this._grid_red.x = this._sprite_cursor.x - pos.e(1);
+    this._grid_red.y = this._sprite_cursor.y - pos.e(2);
+    this._grid_green.x =  this._grid_red.x ;
+    this._grid_green.y =  this._grid_red.y ;
 };
 
 //======================================= Constructor==========================
 Cursor.prototype.initialize = function () {
     var g = new createjs.Graphics();
-    this._grid = new createjs.Shape(g);
+    this._grid_red = new createjs.Shape(g);
+    g = new createjs.Graphics();
+    this._grid_green = new createjs.Shape(g);
 };

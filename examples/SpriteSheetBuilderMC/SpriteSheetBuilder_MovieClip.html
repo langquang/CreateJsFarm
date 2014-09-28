@@ -74,7 +74,7 @@
 		builder.buildAsync();
 		
 		// append the generated spritesheet image for demo purposes:
-		document.body.appendChild(builder._data.images[0]);
+		document.body.appendChild(builder.shop_data.images[0]);
 		
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", stage);

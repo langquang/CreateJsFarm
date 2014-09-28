@@ -28,7 +28,7 @@ p._tween_min = -340;
 p._cur_tap_max_tween_index = 0;
 p._cur_tap_cur_tween_index = 0;
 //data
-p._data = null;
+p.shop_data = null;
 p._data_friends = [
     {name: "friend_1", level: 5},
     {name: "friend_2", level: 8},
@@ -93,8 +93,8 @@ p.loadData = function () {
 };
 
 p.loadDataCompleted = function (evt) {
-    this._data = this.loader.getResult("gui_hud");
-    var animation_data = this._data.anim;
+    this.shop_data = this.loader.getResult("gui_hud");
+    var animation_data = this.shop_data.anim;
     var ss = new createjs.SpriteSheet(animation_data);
     // background
     this._background = new createjs.Sprite(ss);

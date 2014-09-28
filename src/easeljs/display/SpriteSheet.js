@@ -209,7 +209,7 @@ var p = SpriteSheet.prototype = new createjs.EventDispatcher();
 	 * @property _data
 	 * @protected
 	 **/
-	p._data = null;
+	p.shop_data = null;
 
 	/**
 	 * @property _loadCount
@@ -301,7 +301,7 @@ var p = SpriteSheet.prototype = new createjs.EventDispatcher();
 		// parse animations:
 		this._animations = [];
 		if ((o=data.animations) != null) {
-			this._data = {};
+			this.shop_data = {};
 			var name;
 			for (name in o) {
 				var anim = {name:name};
@@ -328,7 +328,7 @@ var p = SpriteSheet.prototype = new createjs.EventDispatcher();
 				if (anim.next === false || (a.length < 2 && anim.next == name)) { anim.next = null; } // stop
 				if (!anim.speed) { anim.speed = 1; }
 				this._animations.push(name);
-				this._data[name] = anim;
+				this.shop_data[name] = anim;
 			}
 		}
 
@@ -346,7 +346,7 @@ var p = SpriteSheet.prototype = new createjs.EventDispatcher();
 		if (animation == null) {
 			return this._frames ? this._frames.length : this._numFrames;
 		} else {
-			var data = this._data[animation];
+			var data = this.shop_data[animation];
 			if (data == null) { return 0; }
 			else { return data.frames.length; }
 		}
@@ -374,7 +374,7 @@ var p = SpriteSheet.prototype = new createjs.EventDispatcher();
 	 * @return {Object} a generic object with frames, speed, name, and next properties.
 	 **/
 	p.getAnimation = function(name) {
-		return this._data[name];
+		return this.shop_data[name];
 	};
 
 	/**
@@ -431,7 +431,7 @@ var p = SpriteSheet.prototype = new createjs.EventDispatcher();
 		o._animations = this._animations;
 		o._frames = this._frames;
 		o._images = this._images;
-		o._data = this._data;
+		o.shop_data = this.shop_data;
 		o._frameHeight = this._frameHeight;
 		o._frameWidth = this._frameWidth;
 		o._numFrames = this._numFrames;

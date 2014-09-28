@@ -183,7 +183,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * @protected
 	 * @type Array
 	 **/
-	p._data = null;
+	p.shop_data = null;
 
 	/**
 	 * @property _nextFrameIndex
@@ -246,7 +246,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * @return {Number} The index of the frame that was just added, or null if a sourceRect could not be determined.
 	 **/
 	p.addFrame = function(source, sourceRect, scale, setupFunction, setupData) {
-		if (this._data) { throw SpriteSheetBuilder.ERR_RUNNING; }
+		if (this.shop_data) { throw SpriteSheetBuilder.ERR_RUNNING; }
 		var rect = sourceRect||source.bounds||source.nominalBounds;
 		if (!rect&&source.getBounds) { rect = source.getBounds(); }
 		if (!rect) { return null; }
@@ -266,7 +266,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * of 2 would cause the animation to advance every second tick.
 	 **/
 	p.addAnimation = function(name, frames, next, frequency) {
-		if (this._data) { throw SpriteSheetBuilder.ERR_RUNNING; }
+		if (this.shop_data) { throw SpriteSheetBuilder.ERR_RUNNING; }
 		this._animations[name] = {frames:frames, next:next, frequency:frequency};
 	};
 
@@ -289,7 +289,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * @param {Function} [labelFunction] This method will be called for each movieclip label that is added with four parameters: the label name, the source movieclip instance, the starting frame index (in the movieclip timeline) and the end index. It must return a new name for the label/animation, or false to exclude the label.
 	 **/
 	p.addMovieClip = function(source, sourceRect, scale, setupFunction, setupData, labelFunction) {
-		if (this._data) { throw SpriteSheetBuilder.ERR_RUNNING; }
+		if (this.shop_data) { throw SpriteSheetBuilder.ERR_RUNNING; }
 		var rects = source.frameBounds;
 		var rect = sourceRect||source.bounds||source.nominalBounds;
 		if (!rect&&source.getBounds) { rect = source.getBounds(); }
@@ -329,7 +329,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * @return {SpriteSheet} The created SpriteSheet instance, or null if a build is already running or an error occurred.
 	 **/
 	p.build = function() {
-		if (this._data) { throw SpriteSheetBuilder.ERR_RUNNING; }
+		if (this.shop_data) { throw SpriteSheetBuilder.ERR_RUNNING; }
 		this._startBuild();
 		while (this._drawNext()) {}
 		this._endBuild();
@@ -344,7 +344,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * @param {Number} [timeSlice] Sets the timeSlice property on this instance.
 	 **/
 	p.buildAsync = function(timeSlice) {
-		if (this._data) { throw SpriteSheetBuilder.ERR_RUNNING; }
+		if (this.shop_data) { throw SpriteSheetBuilder.ERR_RUNNING; }
 		this.timeSlice = timeSlice;
 		this._startBuild();
 		var _this = this;
@@ -357,7 +357,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 **/
 	p.stopAsync = function() {
 		clearTimeout(this._timerID);
-		this._data = null;
+		this.shop_data = null;
 	};
 
 	/**
@@ -389,7 +389,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 		this._index = 0;
 		this._scale = this.scale;
 		var dataFrames = [];
-		this._data = {
+		this.shop_data = {
 			images: [],
 			frames: dataFrames,
 			animations: this._animations // TODO: should we "clone" _animations in case someone adds more animations after a build?
@@ -409,7 +409,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 				var canvas = createjs.createCanvas?createjs.createCanvas():document.createElement("canvas");
 				canvas.width = this._getSize(x,this.maxWidth);
 				canvas.height = this._getSize(y,this.maxHeight);
-				this._data.images[img] = canvas;
+				this.shop_data.images[img] = canvas;
 				if (!o.h) {
 					x=y=0;
 					img++;
@@ -486,8 +486,8 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 	 * @protected
 	 **/
 	p._endBuild = function() {
-		this.spriteSheet = new createjs.SpriteSheet(this._data);
-		this._data = null;
+		this.spriteSheet = new createjs.SpriteSheet(this.shop_data);
+		this.shop_data = null;
 		this.progress = 1;
 		this.dispatchEvent("complete");
 	};
@@ -527,7 +527,7 @@ var p = SpriteSheetBuilder.prototype = new createjs.EventDispatcher;
 		var sc = frame.scale*this._scale;
 		var rect = frame.rect;
 		var sourceRect = frame.sourceRect;
-		var canvas = this._data.images[frame.img];
+		var canvas = this.shop_data.images[frame.img];
 		var ctx = canvas.getContext("2d");
 		frame.funct&&frame.funct(frame.source, frame.data);
 		ctx.save();

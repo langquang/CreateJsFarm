@@ -12,14 +12,14 @@ p._background = null;
 p._txtLevel = null;
 p._txtName = null;
 p._icon = null;
-p._data = null;
+p.shop_data = null;
 p.loader = null;
 p._scale_rate = 1;
 p._filter_value = [new createjs.BlurFilter(2, 2, 2), new createjs.ColorMatrixFilter(new createjs.ColorMatrix(0, 0, -100, 0))];
 
 //======================================= Function ===========================
 p.setItem = function (item_data, anim_data) {
-    this._data = item_data;
+    this.shop_data = item_data;
     var ss = new createjs.SpriteSheet(anim_data);
     // background
     this._background = new createjs.Sprite(ss);
@@ -37,17 +37,17 @@ p.setItem = function (item_data, anim_data) {
     this._txtLevel.y = 150;
     this.addChild(this._txtLevel);
 
-    if (this._data != null) {
-        this._txtName.text = this._data.name;
-        this._txtLevel.text = this._data.price;
+    if (this.shop_data != null) {
+        this._txtName.text = this.shop_data.name;
+        this._txtLevel.text = this.shop_data.price;
     }
 
-    this.loadData(this._data.texture);
+    this.loadData(this.shop_data.texture);
 };
 
 p.loadData = function (texture) {
     var manifest = [
-        {src: "assets/" + texture + ".json", id: this._data.name}
+        {src: "assets/" + texture + ".json", id: this.shop_data.name}
     ];
 
     // loader is global
@@ -57,7 +57,7 @@ p.loadData = function (texture) {
 };
 
 p.loadDataCompleted = function (evt) {
-    var animation_data = this.loader.getResult(this._data.name).anim;
+    var animation_data = this.loader.getResult(this.shop_data.name).anim;
     var ss = new createjs.SpriteSheet(animation_data);
     this._icon = new createjs.Sprite(ss);
     this._scale_rate = 100 / this._icon.getBounds().width;
@@ -79,8 +79,8 @@ p.handleEvt = function (evt) {
         // hide ibshop
         showIBShop(false);
         // create cursor
-        var entity = gIsoState.createIsoEntity(this._data.type, this._data.id, 10, 10);
-        entity._startFrame = this._icon.currentFrame;
+        var entity = gIsoState.createIsoEntity(this.shop_data, 10, 10);
+        entity.startFrame = this._icon.currentFrame;
         gCursor.setCursor(entity);
     }
     else if (evt.type == "rollover") {

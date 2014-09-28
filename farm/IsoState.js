@@ -7,7 +7,7 @@ var IsoState = function () {
 var p = IsoState.prototype;
 
 // ===========================  properties =====================================
-p._data = null;
+p.shop_data = null;
 p._entities = new HashTable({});
 // ============
 p._isoLastMouseDown = null;
@@ -66,7 +66,7 @@ p.createEnities = function () {
 //    var entity = this.createIsoEntity(ENTITY_TYPE_BUILDING, "buildings_025_cottage", 10, 10);
 //    gCursor.setCursor(entity);
 
-    this.showGrid(true, 0, 0, 40);
+   // this.showGrid(true, 0, 0, 40);
 };
 
 /**
@@ -123,18 +123,17 @@ p.centerOnCell = function (cellX, cellY) {
 /**
  *
  */
-p.createIsoEntity = function (entity_type, building_type, cellX, cellY) {
+p.createIsoEntity = function (shop_data, cellX, cellY) {
     this._genId++;
-    var entity_data = gShop._data_items[building_type];
     var entity = null;
-    if (entity_type == ENTITY_TYPE_ROAD) {
-        entity = new IsoRoad(building_type, this._genId, "assets/" + entity_data.texture + ".json");
+    if (shop_data.type == ENTITY_TYPE_ROAD) {
+        entity = new IsoRoad(shop_data, this._genId);
     }
-    else if (entity_type == ENTITY_TYPE_BUILDING) {
-        entity = new IsoBuidling(building_type, this._genId, "assets/" + entity_data.texture + ".json");
+    else if (shop_data.type == ENTITY_TYPE_BUILDING) {
+        entity = new IsoBuidling(shop_data, this._genId);
     }
     else {
-        entity = new IsoEntity(building_type, this._genId, "assets/" + entity_data.texture + ".json");
+        entity = new IsoEntity(shop_data, this._genId);
     }
     entity.setCellPosition(cellX, cellY);
     return entity;
@@ -154,16 +153,17 @@ p.canAdd = function (isoEntity) {
         return false;
     }
 
-    var i, j;
-    var maxX = isoEntity.cellX + isoEntity.anchorX;
-    var maxY = isoEntity.cellY + isoEntity.anchorY;
-    for (i = isoEntity.cellX - isoEntity.anchorX; i <= maxX; i++) {
-        for (j = isoEntity.cellY - isoEntity.anchorY; j <= maxY; j++) {
-            if (this._data[i][j] > 0) {
+    var _x, _y;
+    for (var i = 0; i < isoEntity.sizeX; i++) {
+        for (var j = 0; j < isoEntity.sizeY; j++) {
+            _x = isoEntity.cellX - isoEntity.anchorX + i;
+            _y = isoEntity.cellY - isoEntity.anchorY + j;
+            if(this.shop_data[_x][_y] > 0){
                 return false;
             }
         }
     }
+
     return true;
 };
 
@@ -177,12 +177,12 @@ p.add = function (isoEntity) {
         return false;
     }
 
-    var i, j;
-    var maxX = isoEntity.cellX + isoEntity.anchorX;
-    var maxY = isoEntity.cellY + isoEntity.anchorY;
-    for (i = isoEntity.cellX - isoEntity.anchorX; i <= maxX; i++) {
-        for (j = isoEntity.cellY - isoEntity.anchorY; j <= maxY; j++) {
-            this._data[i][j] = isoEntity.entityId;
+    var _x, _y;
+    for (var i = 0; i < isoEntity.sizeX; i++) {
+        for (var j = 0; j < isoEntity.sizeY; j++) {
+            _x = isoEntity.cellX - isoEntity.anchorX + i;
+            _y = isoEntity.cellY - isoEntity.anchorY + j;
+            this.shop_data[_x][_y] = isoEntity.entityId;
         }
     }
 
@@ -195,12 +195,12 @@ p.add = function (isoEntity) {
 };
 
 p.remove = function (isoEntity) {
-    var i, j;
-    var maxX = isoEntity.cellX + isoEntity.anchorX;
-    var maxY = isoEntity.cellY + isoEntity.anchorY;
-    for (i = isoEntity.cellX - isoEntity.anchorX; i <= maxX; i++) {
-        for (j = isoEntity.cellY - isoEntity.anchorY; j <= maxY; j++) {
-            this._data[i][j] = 0;
+    var _x, _y;
+    for (var i = 0; i < isoEntity.sizeX; i++) {
+        for (var j = 0; j < isoEntity.sizeY; j++) {
+            _x = isoEntity.cellX - isoEntity.anchorX + i;
+            _y = isoEntity.cellY - isoEntity.anchorY + j;
+            this.shop_data[_x][_y] = 0;
         }
     }
 
@@ -214,7 +214,7 @@ p.remove = function (isoEntity) {
 
 p.getEntityAt = function (cellX, cellY) {
     if (this.validCell(cellX, cellY)) {
-        var isoEntity = this._entities.getItem(this._data[cellX][cellY]);
+        var isoEntity = this._entities.getItem(this.shop_data[cellX][cellY]);
         return isoEntity;
     }
     return null;
@@ -322,11 +322,11 @@ p.execRoad = function (road, recursive) {
 
 
 p.initialize = function () {
-    this._data = [];
+    this.shop_data = [];
     for (var i = 0; i < MAP_SIZE; i++) {
-        this._data[i] = [];
+        this.shop_data[i] = [];
         for (var j = 0; j < MAP_SIZE; j++) {
-            this._data[i][j] = 0;
+            this.shop_data[i][j] = 0;
         }
     }
     this.createEnities();

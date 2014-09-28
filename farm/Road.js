@@ -3,8 +3,8 @@
  */
 
 
-var IsoRoad = function (buildingId, entityId, texture) {
-    this.initialize(buildingId, entityId, texture);
+var IsoRoad = function (shop_data, entityId) {
+    this.initialize(shop_data, entityId);
 };
 
 var p = IsoRoad.prototype = Object.create(IsoEntity.prototype);
@@ -18,7 +18,7 @@ IsoRoad.prototype.onCreatedByCursorClick = function (current_cursor) {
 IsoRoad.prototype.IsoEntity_loadDataCompleted = p.loadDataCompleted;
 IsoRoad.prototype.loadDataCompleted = function (evt) {
     this.IsoEntity_loadDataCompleted(evt);
-    if( this._startFrame == 0 ){
+    if( this.startFrame == 0 ){
         this.sprite.gotoAndStop(this.sprite_sheet.getNumFrames() - 1);
     }
 };
@@ -26,7 +26,7 @@ IsoRoad.prototype.loadDataCompleted = function (evt) {
 
 // ====================================== Constructor =============================
 IsoRoad.prototype.IsoEntity_initialize = p.initialize;
-IsoRoad.prototype.initialize = function (buildingId, entityId, texture) {
-    this.IsoEntity_initialize(buildingId, entityId, texture);
+IsoRoad.prototype.initialize = function (shop_data, entityId) {
+    this.IsoEntity_initialize(shop_data, entityId);
     this.entityType = ENTITY_TYPE_ROAD;
 };

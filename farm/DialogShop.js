@@ -16,7 +16,7 @@ p._buildingContainer = null;
 p._decorationContainer = null;
 p._shopMask = null;
 
-p._data = null;
+p.shop_data = null;
 p._data_items = null;
 p._frame_lose_1 = 6;
 p._frame_lose_2 = 7;
@@ -50,14 +50,14 @@ p.loadData = function () {
 };
 
 p.loadDataCompleted = function (evt) {
-    this._data = this.loader.getResult("window_shop");
-    this._data_items = this._data.items;
+    this.shop_data = this.loader.getResult("window_shop");
+    this._data_items = this.shop_data.items;
     // add id property to iteminfo
     for (var key in this._data_items) {
         this._data_items[key].id = key;
     }
 
-    var animation_data = this._data.anim;
+    var animation_data = this.shop_data.anim;
     var ss = new createjs.SpriteSheet(animation_data);
     // background
     this._background = new createjs.Sprite(ss);
@@ -89,7 +89,7 @@ p.loadDataCompleted = function (evt) {
     this._buildingContainer.mask = this._shopMask;  // set mask
     this._buildingContainer.visible = false;
     this.addChild(this._buildingContainer);
-    var tabBuidling = this._data.tabs.house;
+    var tabBuidling = this.shop_data.tabs.house;
     var off_x = 20;
     var column = 0;
     for (var i = 0; i < tabBuidling.length; i++) {
@@ -109,7 +109,7 @@ p.loadDataCompleted = function (evt) {
     this._decorationContainer.mask = this._shopMask;  // set mask
     this._decorationContainer.visible = false;
     this.addChild(this._decorationContainer);
-    var tabDecoration = this._data.tabs.decoration;
+    var tabDecoration = this.shop_data.tabs.decoration;
     off_x = 20;
     column = 0;
     for (var i = 0; i < tabDecoration.length; i++) {
@@ -171,12 +171,12 @@ p.loadDataCompleted = function (evt) {
 p._showTap = function(name){
     if( name == "building" ){
         this._cur_tab_container = this._buildingContainer;
-        this._cur_tab_data = this._data.tabs.house;
+        this._cur_tab_data = this.shop_data.tabs.house;
         this._cur_tap_cur_tween_index = 0;
         this._cur_tap_max_tween_index = Math.ceil(this._cur_tab_data.length / 2) - 4;
     }else if( name == "decoration" ){
         this._cur_tab_container = this._decorationContainer;
-        this._cur_tab_data = this._data.tabs.decoration;
+        this._cur_tab_data = this.shop_data.tabs.decoration;
         this._cur_tap_cur_tween_index = 0;
         this._cur_tap_max_tween_index = Math.ceil(this._cur_tab_data.length / 2) - 4;
     }

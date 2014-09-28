@@ -2,13 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46317f02-6b90-4501-959a-a881895d60d5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/Building.js" afterPath="$PROJECT_DIR$/farm/Building.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/Cursor.js" afterPath="$PROJECT_DIR$/farm/Cursor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/Helper.js" afterPath="$PROJECT_DIR$/farm/Helper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/DialogShop.js" afterPath="$PROJECT_DIR$/farm/DialogShop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/FriendListItem.js" afterPath="$PROJECT_DIR$/farm/FriendListItem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/IsoEntity.js" afterPath="$PROJECT_DIR$/farm/IsoEntity.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/IsoState.js" afterPath="$PROJECT_DIR$/farm/IsoState.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/MainBar.js" afterPath="$PROJECT_DIR$/farm/MainBar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/Map.js" afterPath="$PROJECT_DIR$/farm/Map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/assets/house.json" afterPath="$PROJECT_DIR$/farm/assets/house.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/Road.js" afterPath="$PROJECT_DIR$/farm/Road.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/ShopItem.js" afterPath="$PROJECT_DIR$/farm/ShopItem.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/easeljs/display/SpriteSheet.js" afterPath="$PROJECT_DIR$/src/easeljs/display/SpriteSheet.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/easeljs/utils/SpriteSheetBuilder.js" afterPath="$PROJECT_DIR$/src/easeljs/utils/SpriteSheetBuilder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SpriteSheetBuilderMC/SpriteSheetBuilder_MovieClip.html" afterPath="$PROJECT_DIR$/examples/SpriteSheetBuilderMC/SpriteSheetBuilder_MovieClip.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/easeljs/utils/SpriteSheetUtils.js" afterPath="$PROJECT_DIR$/src/easeljs/utils/SpriteSheetUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/easeljs-0.7.1.combined.js" afterPath="$PROJECT_DIR$/lib/easeljs-0.7.1.combined.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/easeljs-0.7.1.min.js" afterPath="$PROJECT_DIR$/lib/easeljs-0.7.1.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/easeljs-NEXT.combined.js" afterPath="$PROJECT_DIR$/lib/easeljs-NEXT.combined.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/easeljs-NEXT.min.js" afterPath="$PROJECT_DIR$/farm/easeljs-NEXT.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/easeljs-NEXT.min.js" afterPath="$PROJECT_DIR$/lib/easeljs-NEXT.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/assets/shop_shoes.json" afterPath="$PROJECT_DIR$/farm/assets/shop_shoes.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/farm/assets/window_shop.json" afterPath="$PROJECT_DIR$/farm/assets/window_shop.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/createjsTheme/assets/js/yui-source.js" afterPath="$PROJECT_DIR$/build/createjsTheme/assets/js/yui-source.js" />
     </list>
     <ignored path="WebFarm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,18 +50,8 @@
       <file leaf-file-name="farm.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/farm/farm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.0666666" vertical-offset="4177" max-vertical-offset="5481">
-              <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Helper.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/farm/Helper.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="245" max-vertical-offset="3024">
-              <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+            <state vertical-scroll-proportion="-39.266666" vertical-offset="1909" max-vertical-offset="5481">
+              <caret line="147" column="51" selection-start-line="147" selection-start-column="51" selection-end-line="147" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -65,27 +71,27 @@
         <entry file="file://$PROJECT_DIR$/farm/FriendListItem.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="651" max-vertical-offset="1470">
-              <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+              <caret line="31" column="68" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IsoEntity.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="IsoEntity.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/farm/IsoEntity.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33223686" vertical-offset="852" max-vertical-offset="3360">
-              <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2719" max-vertical-offset="3402">
+              <caret line="151" column="38" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DialogShop.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/farm/DialogShop.js">
+      <file leaf-file-name="Building.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/farm/Building.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5859">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="798">
+              <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -94,8 +100,8 @@
       <file leaf-file-name="ShopItem.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/farm/ShopItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="2247">
-              <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1461" max-vertical-offset="2247">
+              <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -104,8 +110,8 @@
       <file leaf-file-name="Cursor.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/farm/Cursor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1084" max-vertical-offset="2625">
-              <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1323" max-vertical-offset="3465">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -114,18 +120,18 @@
       <file leaf-file-name="IsoState.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/farm/IsoState.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3768" max-vertical-offset="7161">
-              <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3448" max-vertical-offset="7161">
+              <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Map.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/farm/Map.js">
+      <file leaf-file-name="Road.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/farm/Road.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3990">
-              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.27086383" vertical-offset="67" max-vertical-offset="777">
+              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -146,19 +152,19 @@
       <list>
         <option value="$PROJECT_DIR$/farm/assets/Cursor.js" />
         <option value="$PROJECT_DIR$/farm/HashTable.js" />
-        <option value="$PROJECT_DIR$/farm/Building.js" />
         <option value="$PROJECT_DIR$/farm/Dialog.js" />
-        <option value="$PROJECT_DIR$/farm/Road.js" />
-        <option value="$PROJECT_DIR$/farm/ShopItem.js" />
         <option value="$PROJECT_DIR$/farm/FriendListItem.js" />
         <option value="$PROJECT_DIR$/farm/farm.html" />
         <option value="$PROJECT_DIR$/farm/DialogShop.js" />
         <option value="$PROJECT_DIR$/farm/MainBar.js" />
         <option value="$PROJECT_DIR$/farm/Map.js" />
-        <option value="$PROJECT_DIR$/farm/Cursor.js" />
         <option value="$PROJECT_DIR$/farm/Helper.js" />
-        <option value="$PROJECT_DIR$/farm/IsoState.js" />
+        <option value="$PROJECT_DIR$/farm/ShopItem.js" />
+        <option value="$PROJECT_DIR$/farm/Building.js" />
+        <option value="$PROJECT_DIR$/farm/Road.js" />
         <option value="$PROJECT_DIR$/farm/IsoEntity.js" />
+        <option value="$PROJECT_DIR$/farm/IsoState.js" />
+        <option value="$PROJECT_DIR$/farm/Cursor.js" />
       </list>
     </option>
   </component>
@@ -194,7 +200,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -229,6 +234,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,14 +256,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.Farm">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -268,14 +266,12 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
       <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -283,6 +279,16 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" uri="http://Farm">
@@ -333,7 +339,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -341,7 +347,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32659575" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21840958" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39574468" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24361703" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -350,8 +356,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -368,9 +374,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21840958" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -391,18 +397,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="146" />
+      <option name="time" value="160" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/farm/IsoEntity.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="998" max-vertical-offset="2100">
-          <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/SpriteSheet.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="3255">
@@ -645,13 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/farm/easeljs-NEXT.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.039848197" vertical-offset="0" max-vertical-offset="527">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/Masks.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.7" vertical-offset="1323" max-vertical-offset="2625">
@@ -673,22 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/farm/Building.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="798">
-          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/farm/Road.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="777">
-          <caret line="12" column="78" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/farm/DialogShop.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5859">
@@ -705,30 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/farm/ShopItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="2247">
-          <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/farm/Cursor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1084" max-vertical-offset="2625">
-          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/farm/farm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.0666666" vertical-offset="4177" max-vertical-offset="5481">
-          <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/farm/Helper.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="245" max-vertical-offset="3024">
@@ -739,8 +690,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/farm/FriendListItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1428">
-          <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="651" max-vertical-offset="1470">
+          <caret line="31" column="68" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/assets/building.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/ShopItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1461" max-vertical-offset="2247">
+          <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/easeljs-NEXT.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.079696395" vertical-offset="0" max-vertical-offset="527">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/Building.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="798">
+          <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/farm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-39.266666" vertical-offset="1909" max-vertical-offset="5481">
+          <caret line="147" column="51" selection-start-line="147" selection-start-column="51" selection-end-line="147" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -753,18 +744,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/farm/IsoState.js">
+    <entry file="file://$PROJECT_DIR$/farm/IsoEntity.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3768" max-vertical-offset="7161">
-          <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2719" max-vertical-offset="3402">
+          <caret line="151" column="38" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/farm/IsoEntity.js">
+    <entry file="file://$PROJECT_DIR$/farm/IsoState.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33223686" vertical-offset="852" max-vertical-offset="3360">
-          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3448" max-vertical-offset="7161">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/Cursor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1323" max-vertical-offset="3465">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/farm/Road.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27086383" vertical-offset="67" max-vertical-offset="777">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
           <folding />
         </state>
       </provider>

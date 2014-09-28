@@ -205,7 +205,7 @@ var SpriteSheetUtils = function() {
 
 		var sfx = "_"+(h?"h":"")+(v?"v":"");
 		var names = spriteSheet._animations;
-		var data = spriteSheet._data;
+		var data = spriteSheet.shop_data;
 		var al = names.length/count;
 		for (i=0;i<al;i++) {
 			var name = names[i];
