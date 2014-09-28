@@ -61,18 +61,12 @@ p.handleEvt = function (evt) {
         this.sprite.scaleX = 1.0;
         this.sprite.scaleY = 1.0;
     }
-    else if (evt.type == "mousedown") {
-        this.sprite.scaleX = 1.0;
-        this.sprite.scaleY = 1.0;
-        this.sprite.offset = {x: this.sprite.x - evt.stageX, y: this.sprite.y - evt.stageY};
-    }
-    else if (evt.type == "pressmove") {
-        this.sprite.x = evt.stageX + this.sprite.offset.x;
-        this.sprite.y = evt.stageY + this.sprite.offset.y;
-
-        var screenP = $V([this.sprite.x, this.sprite.y, 0]);
-        var isoP = screenToIso(screenP);
-        this._setIsoPosition(snap(isoP.e(1)), snap(isoP.e(2)));
+    else if( evt.type == "click" )
+    {
+        if( gCursor.state == CURSOR_REMOVE )
+        {
+            gIsoState.remove(this);
+        }
     }
 };
 
@@ -94,7 +88,7 @@ p.loadDataCompleted = function (evt) {
 //    this.sprite.x = this.x;
 //    this.sprite.y = this.y;
 //    gIsoContainer.addChild(this.sprite);
-//    this.sprite.on("click", this.handleEvt, this);
+    this.sprite.on("click", this.handleEvt, this);
 //    this.sprite.on("dblclick", this.handleEvt, this);
     this.sprite.on("rollover", this.handleEvt, this);
     this.sprite.on("rollout", this.handleEvt, this);

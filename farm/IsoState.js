@@ -64,7 +64,7 @@ p.createEnities = function () {
 //    }
 
 //    var entity = this.createIsoEntity(ENTITY_TYPE_BUILDING, "buildings_025_cottage", 10, 10);
-//    gCursor.setCursor(entity);
+//    gCursor.attachIsoEntity(entity);
 
    // this.showGrid(true, 0, 0, 40);
 };
@@ -209,7 +209,7 @@ p.remove = function (isoEntity) {
     if (index > -1) {
         this.children.splice(index, 1);
     }
-    gIsoContainer.remove(isoEntity);
+    gIsoContainer.removeChild(isoEntity);
 };
 
 p.getEntityAt = function (cellX, cellY) {

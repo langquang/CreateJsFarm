@@ -218,7 +218,8 @@ p.handleBtnShopEvent = function (evt) {
 p.handleBtnArrowEvent = function (evt) {
     if (evt.type == "click") {
         this._btnArrow.gotoAndStop(this._frame_arrow_1);
-        gCursor.setCursor(null);
+        gCursor.attachIsoEntity(null);
+        gCursor.setState(CURSOR_ARROW);
     } else if (evt.type == "rollover") {
         this._btnArrow.gotoAndStop(this._frame_arrow_2);
     } else if (evt.type == "rollout") {
@@ -229,7 +230,8 @@ p.handleBtnArrowEvent = function (evt) {
 p.handleBtnDeleteEvent = function (evt) {
     if (evt.type == "click") {
         this._btnDelete.gotoAndStop(this._frame_delete_1);
-
+        gCursor.setState(CURSOR_REMOVE);
+        gCursor.attachIsoEntity(null);
     } else if (evt.type == "rollover") {
         this._btnDelete.gotoAndStop(this._frame_delete_2);
     } else if (evt.type == "rollout") {
@@ -289,7 +291,7 @@ p.handleBtnFriendPrevEvent = function (evt) {
 p.handleBtnStopEvent = function (evt) {
     if (evt.type == "click") {
         this._btnStop.gotoAndStop(this._frame_stop_1);
-        gCursor.setCursor(null);
+        gCursor.attachIsoEntity(null);
 
     } else if (evt.type == "rollover") {
         this._btnStop.gotoAndStop(this._frame_stop_2);

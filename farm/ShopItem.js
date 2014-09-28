@@ -81,7 +81,8 @@ p.handleEvt = function (evt) {
         // create cursor
         var entity = gIsoState.createIsoEntity(this.shop_data, 10, 10);
         entity.startFrame = this._icon.currentFrame;
-        gCursor.setCursor(entity);
+        gCursor.attachIsoEntity(entity);
+        gCursor.setState(CURSOR_BUY);
     }
     else if (evt.type == "rollover") {
         this._icon.scaleX = this._scale_rate * 1.1;

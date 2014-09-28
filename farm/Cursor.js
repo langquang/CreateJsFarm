@@ -2,6 +2,11 @@
  * Created by CPU001 on 9/21/2014.
  */
 
+var CURSOR_ARROW = 1;
+var CURSOR_MOVE = 2;
+var CURSOR_REMOVE = 3;
+var CURSOR_BUY = 4;
+
 var Cursor = function () {
     this.initialize();
 };
@@ -15,18 +20,18 @@ p._grid_green = null;
 p._grid_anchorX = 0;
 p._grid_anchorY = 0;
 p._isoLastMouseDown = null;
+p.state = CURSOR_ARROW;
 
 p.handleOnStageMove = function (evt) {
     if (this._sprite_cursor != null) {
         var isoP = stageToIso(gStage.mouseX, gStage.mouseY);
         this._sprite_cursor.setCellPosition(getCell(isoP.e(1)), getCell(isoP.e(2)));
         // render grid
-        if( gIsoState.canAdd(this._sprite_cursor) )
-        {
+        if (gIsoState.canAdd(this._sprite_cursor)) {
             this._grid_green.visible = true;
             this._grid_red.visible = false;
         }
-        else{
+        else {
             this._grid_green.visible = false;
             this._grid_red.visible = true;
         }
@@ -43,6 +48,10 @@ p.handleOnStageMove = function (evt) {
     }
 };
 
+p.setState = function( state ){
+    this.state = state;
+};
+
 p.handleOnStageMouseDown = function (evt) {
     this._isoLastMouseDown = $V([evt.stageX, evt.stageY, 0]);
 };
@@ -51,7 +60,7 @@ p.handleOnStageMouseUp = function (evt) {
 };
 
 
-p.setCursor = function (sprite) {
+p.attachIsoEntity = function (sprite) {
     gCursorsContainer.removeAllChildren();
     this._sprite_cursor = sprite;
     if (this._sprite_cursor != null) {
@@ -68,6 +77,7 @@ p.setCursor = function (sprite) {
         gCursorsContainer.addChild(this._grid_green);
         gCursorsContainer.addChild(this._sprite_cursor);
 
+    }else{
     }
 };
 
@@ -77,9 +87,12 @@ p.handleOnStageClick = function (evt) {
         var curPos = $V([evt.stageX, evt.stageY, 0]);
         if (curPos.distanceFrom(this._isoLastMouseDown) <= 5) {
             this._sprite_cursor.onCursorClick();
-            var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
-            gIsoState.add(new_instance);
-            new_instance.onCreatedByCursorClick(this._sprite_cursor);
+            if( this.state == CURSOR_BUY ){
+                var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
+                gIsoState.add(new_instance);
+                new_instance.onCreatedByCursorClick(this._sprite_cursor);
+            }
+
         }
     }
 
@@ -146,8 +159,8 @@ p.updatePositionOfGrid = function () {
     var pos = isoToScreen($V([this._grid_anchorX * CELL_SIZE, this._grid_anchorY * CELL_SIZE, 0]));
     this._grid_red.x = this._sprite_cursor.x - pos.e(1);
     this._grid_red.y = this._sprite_cursor.y - pos.e(2);
-    this._grid_green.x =  this._grid_red.x ;
-    this._grid_green.y =  this._grid_red.y ;
+    this._grid_green.x = this._grid_red.x;
+    this._grid_green.y = this._grid_red.y;
 };
 
 //======================================= Constructor==========================
