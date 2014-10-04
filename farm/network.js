@@ -21,12 +21,15 @@ socket.on(_msg_login_, function (res) {
     var buildings = res.buildings;
     for (var key in buildings) {
         if (buildings.hasOwnProperty(key)) {
-            var buidlding_data = buildings[key];
-            var shop_data = gItemConfig[buidlding_data.shop_id];
-            var building = gIsoState.createStableIsoEntity(shop_data, buidlding_data.x, buidlding_data.y, key);
+            var building_data = buildings[key];
+            var shop_data = gItemConfig[building_data.shop_id];
+            var building = gIsoState.createStableIsoEntity(shop_data, building_data.x, building_data.y, key);
+            building.last_harvest = building_data.last_harvest;
             gIsoState.add(building);
+
         }
     }
+    gDeltaTime = res.time - Math.floor(new Date().getTime() / 1000);
     console.log("login success");
 });
 
@@ -52,6 +55,12 @@ socket.on(_msg_delete_, function (res) {
     }
 });
 
+socket.on(_msg_harvest_, function (res) {
+    if (res.result == true) {
+        console.log("harvest success");
+    }
+});
+
 
 //====================================== send ==================================================
 function sendLogin() {
@@ -72,5 +81,5 @@ function sendMove(buildingId, x, y) {
 }
 
 function sendHarvest(buildingId) {
-    socket.emit(_msg_move_, {userId: gUserId, buildingId: buildingId});
+    socket.emit(_msg_harvest_, {userId: gUserId, buildingId: buildingId});
 }

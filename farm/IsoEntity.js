@@ -35,23 +35,6 @@ p.sprite_sheet = null;
 p.last_harvest = 0;
 // ============================ function
 
-p.harvest = function () {
-
-    if( this.canHarvest() ){
-        this.last_harvest = getSeconds();
-        sendHarvest(this.entityId);
-        return this.shop_data.income;
-    }
-    return -1;
-};
-
-p.canHarvest = function () {
-    if (this.type == ENTITY_TYPE_BUILDING && this.last_harvest + this.shop_data.time >= getSeconds()) {
-        return true;
-    }
-    return false;
-};
-
 p._setPosition = function (x, y) {
     this.x = x;
     this.y = y;
@@ -91,11 +74,6 @@ p.handleEvt = function (evt) {
                 // attach current building to cursor
                 gIsoState.remove(this);
                 gCursor.attachIsoEntity(this);
-            }
-        }
-        else if( gCursor.state == CURSOR_ARROW ){
-            if( this.canHarvest() ){
-                this.harvest();
             }
         }
     }

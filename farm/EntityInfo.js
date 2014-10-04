@@ -13,6 +13,7 @@ p._background = null;
 p._txtName = null;
 p._txtName_stroke = null;
 p._txtDes = null;
+p._curBuilding = null;
 //============================== function
 p.show = function(visible, x, y)
 {
@@ -20,15 +21,31 @@ p.show = function(visible, x, y)
         gMapIconContainer.addChild(this);
     }else{
         gMapIconContainer.removeChild(this);
+        this._curBuilding = null;
     }
     this.x = x;
     this.y = y - 110;
 };
 
-p.setInfo= function(name, des){
+p.setInfo= function(name, des, building){
     this._txtName.text = name;
     this._txtName_stroke.text = name;
     this._txtDes.text = des;
+    this._curBuilding = building;
+};
+
+p.update = function(cur_seconds){
+
+    if( this._curBuilding){
+        var wait_seconds = this._curBuilding.last_harvest + this._curBuilding.shop_data.time - cur_seconds;
+        if( wait_seconds > 0 )
+        {
+            this._txtDes.text = "Harvest in: " + toHHMMSS(wait_seconds);
+        }
+        else{
+            this._txtDes.text = "Click to collect profits";
+        }
+    }
 };
 
 //======================================= Override==========================

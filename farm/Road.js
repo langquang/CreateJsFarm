@@ -12,7 +12,7 @@ var p = IsoRoad.prototype = Object.create(IsoEntity.prototype);
 //======================================= override ================================
 IsoRoad.prototype.IsoEntity_onCreatedByCursorClick = p.onCreatedByCursorClick;
 IsoRoad.prototype.onCreatedByCursorClick = function (current_cursor) {
-    gIsoState.execRoad(this, true);
+//    gIsoState.execRoad(this, true);
 };
 
 IsoRoad.prototype.IsoEntity_loadDataCompleted = p.loadDataCompleted;

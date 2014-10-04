@@ -13,6 +13,7 @@ p._entities = new HashTable({});
 p._isoLastMouseDown = null;
 p._isoIsPanning = false;
 p.children = [];
+p.product_gold = [];
 p._genId = 0;
 
 // =========================== functions ======================================
@@ -199,7 +200,14 @@ p.add = function (isoEntity) {
 
     this._entities.setItem(isoEntity.entityId, isoEntity);
     this.children.push(isoEntity);
+    if( isoEntity.entityType == ENTITY_TYPE_BUILDING ){
+        this.product_gold.push(isoEntity);
+    }
+    else if(isoEntity.entityType == ENTITY_TYPE_ROAD){
+        this.execRoad(isoEntity, true);
+    }
     gIsoContainer.addChild(isoEntity);
+
 
     return true;
 
@@ -224,6 +232,14 @@ p.remove = function (isoEntity) {
     if (index > -1) {
         this.children.splice(index, 1);
     }
+
+    if( isoEntity.entityType == ENTITY_TYPE_BUILDING ){
+        index = this.product_gold.indexOf(isoEntity);
+        if (index > -1) {
+            this.product_gold.splice(index, 1);
+        }
+    }
+
     gIsoContainer.removeChild(isoEntity);
 };
 
