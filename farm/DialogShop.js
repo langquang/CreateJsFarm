@@ -53,7 +53,7 @@ p.loadDataCompleted = function (evt) {
     this.shop_data = this.loader.getResult("window_shop");
     this._data_items = this.shop_data.items;
     gItemConfig = this._data_items;
-    sendLogin(gUserId);
+    sendLogin();
 
     // add id property to iteminfo
     for (var key in this._data_items) {

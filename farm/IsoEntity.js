@@ -30,7 +30,27 @@ p.anchorY = 1;    // cell size
 p._building_data = null; // constance data
 p.startFrame = 0;
 p.sprite_sheet = null;
+
+// server
+p.last_harvest = 0;
 // ============================ function
+
+p.harvest = function () {
+
+    if( this.canHarvest() ){
+        this.last_harvest = getSeconds();
+        sendHarvest(this.entityId);
+        return this.shop_data.income;
+    }
+    return -1;
+};
+
+p.canHarvest = function () {
+    if (this.type == ENTITY_TYPE_BUILDING && this.last_harvest + this.shop_data.time >= getSeconds()) {
+        return true;
+    }
+    return false;
+};
 
 p._setPosition = function (x, y) {
     this.x = x;
@@ -61,19 +81,21 @@ p.handleEvt = function (evt) {
         this.sprite.scaleX = 1.0;
         this.sprite.scaleY = 1.0;
     }
-    else if( evt.type == "click" )
-    {
-        if( gCursor.state == CURSOR_REMOVE )
-        {
+    else if (evt.type == "click") {
+        if (gCursor.state == CURSOR_REMOVE) {
             gIsoState.remove(this);
+            sendDelete(this.entityId)
         }
-        else if(gCursor.state == CURSOR_MOVE)
-        {
-            if( gCursor._sprite_cursor == null )
-            {
+        else if (gCursor.state == CURSOR_MOVE) {
+            if (gCursor._sprite_cursor == null) {
                 // attach current building to cursor
                 gIsoState.remove(this);
                 gCursor.attachIsoEntity(this);
+            }
+        }
+        else if( gCursor.state == CURSOR_ARROW ){
+            if( this.canHarvest() ){
+                this.harvest();
             }
         }
     }
@@ -81,8 +103,8 @@ p.handleEvt = function (evt) {
 
 // this != this
 p.loadDataCompleted = function (evt) {
-    this._building_data = this.loader.getResult(this.entityId).data;
-    var animation_data = this.loader.getResult(this.entityId).anim;
+    this._building_data = this.loader.getResult(this.shop_id).data;
+    var animation_data = this.loader.getResult(this.shop_id).anim;
     this.sprite_sheet = new createjs.SpriteSheet(animation_data);
     this.sprite = new createjs.Sprite(this.sprite_sheet);
     this.sprite.gotoAndStop(this.startFrame);
@@ -134,7 +156,7 @@ p.gotoAndPlay = function (frame_index) {
 
 p.loadData = function () {
     var manifest = [
-        {src: "assets/" + this.texture + ".json", id: this.entityId}
+        {src: "assets/" + this.texture + ".json", id: this.shop_id}
     ];
 
     // loader is global

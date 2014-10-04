@@ -139,6 +139,17 @@ p.createIsoEntity = function (shop_data, cellX, cellY) {
     return entity;
 };
 
+
+/**
+ *
+ */
+p.createStableIsoEntity = function (shop_data, cellX, cellY, entityId) {
+    var entity = this.createIsoEntity(shop_data, cellX, cellY);
+    entity.entityId = entityId;
+    return entity;
+};
+
+
 p.canAdd = function (isoEntity) {
     if (isoEntity.cellX - isoEntity.anchorX < 0) {
         return false;
@@ -192,6 +203,10 @@ p.add = function (isoEntity) {
 
     return true;
 
+};
+
+p.get = function(entityId){
+    return this._entities.getItem(entityId);
 };
 
 p.remove = function (isoEntity) {

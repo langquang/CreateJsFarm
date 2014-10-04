@@ -1,6 +1,7 @@
 /**
  * Created by CPU001 on 10/4/2014.
  */
+'use strict';
 // socket
 var socket = io.connect('192.168.1.20:3000');
 //==================================== MSG ===============================
@@ -14,33 +15,62 @@ var _msg_boots_ = "boots";
 
 var _storeLoginData;
 //====================================== RECIVE ==================================================
-socket.on(_msg_login_, function (data) {
-    console.log("Login response");
-    console.log(data);
+socket.on(_msg_login_, function (res) {
+    console.log("Login response" + JSON.stringify(res));
 
-    var res = JSON.parse(data);
-    var buildings =  res.buildings;
-    for (var key in buildings)
-    {
-        var buidlding_data = buildings[key];
-        var shop_data = gItemConfig[buidlding_data.shop_id];
-        var building = gIsoState.createIsoEntity(shop_data, buidlding_data.x, buidlding_data.y);
-        gIsoState.add(building);
+    var buildings = res.buildings;
+    for (var key in buildings) {
+        if (buildings.hasOwnProperty(key)) {
+            var buidlding_data = buildings[key];
+            var shop_data = gItemConfig[buidlding_data.shop_id];
+            var building = gIsoState.createStableIsoEntity(shop_data, buidlding_data.x, buidlding_data.y, key);
+            gIsoState.add(building);
+        }
     }
+    console.log("login success");
+});
 
+socket.on(_msg_buy_, function (res) {
+    if (res.result == true) {
+        var building = gIsoState.get(res.temptId);
+        if (building != null) {
+            console.log("buy success");
+            building.entityId = res.entityId;
+        }
+    }
+});
+
+socket.on(_msg_move_, function (res) {
+    if (res.result == true) {
+        console.log("move success");
+    }
+});
+
+socket.on(_msg_delete_, function (res) {
+    if (res.result == true) {
+        console.log("delete success");
+    }
 });
 
 
 //====================================== send ==================================================
-function sendLogin(userId) {
+function sendLogin() {
     console.log("Connecting......");
-    socket.emit(_msg_login_, JSON.stringify({userId: userId}));
+    socket.emit(_msg_login_, {userId: gUserId});
 }
 
-function sendBuy(userId, id, x, y) {
-    socket.emit(_msg_buy_, JSON.stringify({userId: userId, id: id, x: x, y: y}));
+function sendBuy(id, x, y, temptId) {
+    socket.emit(_msg_buy_, {userId: gUserId, id: id, x: x, y: y, temptId: temptId});
 }
 
-function sendDelete(userId, buildingId) {
-    socket.emit(_msg_login_, JSON.stringify({userId: userId, buildingId: buildingId}));
+function sendDelete(buildingId) {
+    socket.emit(_msg_delete_, {userId: gUserId, buildingId: buildingId});
+}
+
+function sendMove(buildingId, x, y) {
+    socket.emit(_msg_move_, {userId: gUserId, buildingId: buildingId, x: x, y: y});
+}
+
+function sendHarvest(buildingId) {
+    socket.emit(_msg_move_, {userId: gUserId, buildingId: buildingId});
 }

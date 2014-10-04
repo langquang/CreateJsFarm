@@ -158,3 +158,7 @@ function isHitUI(stageX, stageY){
 
     return false;
 }
+
+function getSeconds(){
+    return  Math.floor(new Date().getTime() / 1000);
+};
