@@ -122,6 +122,7 @@ p.handleOnStageClick = function (evt) {
                         // add attach buidling to map
                         gIsoState.add(this._sprite_cursor);
                         this._sprite_cursor.alpha = 1.0; // revert alpha value
+                        sendBuy(gUserId, this._sprite_cursor.shop_id, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
                         // clear cursor
                         this.attachIsoEntity(null);
                         this.setState(CURSOR_ARROW);
@@ -129,9 +130,8 @@ p.handleOnStageClick = function (evt) {
                         var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
                         gIsoState.add(new_instance);
                         new_instance.onCreatedByCursorClick(this._sprite_cursor);
+                        sendBuy(gUserId, this._sprite_cursor.shop_id, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
                     }
-
-
                 }
             }
             // click to move

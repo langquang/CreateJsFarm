@@ -63,6 +63,8 @@
     <script type="text/javascript" src="easeljs-NEXT.min.js"></script>
     <script type="text/javascript" src="Tween.js"></script>
     <script type="text/javascript" src="Ease.js"></script>
+    <script type="text/javascript" src="socket.io-1.1.0.js"></script>
+    <script type="text/javascript" src="network.js"></script>
 
     <script type="text/javascript" src="HashTable.js"></script>
     <script type="text/javascript" src="IsoEntity.js"></script>
@@ -110,6 +112,11 @@
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
         var gAnchorY = 856;
+        var gUserId = "butin5";
+
+        // config
+        var gItemConfig;
+
 
 
         function init() {
@@ -214,6 +221,11 @@
             gUIContainer.addChild(gMainBar);
 //            gUIContainer.addChild(gShop);
             gUIContainer.addChild(gHud);
+
+
+            // ========================================= Start ==============================================
+
+
 
         }
 
