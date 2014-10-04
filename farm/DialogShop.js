@@ -51,15 +51,11 @@ p.loadData = function () {
 
 p.loadDataCompleted = function (evt) {
     this.shop_data = this.loader.getResult("window_shop");
-    this._data_items = this.shop_data.items;
-    gItemConfig = this._data_items;
-    sendLogin();
-
+    this._data_items  = gLoader.getResult("window_shop").items;
     // add id property to iteminfo
     for (var key in this._data_items) {
         this._data_items[key].id = key;
     }
-
     var animation_data = this.shop_data.anim;
     var ss = new createjs.SpriteSheet(animation_data);
     // background

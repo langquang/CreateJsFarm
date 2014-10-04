@@ -80,6 +80,7 @@
     <script type="text/javascript" src="MainBar.js"></script>
     <script type="text/javascript" src="Hub.js"></script>
     <script type="text/javascript" src="DarkLock.js"></script>
+    <script type="text/javascript" src="EntityInfo.js"></script>
 
 
     <!-- We also provide hosted minified versions of all CreateJS libraries.
@@ -99,6 +100,7 @@
         var gGridContainer;
         var gRoadsContainer;
         var gIsoContainer;
+        var gMapIconContainer;
         var gCursorsContainer;
         var gUIContainer;
         var gDarkLock;
@@ -108,6 +110,7 @@
         var gShop;
         var gMainBar;
         var gHud;
+        var gEntityInfo;
         // constance
         var stageWidth, stageHeight;
         var gAnchorX = 2452;
@@ -116,6 +119,9 @@
 
         // config
         var gItemConfig;
+        // embed
+        var gLoader;
+        var gMap_Icons;
 
 
 
@@ -157,11 +163,16 @@
             gIsoContainer.y = gAnchorY;
             gGameContainer.addChild(gIsoContainer);
             // layer 5
+            gMapIconContainer = new createjs.Container();
+            gMapIconContainer.x = gAnchorX;
+            gMapIconContainer.y = gAnchorY;
+            gGameContainer.addChild(gMapIconContainer);
+            // layer 6
             gCursorsContainer = new createjs.Container();
             gCursorsContainer.x = gAnchorX;
             gCursorsContainer.y = gAnchorY;
             gGameContainer.addChild(gCursorsContainer);
-            // layer 6 - UI
+            // layer 7 - UI
             gUIContainer = new createjs.Container();
             gStage.addChild(gUIContainer);
 
@@ -174,6 +185,7 @@
             gMainBar = new MainBar();
             gHud = new Hub();
             gDarkLock = new DarkLock();
+            gEntityInfo = new EntityInfo();
             // ===================================  stats ============================================
             stageLocLabel = new createjs.Text("", "bold 14px Arial", "#000");
             stageLocLabel.x = 10;
@@ -223,11 +235,16 @@
             gUIContainer.addChild(gHud);
 
 
-            // ========================================= Start ==============================================
 
 
-
+            loadData();
         }
+
+        // ========================================= Start ==============================================
+        function startGame(){
+            sendLogin();
+        }
+
 
         function tick(event) {
             zorder(gIsoState.children);
@@ -271,6 +288,32 @@
                 gDarkLock.show(false);
                 gUIContainer.removeChild(gShop);
             }
+        }
+
+        //=======================================Functions =========================
+        function loadData() {
+            var manifest = [
+                {src: "assets/window_shop.json", id: "window_shop"},
+                {src: "assets/window_shop.png", id: "window_shop_texture"},
+                {src: "assets/map_icons.json", id: "map_icons"},
+                {src: "assets/map_icons.png", id: "map_icons_texture"}
+            ];
+
+            // loader is global
+            gLoader= new createjs.LoadQueue();
+            gLoader.on("complete", this.loadDataCompleted, this);
+            gLoader.loadManifest(manifest);
+        }
+
+        function loadDataCompleted(evt) {
+            gItemConfig = gLoader.getResult("window_shop").items;
+            // add id property to iteminfo
+            for (var key in gItemConfig) {
+                gItemConfig[key].id = key;
+            }
+
+            gMap_Icons = new createjs.SpriteSheet(gLoader.getResult("map_icons"));
+            startGame();
         }
 
 

@@ -25,6 +25,19 @@ IsoBuidling.prototype.loadDataCompleted = function (evt) {
 
 };
 
+IsoBuidling.prototype.IsoEntity_handleEvt = p.handleEvt;
+IsoBuidling.prototype.handleEvt = function (evt) {
+    this.IsoEntity_handleEvt(evt);
+    if (evt.type == "rollover") {
+        gEntityInfo.show(true, this.x, this.y);
+        gEntityInfo.setInfo(this.shop_data.name, "click to collect profits");
+    }
+    else if (evt.type == "rollout") {
+        gEntityInfo.show(false, this.x, this.y);
+    }
+};
+
+
 // ====================================== Constructor =============================
 IsoBuidling.prototype.IsoEntity_initialize = p.initialize;
 IsoBuidling.prototype.initialize = function (shop_data, entityId) {
