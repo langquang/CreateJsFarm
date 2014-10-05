@@ -29,6 +29,9 @@ socket.on(_msg_login_, function (res) {
 
         }
     }
+
+    gHud.setInfo(res.game.gold, res.game.exp, res.game.energy, res.game.lastEnergy);
+
     gDeltaTime = res.time - Math.floor(new Date().getTime() / 1000);
     console.log("login success");
 });

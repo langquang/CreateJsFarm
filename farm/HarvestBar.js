@@ -17,6 +17,8 @@ p._txtDes = null;
 //============================== function
 p.show = function(entity, x, y)
 {
+    gHud.decEnegry(1);
+
     gMapIconContainer.addChild(this);
     this.x = x - 50;
     this.y = y - 70;
@@ -49,7 +51,9 @@ p.show = function(entity, x, y)
         function complete(){
             gResourceContainer.removeChild(_exp);
             gResourceContainer.removeChild(_gold);
-            entity.harvest();
+            var  gold = entity.harvest();
+            gHud.incExp(1);
+            gHud.incGold(gold > 0 ? gold : 0);
         }
     }
 

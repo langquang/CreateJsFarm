@@ -12,21 +12,20 @@ var p = IsoBuidling.prototype = Object.create(IsoEntity.prototype);
 //======================================= property ================================
 p._constrcutor_step = 1;
 p._icon = null;
+p._isHarvesting = false;
 
 
 p.harvest = function () {
 
-    if (this.canHarvest()) {
-        this.last_harvest = getSeconds();
-        sendHarvest(this.entityId);
-        this._icon.visible = false;
-        return this.shop_data.income;
-    }
-    return -1;
+    this.last_harvest = getSeconds();
+    sendHarvest(this.entityId);
+    this._icon.visible = false;
+    this._isHarvesting = false;
+    return this.shop_data.income;
 };
 
 p.canHarvest = function () {
-    return this._icon.visible;
+    return this._icon.visible && this._isHarvesting == false;
 };
 
 p.checkHarvest = function (cur_seconds) {
@@ -66,8 +65,14 @@ IsoBuidling.prototype.handleEvt = function (evt) {
         if (gCursor.state == CURSOR_ARROW) {
 
             if (this.canHarvest()) {
-                var harvestbar = new HarvestBar();
-                harvestbar.show(this, this.x, this.y);
+
+                if( gHud.getEnegry() <= 0 ){
+                    showTextError("not enough enegry!", this.x, this.y);
+                }else{
+                    this._isHarvesting = true;
+                    var harvestbar = new HarvestBar();
+                    harvestbar.show(this, this.x, this.y);
+                }
             }
         }
     }
