@@ -18,7 +18,6 @@ p._isHarvesting = false;
 p.harvest = function () {
 
     this.last_harvest = getSeconds();
-    sendHarvest(this.entityId);
     this._icon.visible = false;
     this._isHarvesting = false;
     return this.shop_data.income;
@@ -66,13 +65,26 @@ IsoBuidling.prototype.handleEvt = function (evt) {
 
             if (this.canHarvest()) {
 
-                if( gHud.getEnegry() <= 0 ){
-                    showTextError("not enough enegry!", this.x, this.y);
+                if( gUserId == gCurUserId ){
+                    if( gHud.getEnegry() <= 0 ){
+                        showTextError("not enough enegry!", this.x, this.y);
+                    }else{
+                        this._isHarvesting = true;
+                        new HarvestBar(true).show(this, this.x, this.y);
+                        gHud.decEnegry(1);
+                    }
                 }else{
-                    this._isHarvesting = true;
-                    var harvestbar = new HarvestBar();
-                    harvestbar.show(this, this.x, this.y);
+                    if( gfriendList.hasOwnProperty(gCurUserId) &&  gfriendList[gCurUserId] > 0){
+                        this._isHarvesting = true;
+                        new HarvestBar(false).show(this, this.x, this.y);
+                        gfriendList[gCurUserId] -= 1;
+                    }
+                    else{
+                        showTextError("come back tomorrow!", this.x, this.y);
+                    }
                 }
+
+
             }
         }
     }

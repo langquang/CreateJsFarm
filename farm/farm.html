@@ -117,7 +117,8 @@ var gEntityInfo;
 var stageWidth, stageHeight;
 var gAnchorX = 2452;
 var gAnchorY = 856;
-var gUserId = "butin11";
+var gUserId = "butin12";
+var gCurUserId = gUserId;
 
 // config
 var gItemConfig;
@@ -126,6 +127,7 @@ var gLoader;
 var gMap_Icons;
 var gGoldSheet;
 var gDeltaTime = 0;
+var gIsLogin = false;
 
 
 function init() {
@@ -184,8 +186,8 @@ function init() {
 
 
     // ==================================== Instance =========================================
-//            gMap = new IsoMap();
-
+    gDarkLock = new DarkLock();
+    gDarkLock.show(true);
     // ===================================  stats ============================================
     stageLocLabel = new createjs.Text("", "bold 14px Arial", "#000");
     stageLocLabel.x = 10;
@@ -238,7 +240,6 @@ function startGame() {
     gIsoState = new IsoState();
     gShop = new DialogShop();
     gHud = new Hub();
-    gDarkLock = new DarkLock();
     gEntityInfo = new EntityInfo();
     gUIContainer.addChild(gHud);
     sendLogin();
@@ -249,6 +250,8 @@ function onLoginComplete()
 {
     gMainBar = new MainBar();
     gUIContainer.addChild(gMainBar);
+    gIsLogin = true;
+    gDarkLock.show(false);
 
 }
 

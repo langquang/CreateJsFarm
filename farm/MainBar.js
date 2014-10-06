@@ -17,6 +17,7 @@ p._btnMove = null;
 p._btnShop = null;
 p._btnFriendNext = null;
 p._btnFriendPrev = null;
+p._btnGoHome = null;
 
 // container
 p._friendListContainer = null;
@@ -78,8 +79,27 @@ p._frame_energy = 20;
 p._frame_level = 21;
 p._frame_runer = 22;
 p._frame_bg_2 = 23;
+p._frame_enegry= 26;
 
 //=======================================Functions =========================
+p.showHome = function( isHome ){
+    if( isHome ){
+        this._btnArrow.visible = true;
+        this._btnDelete.visible = true;
+        this._btnGoHome.visible = false;
+        this._btnMove.visible = true;
+        this._btnShop.visible = true;
+        this._btnStop.visible = true;
+    }else{
+        this._btnArrow.visible = false;
+        this._btnDelete.visible = false;
+        this._btnGoHome.visible = true;
+        this._btnMove.visible = false;
+        this._btnShop.visible = false;
+        this._btnStop.visible = false;
+    }
+};
+
 p.loadData = function () {
     var manifest = [
         {src: "assets/gui_hud.json", id: "gui_hud"},
@@ -125,7 +145,7 @@ p.loadDataCompleted = function (evt) {
     for (var i = 0; i < this._data_friends.length; i++) {
         var friend_item = new FriendListItem();
         friend_item.setFriendInfo(this._data_friends[i], animation_data, this._frame_friend_1, this._frame_friend_2);
-        friend_item.x = 43 +  i * this._tween_distance;
+        friend_item.x = 43 + i * this._tween_distance;
         friend_item.y = 50;
         this._friendListContainer.addChild(friend_item);
     }
@@ -201,6 +221,17 @@ p.loadDataCompleted = function (evt) {
     this._btnFriendPrev.on("rollover", this.handleBtnFriendPrevEvent, this);
     this._btnFriendPrev.on("rollout", this.handleBtnFriendPrevEvent, this);
     this.addChild(this._btnFriendPrev);
+    // btn gohome
+    ss = new createjs.SpriteSheet(animation_data);
+    this._btnGoHome = new createjs.Sprite(ss);
+    this._btnGoHome.gotoAndStop(this._frame_home);
+    this._btnGoHome.x = 280;
+    this._btnGoHome.y = -65;
+    this._btnGoHome.on("click", this.handleGoHomeEvent, this);
+    this._btnGoHome.on("rollover", this.handleGoHomeEvent, this);
+    this._btnGoHome.on("rollout", this.handleGoHomeEvent, this);
+    this._btnGoHome.visible = false;
+    this.addChild(this._btnGoHome);
 
     // set cursor icon
     gCursor.setTexture(animation_data);
@@ -259,10 +290,10 @@ p.handleBtnFriendNextEvent = function (evt) {
     if (evt.type == "click") {
         this._btnFriendNext.gotoAndStop(this._frame_next_1);
 
-        if( this._cur_tap_cur_tween_index < this._cur_tap_max_tween_index ){
+        if (this._cur_tap_cur_tween_index < this._cur_tap_max_tween_index) {
             this._cur_tap_cur_tween_index++;
-            var toX = this._tween_min - this._cur_tap_cur_tween_index*this._tween_distance;
-             createjs.Tween.get(this._friendListContainer).to({x: toX }, 200).call(this.handleTweenCompleted);
+            var toX = this._tween_min - this._cur_tap_cur_tween_index * this._tween_distance;
+            createjs.Tween.get(this._friendListContainer).to({x: toX }, 200).call(this.handleTweenCompleted);
         }
 
     } else if (evt.type == "rollover") {
@@ -280,9 +311,9 @@ p.handleBtnFriendPrevEvent = function (evt) {
     if (evt.type == "click") {
         this._btnFriendPrev.gotoAndStop(this._frame_prev_1);
 
-        if( this._cur_tap_cur_tween_index > 0 ){
+        if (this._cur_tap_cur_tween_index > 0) {
             this._cur_tap_cur_tween_index--;
-            var toX = this._tween_min - this._cur_tap_cur_tween_index*this._tween_distance;
+            var toX = this._tween_min - this._cur_tap_cur_tween_index * this._tween_distance;
             createjs.Tween.get(this._friendListContainer).to({x: toX }, 200).call(this.handleTweenCompleted);
         }
 
@@ -290,6 +321,21 @@ p.handleBtnFriendPrevEvent = function (evt) {
         this._btnFriendPrev.gotoAndStop(this._frame_prev_2);
     } else if (evt.type == "rollout") {
         this._btnFriendPrev.gotoAndStop(this._frame_prev_1);
+    }
+};
+
+
+p.handleGoHomeEvent = function (evt) {
+    if (evt.type == "click") {
+        this._btnGoHome.gotoAndStop(this._frame_home);
+        sendVisit(gUserId);
+
+    } else if (evt.type == "rollover") {
+        this._btnGoHome.scaleX = 1.1;
+        this._btnGoHome.scaleY = 1.1;
+    } else if (evt.type == "rollout") {
+        this._btnGoHome.scaleX = 1.0;
+        this._btnGoHome.scaleY = 1.0;
     }
 };
 
@@ -316,11 +362,9 @@ MainBar.prototype.initialize = function () {
     this._data_friends = [];
     var friendInfo = gLoginData.friendInfo;
     var friends = gLoginData.friend;
-    for( var friendId in friendInfo)
-    {
-        if( friendInfo.hasOwnProperty(friendId) )
-        {
-            this._data_friends.push({name: friendId, level: Math.floor(friendInfo[friendId].exp/10), enegry : friends[friendId]});
+    for (var friendId in friendInfo) {
+        if (friendInfo.hasOwnProperty(friendId)) {
+            this._data_friends.push({name: friendId, level: Math.floor(friendInfo[friendId].exp / 10), enegry: friends[friendId]});
         }
     }
 

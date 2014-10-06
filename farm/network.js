@@ -13,11 +13,12 @@ var _msg_delete_ = "delete";
 var _msg_visit_ = "visit";
 var _msg_boots_ = "boots";
 
-var _storeLoginData;
+var gfriendList;
 //====================================== RECIVE ==================================================
 socket.on(_msg_login_, function (res) {
     console.log("Login response" + JSON.stringify(res));
     gLoginData = res;
+    gfriendList = res.friend;
     var buildings = res.buildings;
     for (var key in buildings) {
         if (buildings.hasOwnProperty(key)) {
@@ -80,6 +81,9 @@ socket.on(_msg_visit_, function (res) {
 
             }
         }
+        gCurUserId = res.userId;
+        gMainBar.showHome(gCurUserId == gUserId);
+        gDarkLock.show(false);
     }
 });
 
@@ -107,5 +111,10 @@ function sendHarvest(buildingId) {
 }
 
 function sendVisit(friendId) {
+    gDarkLock.show(true);
     socket.emit(_msg_visit_, {friendId: friendId});
+}
+
+function sendBoots(friendId) {
+    socket.emit(_msg_boots_, {friendId: friendId});
 }

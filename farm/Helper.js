@@ -140,26 +140,31 @@ function cellToScreen(cellX, cellY) {
 /**
  * check hitUI
  */
-function isHitUI(stageX, stageY){
+function isHitUI(stageX, stageY) {
 
-    if( gDarkLock.isShowing()){
+    if (!gIsLogin) {
+        return true;
+    }
+
+    if (gDarkLock.isShowing()) {
         return true;
     }
 
     var localP = gShop.globalToLocal(stageX, stageY);
-    if(gShop != null && gShop._background != null && gUIContainer.contains(gShop) && gShop._background.hitTest(localP.x, localP.y) ){
+    if (gShop._background != null && gUIContainer.contains(gShop) && gShop._background.hitTest(localP.x, localP.y)) {
         return true;
     }
 
     localP = gMainBar.globalToLocal(stageX, stageY);
-    if( gMainBar != null && gMainBar._background != null && gMainBar._background.hitTest(localP.x, localP.y) ){
+    if (gMainBar._background != null && gMainBar._background.hitTest(localP.x, localP.y)) {
         return true;
     }
+
 
     return false;
 }
 
-function getSeconds(){
+function getSeconds() {
     return  Math.floor(new Date().getTime() / 1000) + gDeltaTime;
 }
 
@@ -168,18 +173,24 @@ function getRandomInt(min, max) {
 }
 
 function toHHMMSS(sec_num) {
-    var hours   = Math.floor(sec_num / 3600);
+    var hours = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    var time    = hours+':'+minutes+':'+seconds;
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    var time = hours + ':' + minutes + ':' + seconds;
     return time;
 }
 
-function showTextError(text, game_x, game_y){
+function showTextError(text, game_x, game_y) {
     var label = new createjs.Text(text, "bold 12px Arial", "#F00");
     label.textAlign = "center";
     label.x = game_x;
@@ -187,7 +198,7 @@ function showTextError(text, game_x, game_y){
     gMapIconContainer.addChild(label);
 
     createjs.Tween.get(label).to({y: game_y - 100}, 1000).call(handleComplete);
-    function handleComplete(){
+    function handleComplete() {
         gMapIconContainer.removeChild(label);
     }
 }

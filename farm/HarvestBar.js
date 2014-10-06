@@ -2,8 +2,8 @@
  * Created by CPU001 on 10/5/2014.
  */
 
-var HarvestBar = function () {
-    this.initialize();
+var HarvestBar = function (isHarvest) {
+    this.initialize(isHarvest);
 };
 
 var p = HarvestBar.prototype = new createjs.Container();
@@ -12,13 +12,12 @@ p._background = null;
 p._background_2 = null;
 p._runner = null;
 p._mask = null;
-p._tween_data = {value:0};
+p._tween_data = {value: 0};
 p._txtDes = null;
-//============================== function
-p.show = function(entity, x, y)
-{
-    gHud.decEnegry(1);
+p._isHarvest = null;
 
+//============================== function
+p.show = function (entity, x, y) {
     gMapIconContainer.addChild(this);
     this.x = x - 50;
     this.y = y - 70;
@@ -27,33 +26,42 @@ p.show = function(entity, x, y)
     var _this = this;
 
     tween_data.value = 0;
-    createjs.Tween.get(this._tween_data, {onChange : handleOnchange}).to({value:100}, 1000).call(handleComplete);
-    function handleComplete(){
+    createjs.Tween.get(this._tween_data, {onChange: handleOnchange}).to({value: 100}, 1000).call(handleComplete);
+    function handleComplete() {
         //Tween complete
         gMapIconContainer.removeChild(_this);
         // +gold +exp
-        var _exp = new createjs.Sprite(gMap_Icons);
-        _exp.gotoAndStop(0);
         var _pos = gMapIconContainer.localToGlobal(x - 50, y - 70);
-        _exp.x = _pos.x;
-        _exp.y = _pos.y;
+        var _exp, _gold, _isHarvest = _this._isHarvest;
+        if (_isHarvest) {
+            _exp = new createjs.Sprite(gMap_Icons);
+            _exp.gotoAndStop(0);
+            _exp.x = _pos.x;
+            _exp.y = _pos.y;
+            gResourceContainer.addChild(_exp);
+            createjs.Tween.get(_exp).to({x: 680, y: 0}, 700);
+        }
 
-        gResourceContainer.addChild(_exp);
-        createjs.Tween.get(_exp).to({x: 680, y:0}, 700).call(complete);
-
-        var _gold = new createjs.Sprite(gMap_Icons);
+        _gold = new createjs.Sprite(gMap_Icons);
         _gold.gotoAndStop(1);
         _gold.x = _pos.x;
         _gold.y = _pos.y;
         gResourceContainer.addChild(_gold);
-        createjs.Tween.get(_gold).to({x:260, y: 0}, 700);
+        createjs.Tween.get(_gold).to({x: 260, y: 0}, 700).call(complete);
 
-        function complete(){
-            gResourceContainer.removeChild(_exp);
+        function complete() {
+            if (_isHarvest) {
+                gResourceContainer.removeChild(_exp);
+                gHud.incExp(1);
+                var gold = entity.harvest();
+                gHud.incGold(gold > 0 ? gold : 0);
+                sendHarvest(this.entityId);
+            }else{
+                entity.harvest();
+                gHud.incGold(10);
+                sendBoots(gCurUserId);
+            }
             gResourceContainer.removeChild(_gold);
-            var  gold = entity.harvest();
-            gHud.incExp(1);
-            gHud.incGold(gold > 0 ? gold : 0);
         }
     }
 
@@ -61,7 +69,7 @@ p.show = function(entity, x, y)
         var g = runner.graphics;
         g.clear();
         g.beginFill("#4DB8DB");
-        g.drawRect(1, 1, 98*tween_data.value/100, 16);
+        g.drawRect(1, 1, 98 * tween_data.value / 100, 16);
         g.endFill();
     }
 
@@ -71,14 +79,15 @@ p.show = function(entity, x, y)
 //======================================= Override==========================
 //======================================= Constructor==========================
 HarvestBar.prototype.Container_initialize = p.initialize;
-HarvestBar.prototype.initialize = function () {
+HarvestBar.prototype.initialize = function (isHarvest) {
     this.Container_initialize();
+    this._isHarvest = isHarvest;
 
     var g = new createjs.Graphics();
     g.beginFill("#FFF").drawRect(0, 0, 100, 18).endFill();
     this._background = new createjs.Shape(g);
     this._background.alpha = 0.7;
-   this.addChild(this._background);
+    this.addChild(this._background);
 
     g = new createjs.Graphics();
     g.beginFill("#002966").drawRect(1, 1, 98, 16).endFill();
