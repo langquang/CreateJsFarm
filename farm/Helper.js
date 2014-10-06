@@ -147,12 +147,12 @@ function isHitUI(stageX, stageY){
     }
 
     var localP = gShop.globalToLocal(stageX, stageY);
-    if( gShop._background != null && gUIContainer.contains(gShop) && gShop._background.hitTest(localP.x, localP.y) ){
+    if(gShop != null && gShop._background != null && gUIContainer.contains(gShop) && gShop._background.hitTest(localP.x, localP.y) ){
         return true;
     }
 
     localP = gMainBar.globalToLocal(stageX, stageY);
-    if( gMainBar._background != null && gMainBar._background.hitTest(localP.x, localP.y) ){
+    if( gMainBar != null && gMainBar._background != null && gMainBar._background.hitTest(localP.x, localP.y) ){
         return true;
     }
 

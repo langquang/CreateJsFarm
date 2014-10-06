@@ -28,7 +28,7 @@ p._tween_min = -340;
 p._cur_tap_max_tween_index = 0;
 p._cur_tap_cur_tween_index = 0;
 //data
-p.shop_data = null;
+p.map_data = null;
 p._data_friends = [
     {name: "friend_1", level: 5},
     {name: "friend_2", level: 8},
@@ -93,8 +93,8 @@ p.loadData = function () {
 };
 
 p.loadDataCompleted = function (evt) {
-    this.shop_data = this.loader.getResult("gui_hud");
-    var animation_data = this.shop_data.anim;
+    this.map_data = this.loader.getResult("gui_hud");
+    var animation_data = this.map_data.anim;
     var ss = new createjs.SpriteSheet(animation_data);
     // background
     this._background = new createjs.Sprite(ss);
@@ -312,6 +312,18 @@ p.handleBtnStopEvent = function (evt) {
 MainBar.prototype.Container_initialize = p.initialize;
 MainBar.prototype.initialize = function () {
     this.Container_initialize();
+
+    this._data_friends = [];
+    var friendInfo = gLoginData.friendInfo;
+    var friends = gLoginData.friend;
+    for( var friendId in friendInfo)
+    {
+        if( friendInfo.hasOwnProperty(friendId) )
+        {
+            this._data_friends.push({name: friendId, level: Math.floor(friendInfo[friendId].exp/10), enegry : friends[friendId]});
+        }
+    }
+
     this.loadData();
     this.x = stageWidth / 2;
     this.y = stageHeight;

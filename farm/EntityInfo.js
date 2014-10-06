@@ -37,7 +37,7 @@ p.setInfo= function(name, des, building){
 p.update = function(cur_seconds){
 
     if( this._curBuilding){
-        var wait_seconds = this._curBuilding.last_harvest + this._curBuilding.shop_data.time - cur_seconds;
+        var wait_seconds = this._curBuilding.last_harvest + this._curBuilding.map_data.time - cur_seconds;
         if( wait_seconds > 0 )
         {
             this._txtDes.text = "Harvest in: " + toHHMMSS(wait_seconds);

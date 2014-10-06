@@ -1,5 +1,7 @@
 //this.createjs = this.createjs || {};
 
+var MAP_SIZE = 60;
+
 var IsoState = function () {
     this.initialize();
 };
@@ -7,7 +9,7 @@ var IsoState = function () {
 var p = IsoState.prototype;
 
 // ===========================  properties =====================================
-p.shop_data = null;
+p.map_data = null;
 p._entities = new HashTable({});
 // ============
 p._isoLastMouseDown = null;
@@ -170,7 +172,7 @@ p.canAdd = function (isoEntity) {
         for (var j = 0; j < isoEntity.sizeY; j++) {
             _x = isoEntity.cellX - isoEntity.anchorX + i;
             _y = isoEntity.cellY - isoEntity.anchorY + j;
-            if(this.shop_data[_x][_y] > 0){
+            if(this.map_data[_x][_y] > 0){
                 return false;
             }
         }
@@ -194,7 +196,7 @@ p.add = function (isoEntity) {
         for (var j = 0; j < isoEntity.sizeY; j++) {
             _x = isoEntity.cellX - isoEntity.anchorX + i;
             _y = isoEntity.cellY - isoEntity.anchorY + j;
-            this.shop_data[_x][_y] = isoEntity.entityId;
+            this.map_data[_x][_y] = isoEntity.entityId;
         }
     }
 
@@ -223,7 +225,7 @@ p.remove = function (isoEntity) {
         for (var j = 0; j < isoEntity.sizeY; j++) {
             _x = isoEntity.cellX - isoEntity.anchorX + i;
             _y = isoEntity.cellY - isoEntity.anchorY + j;
-            this.shop_data[_x][_y] = 0;
+            this.map_data[_x][_y] = 0;
         }
     }
 
@@ -243,9 +245,15 @@ p.remove = function (isoEntity) {
     gIsoContainer.removeChild(isoEntity);
 };
 
+p.removeAll = function(){
+    this.initialize();
+    gIsoContainer.removeAllChildren();
+    this.children = [];
+};
+
 p.getEntityAt = function (cellX, cellY) {
     if (this.validCell(cellX, cellY)) {
-        var isoEntity = this._entities.getItem(this.shop_data[cellX][cellY]);
+        var isoEntity = this._entities.getItem(this.map_data[cellX][cellY]);
         return isoEntity;
     }
     return null;
@@ -353,11 +361,11 @@ p.execRoad = function (road, recursive) {
 
 
 p.initialize = function () {
-    this.shop_data = [];
+    this.map_data = [];
     for (var i = 0; i < MAP_SIZE; i++) {
-        this.shop_data[i] = [];
+        this.map_data[i] = [];
         for (var j = 0; j < MAP_SIZE; j++) {
-            this.shop_data[i][j] = 0;
+            this.map_data[i][j] = 0;
         }
     }
     this.createEnities();

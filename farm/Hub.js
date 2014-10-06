@@ -55,8 +55,8 @@ p.loadData = function () {
 };
 
 p.loadDataCompleted = function (evt) {
-    this.shop_data = this.loader.getResult("gui_hud");
-    var animation_data = this.shop_data.anim;
+    this.map_data = this.loader.getResult("gui_hud");
+    var animation_data = this.map_data.anim;
     var ss = new createjs.SpriteSheet(animation_data);
     // gold
     this._gold_bg = new createjs.Sprite(ss);
@@ -192,6 +192,9 @@ p.incEnegry = function (value) {
 };
 
 p.decEnegry = function (value) {
+    if( this._energy_number == 30 ){
+        this._lastEnergy = getSeconds();
+    }
     this._energy_number -= value;
     if (this._energy_number < 0) {
         this._energy_number = 0;
@@ -215,14 +218,23 @@ p.incExp = function (value) {
 };
 
 p.energycountdown = function(curseconds){
-    var deltatime = curseconds - this._lastEnergy;
-    var incEnergy = Math.floor(deltatime / 60);
-    if( incEnergy > 0 ){
-        this._energy_number += incEnergy;
-        this._lastEnergy = curseconds - (deltatime % 60);
-        this.update();
+    if( this._energy_number < 30 )
+    {
+        var deltatime = curseconds - this._lastEnergy;
+        var incEnergy = Math.floor(deltatime / 60);
+        if( incEnergy > 0 ){
+            this._energy_number += incEnergy;
+            this._lastEnergy = curseconds - (deltatime % 60);
+            this.update();
+        }
+        this._countdown.text = toHHMMSS(60 - deltatime % 60);
+        this._countdown.visible = true;
     }
-   this._countdown.text = toHHMMSS(60 - deltatime % 60);
+    else
+    {
+        this._countdown.visible = false;
+    }
+
 };
 
 

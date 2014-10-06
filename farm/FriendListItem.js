@@ -12,7 +12,7 @@ p._background = null;
 p._txtLevel = null;
 p._txtName = null;
 p._icon = null;
-p.shop_data = null;
+p.map_data = null;
 p.loader = null;
 p._scale_rate = 1;
 p._frame_1 = 0;
@@ -20,7 +20,7 @@ p._frame_2 = 0;
 
 //======================================= Function ===========================
 p.setFriendInfo = function (friend_data, anim_data, frame_1, frame_2) {
-    this.shop_data = friend_data;
+    this.map_data = friend_data;
     this._frame_1 = frame_1;
     this._frame_2 = frame_2;
     var ss = new createjs.SpriteSheet(anim_data);
@@ -29,13 +29,13 @@ p.setFriendInfo = function (friend_data, anim_data, frame_1, frame_2) {
     this._background.gotoAndStop(this._frame_1);
     this.addChild(this._background);
     // txtName
-    this._txtName = new createjs.Text( this.shop_data.name, "bold 12px Arial", "#000");
+    this._txtName = new createjs.Text( this.map_data.name, "bold 12px Arial", "#000");
     this._txtName.textAlign = "center";
     this._txtName.x = 0;
     this._txtName.y = -45;
     this.addChild(this._txtName);
     // txtName
-    this._txtLevel = new createjs.Text( this.shop_data.level, "bold 14px Arial", "#000");
+    this._txtLevel = new createjs.Text( this.map_data.level, "bold 14px Arial", "#000");
     this._txtLevel.x = 8;
     this._txtLevel.y = 25;
     this.addChild(this._txtLevel);
@@ -48,7 +48,7 @@ p.setFriendInfo = function (friend_data, anim_data, frame_1, frame_2) {
 p.handleEvent = function (evt) {
     if (evt.type == "click") {
         this._background.gotoAndStop(this._frame_1);
-
+        sendVisit(this.map_data.name);
     } else if (evt.type == "rollover") {
         this._background.gotoAndStop(this._frame_2);
     } else if (evt.type == "rollout") {
