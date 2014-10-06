@@ -30,6 +30,7 @@ p._cur_tap_max_tween_index = 0;
 p._cur_tap_cur_tween_index = 0;
 //data
 p.map_data = null;
+p._friends = [];
 p._data_friends = [
     {name: "friend_1", level: 5},
     {name: "friend_2", level: 8},
@@ -147,6 +148,7 @@ p.loadDataCompleted = function (evt) {
         friend_item.setFriendInfo(this._data_friends[i], animation_data, this._frame_friend_1, this._frame_friend_2);
         friend_item.x = 43 + i * this._tween_distance;
         friend_item.y = 50;
+        this._friends.push(friend_item);
         this._friendListContainer.addChild(friend_item);
     }
     this._cur_tap_max_tween_index = Math.ceil(this._data_friends.length) - 6;
@@ -352,6 +354,17 @@ p.handleBtnStopEvent = function (evt) {
     }
 };
 
+p.boots = function(friendId, enegry){
+    this._friends.forEach(function(element, index, array){
+        if( element._friend_data.name = friendId ){
+            element._friend_data.enegry = enegry;
+            if( enegry <= 0 ){
+                element._iconEnergy.visible = false;
+                element._txtEnegry.visible = false;
+            }
+        }
+    })
+};
 
 //======================================= Override==========================
 //======================================= Constructor==========================

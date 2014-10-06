@@ -59,6 +59,7 @@ p.show = function (entity, x, y) {
             }else{
                 entity.harvest();
                 gHud.incGold(10);
+                gMainBar.boots(gCurUserId, gfriendList[gCurUserId] );
                 sendBoots(gCurUserId);
             }
             gResourceContainer.removeChild(_gold);
