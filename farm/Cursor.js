@@ -123,6 +123,7 @@ p.handleOnStageClick = function (evt) {
                         gIsoState.add(this._sprite_cursor);
                         this._sprite_cursor.alpha = 1.0; // revert alpha value
                         sendBuy(this._sprite_cursor.shop_id, this._sprite_cursor.cellX, this._sprite_cursor.cellY, this._sprite_cursor.entityId);
+                        gHud.decGold(this._sprite_cursor.shop_data.price);
                         // clear cursor
                         this.attachIsoEntity(null);
                         this.setState(CURSOR_ARROW);
@@ -131,6 +132,7 @@ p.handleOnStageClick = function (evt) {
                         gIsoState.add(new_instance);
                         new_instance.onCreatedByCursorClick(this._sprite_cursor);
                         sendBuy(this._sprite_cursor.shop_id, this._sprite_cursor.cellX, this._sprite_cursor.cellY, new_instance.entityId);
+                        gHud.decGold(this._sprite_cursor.shop_data.price);
                     }
                 }
             }

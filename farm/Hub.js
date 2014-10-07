@@ -180,7 +180,7 @@ p.incGold = function (value) {
 };
 
 p.decGold = function (value) {
-    this._gold_number = value;
+    this._gold_number -= value;
     if (this._gold_number < 0) {
         this._gold_number = 0;
     }
