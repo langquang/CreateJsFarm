@@ -9,7 +9,7 @@ var FriendListItem = function () {
 var p = FriendListItem.prototype = new createjs.Container();
 //============================== propertys
 p._background = null;
-p._txtLevel = null;
+p._txtPrice = null;
 p._txtEnegry = null;
 p._txtName = null;
 p._icon = null;
@@ -47,10 +47,10 @@ p.setFriendInfo = function (friend_data, anim_data, frame_1, frame_2) {
     this._iconExp.gotoAndStop(12);
     this.addChild(this._iconExp);
     // txtName
-    this._txtLevel = new createjs.Text( this._friend_data.level, "bold 14px Arial", "#0066FF");
-    this._txtLevel.x = 8;
-    this._txtLevel.y = 25;
-    this.addChild(this._txtLevel);
+    this._txtPrice = new createjs.Text( this._friend_data.level, "bold 14px Arial", "#0066FF");
+    this._txtPrice.x = 8;
+    this._txtPrice.y = 25;
+    this.addChild(this._txtPrice);
 
     // iconEnegry
     this._iconEnergy = new createjs.Sprite(ss);
@@ -59,7 +59,7 @@ p.setFriendInfo = function (friend_data, anim_data, frame_1, frame_2) {
     this._iconEnergy.gotoAndStop(26);
     this.addChild(this._iconEnergy);
     // txtName
-    this._txtEnegry = new createjs.Text( this._friend_data.enegry, "bold 14px Arial", "#0066FF");
+    this._txtEnegry = new createjs.Text( this._friend_data.enegry, "bold 14px Arial", "#CCCC00");
     this._txtEnegry.x = -20;
     this._txtEnegry.y = 25;
     this.addChild(this._txtEnegry);

@@ -9,7 +9,7 @@ var ShopItem = function () {
 var p = ShopItem.prototype = new createjs.Container();
 //============================== propertys
 p._background = null;
-p._txtLevel = null;
+p._txtPrice = null;
 p._txtName = null;
 p._icon = null;
 p.shop_data = null;
@@ -32,17 +32,26 @@ p.setItem = function (item_data, anim_data) {
     this._txtName.y = 10;
     this.addChild(this._txtName);
     // txtName
-    this._txtLevel = new createjs.Text("500", "bold 14px Arial", "#FFF");
-    this._txtLevel.x = 55;
-    this._txtLevel.y = 150;
-    this.addChild(this._txtLevel);
+    this._txtPrice = new createjs.Text("500", "bold 14px Arial", "#FFF");
+    this._txtPrice.x = 55;
+    this._txtPrice.y = 150;
+    this.addChild(this._txtPrice);
 
     if (this.shop_data != null) {
         this._txtName.text = this.shop_data.name;
-        this._txtLevel.text = this.shop_data.price;
+        this._txtPrice.text = this.shop_data.price;
     }
 
     this.loadData(this.shop_data.texture);
+};
+
+
+p.update = function () {
+    if (gHud.getGold() > this.shop_data.price) {
+        this._txtPrice.color = "#FFF";
+    } else {
+        this._txtPrice.color = "#F00";
+    }
 };
 
 p.loadData = function (texture) {
@@ -76,13 +85,18 @@ p.loadDataCompleted = function (evt) {
 p.handleEvt = function (evt) {
 
     if (evt.type == "click") {
-        // hide ibshop
-        showIBShop(false);
-        // create cursor
-        var entity = gIsoState.createIsoEntity(this.shop_data, 10, 10);
-        entity.startFrame = this._icon.currentFrame;
-        gCursor.attachIsoEntity(entity);
-        gCursor.setState(CURSOR_BUY);
+
+        if( gHud.getGold() >= this.shop_data.price ){
+            // hide ibshop
+            showIBShop(false);
+            // create cursor
+            var entity = gIsoState.createIsoEntity(this.shop_data, 10, 10);
+            entity.startFrame = this._icon.currentFrame;
+            gCursor.attachIsoEntity(entity);
+            gCursor.setState(CURSOR_BUY);
+        }else{
+            this.error("not enough gold");
+        }
     }
     else if (evt.type == "rollover") {
         this._icon.scaleX = this._scale_rate * 1.1;
@@ -91,6 +105,23 @@ p.handleEvt = function (evt) {
     else if (evt.type == "rollout") {
         this._icon.scaleX = this._scale_rate;
         this._icon.scaleY = this._scale_rate;
+    }
+};
+
+p.error = function(text) {
+
+    var stageP = this.localToGlobal(50,50);
+    var uiP = gUIContainer.globalToLocal(stageP.x, stageP.y);
+
+    var label = new createjs.Text(text, "bold 12px Arial", "#F00");
+    label.textAlign = "center";
+    label.x = uiP.x;
+    label.y = uiP.y;
+    gUIContainer.addChild(label);
+
+    createjs.Tween.get(label).to({y: uiP.y - 100}, 1000).call(handleComplete);
+    function handleComplete() {
+        gUIContainer.removeChild(label);
     }
 };
 

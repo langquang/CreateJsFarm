@@ -55,7 +55,7 @@ p.show = function (entity, x, y) {
                 gHud.incExp(1);
                 var gold = entity.harvest();
                 gHud.incGold(gold > 0 ? gold : 0);
-                sendHarvest(this.entityId);
+                sendHarvest(entity.entityId);
             }else{
                 entity.harvest();
                 gHud.incGold(10);

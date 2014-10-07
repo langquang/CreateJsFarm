@@ -167,6 +167,10 @@ p.setInfo = function (gold, exp, energy, lastEnergy) {
     this.update();
 };
 
+p.getGold = function () {
+    return this._gold_number;
+};
+
 p.incGold = function (value) {
     this._gold_number += value;
     if (this._gold_number < 0) {

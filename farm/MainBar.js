@@ -18,6 +18,7 @@ p._btnShop = null;
 p._btnFriendNext = null;
 p._btnFriendPrev = null;
 p._btnGoHome = null;
+p._txtUserName = null;
 
 // container
 p._friendListContainer = null;
@@ -31,30 +32,7 @@ p._cur_tap_cur_tween_index = 0;
 //data
 p.map_data = null;
 p._friends = [];
-p._data_friends = [
-    {name: "friend_1", level: 5},
-    {name: "friend_2", level: 8},
-    {name: "friend_3", level: 20},
-    {name: "friend_4", level: 20},
-    {name: "friend_5", level: 10},
-    {name: "friend_6", level: 20},
-    {name: "friend_7", level: 20},
-    {name: "friend_8", level: 20},
-    {name: "friend_9", level: 100},
-    {name: "friend_10", level: 20},
-    {name: "friend_11", level: 20},
-    {name: "friend_12", level: 20},
-    {name: "friend_13", level: 20},
-    {name: "friend_14", level: 20},
-    {name: "friend_15", level: 20},
-    {name: "friend_16", level: 20},
-    {name: "friend_17", level: 20},
-    {name: "friend_18", level: 20},
-    {name: "friend_19", level: 20},
-    {name: "friend_20", level: 20},
-    {name: "friend_21", level: 20},
-    {name: "friend_22", level: 20}
-];
+p._data_friends = [];
 
 p._frame_buy_1 = 0;
 p._frame_buy_2 = 1;
@@ -234,9 +212,19 @@ p.loadDataCompleted = function (evt) {
     this._btnGoHome.on("rollout", this.handleGoHomeEvent, this);
     this._btnGoHome.visible = false;
     this.addChild(this._btnGoHome);
+    // user name
+    this._txtUserName = new createjs.Text( gUserId, "bold 15px Arial", "#fff");
+    this._txtUserName.textAlign = "center";
+    this._txtUserName.x = -260;
+    this._txtUserName.y = -137;
+    this.addChild(this._txtUserName);
 
     // set cursor icon
     gCursor.setTexture(animation_data);
+};
+
+p.setUserName = function(username){
+  this._txtUserName.text = username;
 };
 
 p.handleBtnShopEvent = function (evt) {

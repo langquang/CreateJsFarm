@@ -172,7 +172,7 @@ p.canAdd = function (isoEntity) {
         for (var j = 0; j < isoEntity.sizeY; j++) {
             _x = isoEntity.cellX - isoEntity.anchorX + i;
             _y = isoEntity.cellY - isoEntity.anchorY + j;
-            if(this.map_data[_x][_y] > 0){
+            if(this.map_data[_x][_y] != "0"){
                 return false;
             }
         }
@@ -225,7 +225,7 @@ p.remove = function (isoEntity) {
         for (var j = 0; j < isoEntity.sizeY; j++) {
             _x = isoEntity.cellX - isoEntity.anchorX + i;
             _y = isoEntity.cellY - isoEntity.anchorY + j;
-            this.map_data[_x][_y] = 0;
+            this.map_data[_x][_y] = "0";
         }
     }
 

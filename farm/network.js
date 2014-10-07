@@ -83,6 +83,7 @@ socket.on(_msg_visit_, function (res) {
         }
         gCurUserId = res.userId;
         gMainBar.showHome(gCurUserId == gUserId);
+        gMainBar.setUserName(gCurUserId);
         gDarkLock.show(false);
     }
 });
