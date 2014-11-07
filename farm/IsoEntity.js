@@ -3,6 +3,7 @@
 
 var ENTITY_TYPE_ROAD = "road";
 var ENTITY_TYPE_BUILDING = "building";
+var ENTITY_TYPE_DECO = "deco";
 
 var IsoEntity = function (shop_data, entityId) {
     this.initialize(shop_data, entityId);
@@ -27,6 +28,8 @@ p.sizeX = 2;    // cell size
 p.sizeY = 2;    // cell size
 p.anchorX = 1;    // cell size
 p.anchorY = 1;    // cell size
+p.anchorX_2 = 1;    // cell size
+p.anchorY_2 = 1;    // cell size
 p._building_data = null; // constance data
 p.startFrame = 0;
 p.sprite_sheet = null;
@@ -156,5 +159,16 @@ IsoEntity.prototype.initialize = function (shop_data, entityId) {
     this.sizeY = this.shop_data.height;
     this.anchorX = Math.floor(this.sizeX / 2);
     this.anchorY = Math.floor(this.sizeY / 2);
+
+    if( this.anchorX == 0 )
+        this.anchorX_2 = 1;
+    else
+        this.anchorX_2 = this.anchorX;
+
+    if( this.anchorY == 0 )
+        this.anchorY_2 = 1;
+    else
+        this.anchorY_2 = this.anchorY;
+
     this.loadData();
 };

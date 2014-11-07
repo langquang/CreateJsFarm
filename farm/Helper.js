@@ -18,8 +18,8 @@ function zorder(children) {
     for (i = 0; i < max; ++i) {
         var behind = [];
         var objA = children[i];
-        var rightA = objA.cellX + objA.anchorX;
-        var frontA = objA.cellY + objA.anchorY;
+        var rightA = objA.cellX + objA.anchorX_2;
+        var frontA = objA.cellY + objA.anchorY_2;
 
         for (var j = 0; j < max; ++j) {
             var objB = children[j];

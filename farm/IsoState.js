@@ -129,7 +129,10 @@ p.centerOnCell = function (cellX, cellY) {
 p.createIsoEntity = function (shop_data, cellX, cellY) {
     this._genId++;
     var entity = null;
-    if (shop_data.type == ENTITY_TYPE_ROAD) {
+    if (shop_data.type == ENTITY_TYPE_DECO) {
+        entity = new IsoDeco(shop_data, this._genId);
+    }
+    else if (shop_data.type == ENTITY_TYPE_ROAD) {
         entity = new IsoRoad(shop_data, this._genId);
     }
     else if (shop_data.type == ENTITY_TYPE_BUILDING) {

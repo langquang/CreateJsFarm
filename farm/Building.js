@@ -52,9 +52,9 @@ IsoBuidling.prototype.handleEvt = function (evt) {
     this.IsoEntity_handleEvt(evt);
     if (evt.type == "rollover") {
         gEntityInfo.show(true, this.x, this.y);
-        if( this.canHarvest() ){
+        if (this.canHarvest()) {
             gEntityInfo.setInfo(this.shop_data.name, "Click to collect profits", null);
-        }else{
+        } else {
             gEntityInfo.setInfo(this.shop_data.name, "Harvest in: ", this);
         }
     }
@@ -65,21 +65,21 @@ IsoBuidling.prototype.handleEvt = function (evt) {
 
             if (this.canHarvest()) {
 
-                if( gUserId == gCurUserId ){
-                    if( gHud.getEnegry() <= 0 ){
+                if (gUserId == gCurUserId) {
+                    if (gHud.getEnegry() <= 0) {
                         showTextError("not enough enegry!", this.x, this.y);
-                    }else{
+                    } else {
                         this._isHarvesting = true;
                         new HarvestBar(true).show(this, this.x, this.y);
                         gHud.decEnegry(1);
                     }
-                }else{
-                    if( gfriendList.hasOwnProperty(gCurUserId) &&  gfriendList[gCurUserId] > 0){
+                } else {
+                    if (gfriendList.hasOwnProperty(gCurUserId) && gfriendList[gCurUserId] > 0) {
                         this._isHarvesting = true;
                         new HarvestBar(false).show(this, this.x, this.y);
                         gfriendList[gCurUserId] -= 1;
                     }
-                    else{
+                    else {
                         showTextError("come back tomorrow!", this.x, this.y);
                     }
                 }

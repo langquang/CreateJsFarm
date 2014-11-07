@@ -108,6 +108,9 @@ p.attachIsoEntity = function (sprite) {
     if( this._icon != null ){
         gCursorsContainer.addChild(this._icon);
     }
+
+    // prevent show Building info when buidling was attach
+    gEntityInfo.visible = sprite == null;
 };
 
 p.handleOnStageClick = function (evt) {
@@ -127,7 +130,7 @@ p.handleOnStageClick = function (evt) {
                         // clear cursor
                         this.attachIsoEntity(null);
                         this.setState(CURSOR_ARROW);
-                    }else if( this._sprite_cursor.entityType == ENTITY_TYPE_ROAD  ){
+                    }else if( this._sprite_cursor.entityType == ENTITY_TYPE_ROAD || this._sprite_cursor.entityType == ENTITY_TYPE_DECO ){
                         var new_instance = gIsoState.createIsoEntity(this._sprite_cursor.shop_data, this._sprite_cursor.cellX, this._sprite_cursor.cellY);
                         gIsoState.add(new_instance);
                         new_instance.onCreatedByCursorClick(this._sprite_cursor);
@@ -235,6 +238,8 @@ p.setTexture = function( animationData ){
 Cursor.prototype.initialize = function () {
     var g = new createjs.Graphics();
     this._grid_red = new createjs.Shape(g);
+    this._grid_red.alpha = 0.5;
     g = new createjs.Graphics();
     this._grid_green = new createjs.Shape(g);
+    this._grid_green.alpha = 0.5;
 };
