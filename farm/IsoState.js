@@ -255,7 +255,10 @@ p.remove = function (isoEntity) {
         if (index > -1) {
             this.product_gold.splice(index, 1);
         }
+    }else if( isoEntity.entityType == ENTITY_TYPE_ROAD ){
+        gRoadsContainer.removeChild(isoEntity);
     }
+
 
     gIsoContainer.removeChild(isoEntity);
 };
@@ -386,6 +389,6 @@ p.initialize = function () {
         }
     }
     this.createEnities();
-    this.centerOnCell(0, 0);
+    this.centerOnCell(20, 10);
 
 };

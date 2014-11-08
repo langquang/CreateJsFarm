@@ -53,21 +53,25 @@ FallIcon.prototype.initialize = function (res_type, x, y, index, userId, buildin
     createjs.Tween.get(this._sprite).wait(400).to({y: this._y_bottom}, 400, createjs.Ease.quadIn).call(handleComplete);
 
     function handleComplete() {
-        _this._sprite.on("rollover", function () {
-            var stageP = gIsoFallIconContainer.localToGlobal(_this._sprite.x, _this._sprite.y);
-            _this._sprite.x = stageP.x;
-            _this._sprite.y = stageP.y;
-            gResourceContainer.addChild(_this._sprite);
-            if (_this._res_type == RESOURCE_TYPE_GOLD) {
-                createjs.Tween.get(_this._sprite).to({x: 260}, 700, createjs.Ease.sineOut).call(handleDisappear);
-                createjs.Tween.get(_this._sprite).to({y: 0}, 700, createjs.Ease.sineIn);
-            }
-            else {
-                createjs.Tween.get(_this._sprite).to({x: 680}, 700, createjs.Ease.sineOut).call(handleDisappear);
-                createjs.Tween.get(_this._sprite).to({y: 0}, 700, createjs.Ease.sineIn);
-            }
+        _this._sprite.on("rollover", handleMouseOver);
+        createjs.Tween.get(_this._sprite).wait(3000).call(handleMouseOver);
+    }
 
-        });
+    function handleMouseOver() {
+        _this._sprite.off("rollover", this);
+        var stageP = gIsoFallIconContainer.localToGlobal(_this._sprite.x, _this._sprite.y);
+        _this._sprite.x = stageP.x;
+        _this._sprite.y = stageP.y;
+        gResourceContainer.addChild(_this._sprite);
+        if (_this._res_type == RESOURCE_TYPE_GOLD) {
+            createjs.Tween.get(_this._sprite).to({x: 260}, 700, createjs.Ease.sineOut).call(handleDisappear);
+            createjs.Tween.get(_this._sprite).to({y: 0}, 700, createjs.Ease.sineIn);
+        }
+        else {
+            createjs.Tween.get(_this._sprite).to({x: 680}, 700, createjs.Ease.sineOut).call(handleDisappear);
+            createjs.Tween.get(_this._sprite).to({y: 0}, 700, createjs.Ease.sineIn);
+        }
+
     }
 
     function handleDisappear() {
