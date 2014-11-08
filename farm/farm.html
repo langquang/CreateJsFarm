@@ -86,7 +86,7 @@
 <script type="text/javascript" src="DarkLock.js"></script>
 <script type="text/javascript" src="EntityInfo.js"></script>
 <script type="text/javascript" src="HarvestBar.js"></script>
-
+<script type="text/javascript" src="FallIcon.js"></script>
 
 <!-- We also provide hosted minified versions of all CreateJS libraries.
   http://code.createjs.com -->
@@ -105,6 +105,7 @@ var gGameContainer;
 var gGridContainer;
 var gRoadsContainer;
 var gIsoContainer;
+var gIsoFallIconContainer;
 var gMapIconContainer;
 var gCursorsContainer;
 var gUIContainer;
@@ -122,7 +123,7 @@ var gEntityInfo;
 var stageWidth, stageHeight;
 var gAnchorX = 2452;
 var gAnchorY = 856;
-var gUserId = "";//""butin13
+var gUserId = "";//"butin13";
 var gCurUserId = gUserId;
 
 // config
@@ -136,20 +137,35 @@ var gDeltaTime = 0;
 var gIsLogin = false;
 
 function webLoaded() {
-    showInputName();
+    if (gUserId != null && gUserId.length > 0) {
+        init();
+    }
+    else{
+        showInputName();
+    }
+
 }
 
 var box;
 function showInputName() {
     box = dhtmlx.modalbox({
         title: "Đăng nhập",
-        text: "<div id='form_in_box'><div><label> Tên nhân vật <input  id=\"txtName\" class='inform' type='text'></label></div><div><span class='dhtmlx_button'><input type='button' value='Vào game' onclick='checkLogin()' style='width:250px;'></span></label></div></div>",
+        text: "<div id='form_in_box'><div><label> Tên nhân vật <input  id=\"txtName\" class='inform' type='text' onkeypress=\"onKeyPress(event);\"></label></div><div><span class='dhtmlx_button'><input type='button' value='Vào game' onclick='checkLogin()' style='width:250px;'></span></label></div></div>",
         width: "300px"
     });
     //timeout is necessary only in IE
     setTimeout(function () {
         box.getElementsByTagName("input")[0].focus();
     }, 1);
+}
+
+function onKeyPress(e){
+    var regex = new RegExp("^[a-zA-Z0-9]+$");
+    var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (!regex.test(key)) {
+        e.preventDefault();
+        return false;
+    }
 }
 
 function checkLogin() {
@@ -199,6 +215,11 @@ function init() {
     gIsoContainer.x = gAnchorX;
     gIsoContainer.y = gAnchorY;
     gGameContainer.addChild(gIsoContainer);
+    // layer 4
+    gIsoFallIconContainer = new createjs.Container();
+    gIsoFallIconContainer.x = gAnchorX;
+    gIsoFallIconContainer.y = gAnchorY;
+    gGameContainer.addChild(gIsoFallIconContainer);
     // layer 5
     gMapIconContainer = new createjs.Container();
     gMapIconContainer.x = gAnchorX;

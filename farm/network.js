@@ -38,15 +38,16 @@ socket.on(_msg_login_, function (res) {
     onLoginComplete();
 
     // =============================== export map editor ===============================
-    var list = gIsoState.children;
-    var json = [];
-    list.forEach(function(element, index, array){
-        var obj = {type : element.shop_data.id, x : element.cellX, y : element.cellY};
-        json.push( obj );
-    });
+//    var list = gIsoState.children;
+//    var json = [];
+//    list.forEach(function(element, index, array){
+//        var obj = {type : element.shop_data.id, x : element.cellX, y : element.cellY};
+//        json.push( obj );
+//    });
+//    console.log(JSON.stringify(json));
+
     //================================ end map editor ==================================
 
-    console.log(JSON.stringify(json));
 });
 
 socket.on(_msg_buy_, function (res) {

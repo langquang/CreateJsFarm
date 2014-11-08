@@ -263,6 +263,7 @@ p.remove = function (isoEntity) {
 p.removeAll = function(){
     this.initialize();
     gIsoContainer.removeAllChildren();
+    gRoadsContainer.removeAllChildren();
     this.children = [];
     this.zorderList = [];
 };

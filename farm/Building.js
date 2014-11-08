@@ -23,6 +23,10 @@ p.harvest = function () {
     return this.shop_data.income;
 };
 
+p.getIncome = function(){
+    return this.shop_data.income;
+};
+
 p.canHarvest = function () {
     return this._icon.visible && this._isHarvesting == false;
 };

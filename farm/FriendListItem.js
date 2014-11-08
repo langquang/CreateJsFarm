@@ -79,6 +79,21 @@ p.setFriendInfo = function (friend_data, anim_data, frame_1, frame_2) {
     this.on("rollout", this.handleEvent, this);
 };
 
+p.update = function(){
+    if( this._friend_data.enegry <= 0 ){
+        this._iconEnergy.visible = false;
+        this._txtEnegry.visible = false;
+    }
+
+    if( this._friend_data.name == gUserId ){
+        this._iconEnergy.visible = false;
+        this._txtEnegry.visible = false;
+    }
+
+    this._txtEnegry.text = this._friend_data.enegry;
+};
+
+
 p.handleEvent = function (evt) {
     if (evt.type == "click") {
         this._background.gotoAndStop(this._frame_1);

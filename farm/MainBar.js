@@ -344,12 +344,9 @@ p.handleBtnStopEvent = function (evt) {
 
 p.boots = function(friendId, enegry){
     this._friends.forEach(function(element, index, array){
-        if( element._friend_data.name = friendId ){
+        if( element._friend_data.name == friendId ){
             element._friend_data.enegry = enegry;
-            if( enegry <= 0 ){
-                element._iconEnergy.visible = false;
-                element._txtEnegry.visible = false;
-            }
+            element.update();
         }
     })
 };

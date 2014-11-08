@@ -27,43 +27,29 @@ p.show = function (entity, x, y) {
 
     tween_data.value = 0;
     createjs.Tween.get(this._tween_data, {onChange: handleOnchange}).to({value: 100}, 1000).call(handleComplete);
+
     function handleComplete() {
         //Tween complete
         gMapIconContainer.removeChild(_this);
         // +gold +exp
-        var _pos = gMapIconContainer.localToGlobal(x - 50, y - 70);
-        var _exp, _gold, _isHarvest = _this._isHarvest;
-        if (_isHarvest) {
-            _exp = new createjs.Sprite(gMap_Icons);
-            _exp.gotoAndStop(0);
-            _exp.x = _pos.x;
-            _exp.y = _pos.y;
-            gResourceContainer.addChild(_exp);
-            createjs.Tween.get(_exp).to({x: 680, y: 0}, 700);
+        var _pos = gMapIconContainer.localToGlobal(x, y);
+        if( _this._isHarvest )    // harver my building
+        {
+           new FallIcon(RESOURCE_TYPE_GOLD, _pos.x,_pos.y, 0, gCurUserId, entity);
+           new FallIcon(RESOURCE_TYPE_EXP, _pos.x,_pos.y, 1, gCurUserId, entity);
+            entity.harvest();
+            sendHarvest(entity.entityId);
+
+        }
+        else    // friend boots
+        {
+            new FallIcon(RESOURCE_TYPE_GOLD, _pos.x,_pos.y, 0, gCurUserId, entity);
+            entity.harvest();
+            gMainBar.boots(gCurUserId, gfriendList[gCurUserId]);
+            sendBoots(gCurUserId);
+
         }
 
-        _gold = new createjs.Sprite(gMap_Icons);
-        _gold.gotoAndStop(1);
-        _gold.x = _pos.x;
-        _gold.y = _pos.y;
-        gResourceContainer.addChild(_gold);
-        createjs.Tween.get(_gold).to({x: 260, y: 0}, 700).call(complete);
-
-        function complete() {
-            if (_isHarvest) {
-                gResourceContainer.removeChild(_exp);
-                gHud.incExp(1);
-                var gold = entity.harvest();
-                gHud.incGold(gold > 0 ? gold : 0);
-                sendHarvest(entity.entityId);
-            }else{
-                entity.harvest();
-                gHud.incGold(10);
-                gMainBar.boots(gCurUserId, gfriendList[gCurUserId] );
-                sendBoots(gCurUserId);
-            }
-            gResourceContainer.removeChild(_gold);
-        }
     }
 
     function handleOnchange() {
