@@ -2,7 +2,7 @@
   "items": {
     "1": {
       "texture": "cottage",
-      "name": "cottage",
+      "name": "Nhà Mùa Hè",
       "price": 500,
       "income": 200,
       "time": 15,
@@ -13,7 +13,7 @@
     },
     "2": {
       "texture": "road",
-      "name": "road 2",
+      "name": "Đường Phố",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -24,7 +24,7 @@
     },
     "3": {
       "texture": "boutique",
-      "name": "boutique",
+      "name": "Cửa Hàng",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -35,7 +35,7 @@
     },
     "4": {
       "texture": "club",
-      "name": "club",
+      "name": "Bar Club",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -46,7 +46,7 @@
     },
     "5": {
       "texture": "concert_hall",
-      "name": "concert_hall",
+      "name": "Phòng Hòa Nhạc",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -57,7 +57,7 @@
     },
     "6": {
       "texture": "flower_shop",
-      "name": "flower_shop",
+      "name": "Tiệm Hoa",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -68,7 +68,7 @@
     },
     "7": {
       "texture": "hotel",
-      "name": "hotel",
+      "name": "Khách Sạn",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -79,7 +79,7 @@
     },
     "8": {
       "texture": "house",
-      "name": "house",
+      "name": "Nhà Tranh",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -90,7 +90,7 @@
     },
     "9": {
       "texture": "mansion",
-      "name": "mansion",
+      "name": "Biệt Thự",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -101,7 +101,7 @@
     },
     "10": {
       "texture": "police",
-      "name": "police",
+      "name": "Sở Cảnh Sát",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -112,7 +112,7 @@
     },
     "11": {
       "texture": "school",
-      "name": "school",
+      "name": "Trường Học",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -123,7 +123,7 @@
     },
     "12": {
       "texture": "shop_shoes",
-      "name": "shop_shoes",
+      "name": "Tiệp Giầy",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -134,7 +134,7 @@
     },
     "13": {
       "texture": "slims_villa",
-      "name": "slims_villa",
+      "name": "Biệt Thự 2",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -145,7 +145,7 @@
     },
     "14": {
       "texture": "tennis_court",
-      "name": "tennis_court",
+      "name": "Sân Tennis",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -156,7 +156,7 @@
     },
     "15": {
       "texture": "tokyo_tower",
-      "name": "tokyo_tower",
+      "name": "Tháp Tokyo",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -167,7 +167,7 @@
     },
     "16": {
       "texture": "villa",
-      "name": "villa",
+      "name": "Biệt Thự 3",
       "price": 500,
       "income": 200,
       "time": 300,
@@ -178,7 +178,55 @@
     },
     "17": {
       "texture": "flowerbed",
-      "name": "flowerbed",
+      "name": "Chậu Hoa Vàng",
+      "price": 10,
+      "type": "deco",
+      "width": 1,
+      "height": 1
+    },
+    "18": {
+      "texture": "flowerbed_03",
+      "name": "Chậu Hoa Đỏ",
+      "price": 10,
+      "type": "deco",
+      "width": 1,
+      "height": 1
+    },
+    "19": {
+      "texture": "caydua",
+      "name": "Cây dừa",
+      "price": 10,
+      "type": "deco",
+      "width": 1,
+      "height": 1
+    },
+    "20": {
+      "texture": "tuongcaoboi",
+      "name": "Tượng Cao Bồi",
+      "price": 10,
+      "type": "deco",
+      "width": 1,
+      "height": 1
+    },
+    "21": {
+      "texture": "tuongsutu",
+      "name": "Tượng Sư Tử",
+      "price": 10,
+      "type": "deco",
+      "width": 2,
+      "height": 3
+    },
+    "22": {
+      "texture": "cayxanh",
+      "name": "Cây Xanh",
+      "price": 10,
+      "type": "deco",
+      "width": 1,
+      "height": 1
+    },
+    "23": {
+      "texture": "buicay",
+      "name": "Bụi Cây",
       "price": 10,
       "type": "deco",
       "width": 1,
@@ -188,7 +236,6 @@
   "tabs": {
     "house": [
       1,
-      2,
       3,
       4,
       5,
@@ -205,7 +252,14 @@
       16
     ],
     "decoration": [
-      17
+	  2,
+      17,
+      18,
+      19,
+      20,
+      21,
+	  22,
+      23
     ]
   },
   "anim": {

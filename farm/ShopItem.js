@@ -69,11 +69,15 @@ p.loadDataCompleted = function (evt) {
     var animation_data = this.loader.getResult(this.shop_data.name).anim;
     var ss = new createjs.SpriteSheet(animation_data);
     this._icon = new createjs.Sprite(ss);
-    this._scale_rate = 100 / this._icon.getBounds().width;
-    this._icon.scaleX = this._scale_rate;
-    this._icon.scaleY = this._scale_rate;
+    if( this.shop_data.type == ENTITY_TYPE_BUILDING )
+    {
+        this._scale_rate = 100 / this._icon.getBounds().width;
+        this._icon.scaleX = this._scale_rate;
+        this._icon.scaleY = this._scale_rate;
+    }
+
     this._icon.x = 76;
-    this._icon.y = 90;
+    this._icon.y = 100;
     this._icon.gotoAndStop(ss.getNumFrames() - 1);
     this.addChild(this._icon);
 
@@ -99,8 +103,8 @@ p.handleEvt = function (evt) {
         }
     }
     else if (evt.type == "rollover") {
-        this._icon.scaleX = this._scale_rate * 1.1;
-        this._icon.scaleY = this._scale_rate * 1.1;
+        this._icon.scaleX = this._scale_rate * 1.05;
+        this._icon.scaleY = this._scale_rate * 1.05;
     }
     else if (evt.type == "rollout") {
         this._icon.scaleX = this._scale_rate;
