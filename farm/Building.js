@@ -53,9 +53,9 @@ IsoBuidling.prototype.handleEvt = function (evt) {
     if (evt.type == "rollover") {
         gEntityInfo.show(true, this.x, this.y);
         if (this.canHarvest()) {
-            gEntityInfo.setInfo(this.shop_data.name, "Click to collect profits", null);
+            gEntityInfo.setInfo(this.shop_data.name, gTextData["text1"], null);
         } else {
-            gEntityInfo.setInfo(this.shop_data.name, "Harvest in: ", this);
+            gEntityInfo.setInfo(this.shop_data.name, gTextData["text2"], this);
         }
     }
     else if (evt.type == "rollout") {
@@ -67,7 +67,7 @@ IsoBuidling.prototype.handleEvt = function (evt) {
 
                 if (gUserId == gCurUserId) {
                     if (gHud.getEnegry() <= 0) {
-                        showTextError("not enough enegry!", this.x, this.y);
+                        showTextError(gTextData["text4"], this.x, this.y);
                     } else {
                         this._isHarvesting = true;
                         new HarvestBar(true).show(this, this.x, this.y);
@@ -80,7 +80,7 @@ IsoBuidling.prototype.handleEvt = function (evt) {
                         gfriendList[gCurUserId] -= 1;
                     }
                     else {
-                        showTextError("come back tomorrow!", this.x, this.y);
+                        showTextError(gTextData["text5"], this.x, this.y);
                     }
                 }
 

@@ -69,7 +69,14 @@ p.loadDataCompleted = function (evt) {
     var animation_data = this.loader.getResult(this.shop_data.name).anim;
     var ss = new createjs.SpriteSheet(animation_data);
     this._icon = new createjs.Sprite(ss);
-    if( this.shop_data.type == ENTITY_TYPE_BUILDING )
+
+    if( this.shop_data.texture == "tokyo_tower" )
+    {
+        this._scale_rate = 0.3;
+        this._icon.scaleX = this._scale_rate;
+        this._icon.scaleY = this._scale_rate;
+    }
+    else if( this.shop_data.type == ENTITY_TYPE_BUILDING )
     {
         this._scale_rate = 100 / this._icon.getBounds().width;
         this._icon.scaleX = this._scale_rate;
@@ -99,7 +106,7 @@ p.handleEvt = function (evt) {
             gCursor.attachIsoEntity(entity);
             gCursor.setState(CURSOR_BUY);
         }else{
-            this.error("not enough gold");
+            this.error(gTextData["text3"]);
         }
     }
     else if (evt.type == "rollover") {

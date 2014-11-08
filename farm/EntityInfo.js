@@ -40,10 +40,10 @@ p.update = function(cur_seconds){
         var wait_seconds = this._curBuilding.last_harvest + this._curBuilding.shop_data.time - cur_seconds;
         if( wait_seconds > 0 )
         {
-            this._txtDes.text = "Harvest in: " + toHHMMSS(wait_seconds);
+            this._txtDes.text = gTextData["text2"] + toHHMMSS(wait_seconds);
         }
         else{
-            this._txtDes.text = "Click to collect profits";
+            this._txtDes.text = gTextData["text1"];
         }
     }
 };
@@ -74,7 +74,7 @@ EntityInfo.prototype.initialize = function () {
     this.addChild(this._txtName_stroke);
 
 
-    this._txtDes = new createjs.Text("click to collect profits", "bold 12px Arial", "#FFF");
+    this._txtDes = new createjs.Text(gTextData["text1"], "bold 12px Arial", "#FFF");
     this._txtDes.textAlign = "center";
     this._txtDes.x = 0;
     this._txtDes.y = 5;

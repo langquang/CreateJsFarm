@@ -15,6 +15,7 @@ p._entities = new HashTable({});
 p._isoLastMouseDown = null;
 p._isoIsPanning = false;
 p.children = [];
+p.zorderList = [];
 p.product_gold = [];
 p._genId = 0;
 
@@ -205,14 +206,20 @@ p.add = function (isoEntity) {
 
     this._entities.setItem(isoEntity.entityId, isoEntity);
     this.children.push(isoEntity);
+
     if( isoEntity.entityType == ENTITY_TYPE_BUILDING ){
         this.product_gold.push(isoEntity);
+        gIsoContainer.addChild(isoEntity);
+        this.zorderList.push(isoEntity);
     }
     else if(isoEntity.entityType == ENTITY_TYPE_ROAD){
         this.execRoad(isoEntity, true);
+        gRoadsContainer.addChild(isoEntity);
     }
-    gIsoContainer.addChild(isoEntity);
-
+    else if( isoEntity.entityType == ENTITY_TYPE_DECO ){
+        gIsoContainer.addChild(isoEntity);
+        this.zorderList.push(isoEntity);
+    }
 
     return true;
 
@@ -238,6 +245,11 @@ p.remove = function (isoEntity) {
         this.children.splice(index, 1);
     }
 
+    index = this.zorderList.indexOf(isoEntity);
+    if (index > -1) {
+        this.zorderList.splice(index, 1);
+    }
+
     if( isoEntity.entityType == ENTITY_TYPE_BUILDING ){
         index = this.product_gold.indexOf(isoEntity);
         if (index > -1) {
@@ -252,6 +264,7 @@ p.removeAll = function(){
     this.initialize();
     gIsoContainer.removeAllChildren();
     this.children = [];
+    this.zorderList = [];
 };
 
 p.getEntityAt = function (cellX, cellY) {

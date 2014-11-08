@@ -16,7 +16,7 @@ var _msg_boots_ = "boots";
 var gfriendList;
 //====================================== RECIVE ==================================================
 socket.on(_msg_login_, function (res) {
-    console.log("Login response" + JSON.stringify(res));
+//    console.log("Login response" + JSON.stringify(res));
     gLoginData = res;
     gfriendList = res.friend;
     var buildings = res.buildings;
@@ -36,6 +36,17 @@ socket.on(_msg_login_, function (res) {
     gDeltaTime = res.time - Math.floor(new Date().getTime() / 1000);
     console.log("login success");
     onLoginComplete();
+
+    // =============================== export map editor ===============================
+    var list = gIsoState.children;
+    var json = [];
+    list.forEach(function(element, index, array){
+        var obj = {type : element.shop_data.id, x : element.cellX, y : element.cellY};
+        json.push( obj );
+    });
+    //================================ end map editor ==================================
+
+    console.log(JSON.stringify(json));
 });
 
 socket.on(_msg_buy_, function (res) {

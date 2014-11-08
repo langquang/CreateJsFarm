@@ -102,7 +102,7 @@ HarvestBar.prototype.initialize = function (isHarvest) {
     this._runner.alpha = 0.7;
     this.addChild(this._runner);
 
-    this._txtDes = new createjs.Text("collecting...", "bold 12px Arial", "#FFF");
+    this._txtDes = new createjs.Text(gTextData["text6"], "bold 12px Arial", "#FFF");
     this._txtDes.textAlign = "center";
     this._txtDes.x = 50;
     this._txtDes.y = 5;

@@ -123,6 +123,7 @@ var gCurUserId = gUserId;
 
 // config
 var gItemConfig;
+var gTextData;
 // embed
 var gLoader;
 var gMap_Icons;
@@ -261,7 +262,7 @@ function tick(event) {
     gCur_seconds = getSeconds();
 
     if (gIsoState) {
-        zorder(gIsoState.children);
+        zorder(gIsoState.zorderList);
         gIsoState.product_gold.forEach(function(elemment, index, array){
             elemment.checkHarvest(gCur_seconds);
         })
@@ -331,7 +332,8 @@ function loadData() {
         {src: "assets/map_icons.json", id: "map_icons"},
         {src: "assets/map_icons.png", id: "map_icons_texture"},
         {src: "assets/gold.json", id: "gold"},
-        {src: "assets/gold.png", id: "gold_texture"}
+        {src: "assets/gold.png", id: "gold_texture"},
+        {src: "assets/localize.json", id: "localize"}
     ];
 
     // loader is global
@@ -346,6 +348,8 @@ function loadDataCompleted(evt) {
     for (var key in gItemConfig) {
         gItemConfig[key].id = key;
     }
+
+    gTextData = gLoader.getResult("localize");
 
     gMap_Icons = new createjs.SpriteSheet(gLoader.getResult("map_icons"));
     gGoldSheet = new createjs.SpriteSheet(gLoader.getResult("gold"));
