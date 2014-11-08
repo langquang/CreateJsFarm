@@ -3,6 +3,8 @@
 <head>
 <title>EaselJS Example: Bitmap Text</title>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta charset="UTF-8">
+<link href="assets/message_default.css" rel="stylesheet" type="text/css"/>
 <link href="assets/farmStyles.css" rel="stylesheet" type="text/css"/>
 
 <style>
@@ -20,6 +22,8 @@
     }
 </style>
 
+<!--Message box-->
+<script type="text/javascript" src="message.js"></script>
 <!-- Note: All core EaselJS classes are listed here: -->
 <script type="text/javascript" src="../src/createjs/events/Event.js"></script>
 <script type="text/javascript" src="../src/createjs/events/EventDispatcher.js"></script>
@@ -118,7 +122,7 @@ var gEntityInfo;
 var stageWidth, stageHeight;
 var gAnchorX = 2452;
 var gAnchorY = 856;
-var gUserId = "butin13";
+var gUserId = "";//""butin13
 var gCurUserId = gUserId;
 
 // config
@@ -130,6 +134,32 @@ var gMap_Icons;
 var gGoldSheet;
 var gDeltaTime = 0;
 var gIsLogin = false;
+
+function webLoaded() {
+    showInputName();
+}
+
+var box;
+function showInputName() {
+    box = dhtmlx.modalbox({
+        title: "Đăng nhập",
+        text: "<div id='form_in_box'><div><label> Tên nhân vật <input  id=\"txtName\" class='inform' type='text'></label></div><div><span class='dhtmlx_button'><input type='button' value='Vào game' onclick='checkLogin()' style='width:250px;'></span></label></div></div>",
+        width: "300px"
+    });
+    //timeout is necessary only in IE
+    setTimeout(function () {
+        box.getElementsByTagName("input")[0].focus();
+    }, 1);
+}
+
+function checkLogin() {
+    gUserId = document.getElementById("txtName").value;
+    if (gUserId != null && gUserId.length > 0) {
+        dhtmlx.modalbox.hide(box);
+        gCurUserId = gUserId;
+        init();
+    }
+}
 
 
 function init() {
@@ -248,8 +278,7 @@ function startGame() {
 }
 
 var gLoginData = null;
-function onLoginComplete()
-{
+function onLoginComplete() {
     gMainBar = new MainBar();
     gUIContainer.addChild(gMainBar);
     gIsLogin = true;
@@ -263,14 +292,14 @@ function tick(event) {
 
     if (gIsoState) {
         zorder(gIsoState.zorderList);
-        gIsoState.product_gold.forEach(function(elemment, index, array){
+        gIsoState.product_gold.forEach(function (elemment, index, array) {
             elemment.checkHarvest(gCur_seconds);
         })
     }
-    if( gEntityInfo ){
+    if (gEntityInfo) {
         gEntityInfo.update(gCur_seconds);
     }
-    if( gHud ){
+    if (gHud) {
         gHud.energycountdown(gCur_seconds);
     }
     fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
@@ -359,7 +388,7 @@ function loadDataCompleted(evt) {
 
 </script>
 </head>
-<body onload="init()">
+<body onload="webLoaded()">
 <div id="loader"></div>
 <header id="header" class="EaselJS">
 </header>
