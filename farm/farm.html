@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>EaselJS Example: Bitmap Text</title>
+<title>TheNewCity - Công nghệ web & ứng dụng</title>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <meta charset="UTF-8">
 <link href="assets/message_default.css" rel="stylesheet" type="text/css"/>
@@ -140,7 +140,7 @@ function webLoaded() {
     if (gUserId != null && gUserId.length > 0) {
         init();
     }
-    else{
+    else {
         showInputName();
     }
 
@@ -159,13 +159,21 @@ function showInputName() {
     }, 1);
 }
 
-function onKeyPress(e){
-    var regex = new RegExp("^[a-zA-Z0-9]+$");
-    var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-    if (!regex.test(key)) {
-        e.preventDefault();
-        return false;
+function onKeyPress(e) {
+
+    if (e.keyCode == 13)// enter
+    {
+        checkLogin();
     }
+    else if (e.keyCode != 8) {
+        var regex = new RegExp("^[a-zA-Z0-9]+$");
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            return false;
+        }
+    }
+
 }
 
 function checkLogin() {

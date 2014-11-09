@@ -1,6 +1,6 @@
 //this.createjs = this.createjs || {};
 
-var MAP_SIZE = 60;
+var MAP_SIZE = 80;
 
 var IsoState = function () {
     this.initialize();
@@ -118,7 +118,7 @@ p.showGrid = function (isVisible, cellX, cellY, size) {
  * @param cellY : int
  */
 p.centerOnCell = function (cellX, cellY) {
-    var screenP = cellToScreen(cellX, cellY);
+    var screenP = cellToScreen(-cellX, -cellY);
     gGameContainer.x = screenP.e(1) - gAnchorX + stageWidth / 2;
     gGameContainer.y = screenP.e(2) - gAnchorY + stageHeight / 2;
 
@@ -279,6 +279,16 @@ p.getEntityAt = function (cellX, cellY) {
     return null;
 };
 
+p.getRoadAt = function (cellX, cellY) {
+    if (this.validCell(cellX, cellY)) {
+        var isoEntity = this._entities.getItem(this.map_data[cellX][cellY]);
+        if( isoEntity != null && isoEntity.entityType == ENTITY_TYPE_ROAD ){
+            return isoEntity;
+        }
+    }
+    return null;
+};
+
 p.validCell = function (cellX, cellY) {
     if (cellX < 0) return false;
     if (cellX >= MAP_SIZE) return false;
@@ -294,21 +304,21 @@ p.execRoad = function (road, recursive) {
 
     var x = road.cellX;
     var y = road.cellY;
-    var top = this.getEntityAt(x, y - 2);
-    var bottom = this.getEntityAt(x, y + 1);
-    var left = this.getEntityAt(x - 2, y);
-    var right = this.getEntityAt(x + 1, y);
+    var top = this.getRoadAt(x, y - 2);
+    var bottom = this.getRoadAt(x, y + 1);
+    var left = this.getRoadAt(x - 2, y);
+    var right = this.getRoadAt(x + 1, y);
     if (top == null) {
-        top = this.getEntityAt(x - 1, y - 2);
+        top = this.getRoadAt(x - 1, y - 2);
     }
     if (bottom == null) {
-        bottom = this.getEntityAt(x - 1, y + 1);
+        bottom = this.getRoadAt(x - 1, y + 1);
     }
     if (left == null) {
-        left = this.getEntityAt(x - 2, y - 1);
+        left = this.getRoadAt(x - 2, y - 1);
     }
     if (right == null) {
-        right = this.getEntityAt(x + 1, y - 1);
+        right = this.getRoadAt(x + 1, y - 1);
     }
 
 
@@ -389,6 +399,6 @@ p.initialize = function () {
         }
     }
     this.createEnities();
-    this.centerOnCell(20, 10);
+    this.centerOnCell(0, 0);
 
 };

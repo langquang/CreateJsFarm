@@ -137,6 +137,12 @@ function cellToScreen(cellX, cellY) {
     return isoToScreen(isoP);
 }
 
+function cellToStage(cellX, cellY){
+    var screenP = cellToScreen(cellX, cellY);
+    var sP = gIsoContainer.localToGlobal(screenP.e(1), screenP.e(2));
+    return sP;
+}
+
 /**
  * check hitUI
  */

@@ -80,4 +80,7 @@ EntityInfo.prototype.initialize = function () {
     this._txtDes.y = 5;
     this.addChild(this._txtDes);
 
+    this.mouseEnabled = false;
+    this.mouseChildren = false;
+
 };

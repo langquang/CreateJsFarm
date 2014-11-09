@@ -36,15 +36,16 @@ socket.on(_msg_login_, function (res) {
     gDeltaTime = res.time - Math.floor(new Date().getTime() / 1000);
     console.log("login success");
     onLoginComplete();
+    gIsoState.centerOnCell(20,20);
 
     // =============================== export map editor ===============================
-//    var list = gIsoState.children;
-//    var json = [];
-//    list.forEach(function(element, index, array){
-//        var obj = {type : element.shop_data.id, x : element.cellX, y : element.cellY};
-//        json.push( obj );
-//    });
-//    console.log(JSON.stringify(json));
+    var list = gIsoState.children;
+    var json = [];
+    list.forEach(function(element, index, array){
+        var obj = {type : element.shop_data.id, x : element.cellX, y : element.cellY};
+        json.push( obj );
+    });
+    console.log(JSON.stringify(json));
 
     //================================ end map editor ==================================
 
@@ -97,6 +98,7 @@ socket.on(_msg_visit_, function (res) {
         gMainBar.showHome(gCurUserId == gUserId);
         gMainBar.setUserName(gCurUserId);
         gDarkLock.show(false);
+        gIsoState.centerOnCell(20,20);
     }
 });
 
