@@ -1,0 +1,12 @@
+{
+	"anim":
+	{
+		"animations": {},
+		"images": [
+		  "assets/game_icons.png"
+		],
+		"frames": [
+			[0,0,32,22,0,0,0],[0,22,32,22,0,0,0]
+		]
+	}
+}

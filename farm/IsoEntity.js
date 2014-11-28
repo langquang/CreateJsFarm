@@ -4,6 +4,7 @@
 var ENTITY_TYPE_ROAD = "road";
 var ENTITY_TYPE_BUILDING = "building";
 var ENTITY_TYPE_DECO = "deco";
+var ENTITY_TYPE_CHARACTOR = "charactor";
 
 var IsoEntity = function (shop_data, entityId) {
     this.initialize(shop_data, entityId);

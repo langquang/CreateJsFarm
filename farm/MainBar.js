@@ -19,6 +19,8 @@ p._btnFriendNext = null;
 p._btnFriendPrev = null;
 p._btnGoHome = null;
 p._txtUserName = null;
+p._btn_zoom_in = null;
+p._btn_zoom_out = null;
 
 // container
 p._friendListContainer = null;
@@ -82,7 +84,9 @@ p.showHome = function( isHome ){
 p.loadData = function () {
     var manifest = [
         {src: "assets/gui_hud.json", id: "gui_hud"},
-        {src: "assets/gui_hud.png", id: "gui_hud_texture"}
+        {src: "assets/gui_hud.png", id: "gui_hud_texture"},
+        {src: "assets/game_icons.json", id: "game_icons"},
+        {src: "assets/game_icons.png", id: "game_icons_texture"}
     ];
 
     // loader is global
@@ -221,10 +225,45 @@ p.loadDataCompleted = function (evt) {
 
     // set cursor icon
     gCursor.setTexture(animation_data);
+
+
+    var game_icons_anim =  this.loader.getResult("game_icons")["anim"];
+    // btn Zoom in
+    ss = new createjs.SpriteSheet(game_icons_anim);
+    this._btn_zoom_in = new createjs.Sprite(ss);
+    this._btn_zoom_in.gotoAndStop(0);
+    this._btn_zoom_in.x = 320;
+    this._btn_zoom_in.y = -150;
+    this._btn_zoom_in.on("click", this.handleBtnZoomInEvent, this);
+    this.addChild(this._btn_zoom_in);
+    // btn Zoom out
+    ss = new createjs.SpriteSheet(game_icons_anim);
+    this._btn_zoom_out = new createjs.Sprite(ss);
+    this._btn_zoom_out.gotoAndStop(1);
+    this._btn_zoom_out.x = 350;
+    this._btn_zoom_out.y = -150;
+    this._btn_zoom_out.on("click", this.handleBtnZoomOutEvent, this);
+    this.addChild(this._btn_zoom_out);
 };
 
 p.setUserName = function(username){
   this._txtUserName.text = username;
+};
+
+p.handleBtnZoomInEvent = function (evt) {
+    if (evt.type == "click") {
+        setGameZoom(1);
+    } else if (evt.type == "rollover") {
+    } else if (evt.type == "rollout") {
+    }
+};
+
+p.handleBtnZoomOutEvent = function (evt) {
+    if (evt.type == "click") {
+        setGameZoom(0.65);
+    } else if (evt.type == "rollover") {
+    } else if (evt.type == "rollout") {
+    }
 };
 
 p.handleBtnShopEvent = function (evt) {

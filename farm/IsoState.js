@@ -28,19 +28,10 @@ p.handleOnStageMove = function (evt) {
     var curPos = $V([evt.stageX, evt.stageY, 0]);
     this._isoIsPanning = curPos.distanceFrom(this._isoLastMouseDown) > 5;
     if (this._isoIsPanning) {
-        gGameContainer.x += curPos.e(1) - this._isoLastMouseDown.e(1);
-        gGameContainer.y += curPos.e(2) - this._isoLastMouseDown.e(2);
+        gGameContainer.x += (curPos.e(1) - this._isoLastMouseDown.e(1))/gGameZoom;
+        gGameContainer.y += (curPos.e(2) - this._isoLastMouseDown.e(2))/gGameZoom;
         this._isoLastMouseDown = curPos;
-
-        var bgLocal = gBackground.localToGlobal(0, 0);
-        if (bgLocal.x > 0)
-            gGameContainer.x = 0;
-        if (bgLocal.x + gBackground.getBounds().width < stageWidth)
-            gGameContainer.x = stageWidth - gBackground.getBounds().width;
-        if (bgLocal.y > 0)
-            gGameContainer.y = 0;
-        if (bgLocal.y + gBackground.getBounds().height < stageHeight)
-            gGameContainer.y = stageHeight - gBackground.getBounds().height;
+        reLocationGameContainer();
 
     }
 

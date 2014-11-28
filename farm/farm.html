@@ -102,6 +102,7 @@ var stageLocLabel;
 var stageLocLabel2;
 var gBackground;
 // container
+var gZoomContainer;
 var gGameContainer;
 var gGridContainer;
 var gRoadsContainer;
@@ -124,7 +125,8 @@ var gEntityInfo;
 var stageWidth, stageHeight;
 var gAnchorX = 2452;
 var gAnchorY = 856;
-var gUserId = "";//"butin13";
+//var gUserId = "";
+var gUserId = "butin13";
 var gCurUserId = gUserId;
 
 // config
@@ -136,6 +138,7 @@ var gMap_Icons;
 var gGoldSheet;
 var gDeltaTime = 0;
 var gIsLogin = false;
+var gGameZoom = 1;
 
 function webLoaded() {
     if (gUserId != null && gUserId.length > 0) {
@@ -174,7 +177,6 @@ function onKeyPress(e) {
             return false;
         }
     }
-
 }
 
 function checkLogin() {
@@ -204,9 +206,11 @@ function init() {
     gBackground = new createjs.Bitmap("assets/background.jpg");
 
     //===================================== container ========================================
+    gZoomContainer = new createjs.Container();
+    gStage.addChild(gZoomContainer);
     // layer 0 - Game
     gGameContainer = new createjs.Container();
-    gStage.addChild(gGameContainer);
+    gZoomContainer.addChild(gGameContainer);
     // layer 1
     gGameContainer.addChild(gBackground);
     // layer 2
@@ -383,6 +387,34 @@ function showIBShop(visible) {
     }
 }
 
+function setGameZoom(value){
+    var center_point =  gGameContainer.globalToLocal(stageWidth/2, stageHeight/2);
+
+    gZoomContainer.scaleX = value;
+    gZoomContainer.scaleY = value;
+    gGameZoom = value;
+
+    var center_point_2 =  gGameContainer.globalToLocal(stageWidth/2, stageHeight/2);
+    gGameContainer.x += center_point_2.x - center_point.x;
+    gGameContainer.y += center_point_2.y - center_point.y;
+
+    reLocationGameContainer();
+}
+
+function reLocationGameContainer(){
+    var bgLocal = gBackground.localToGlobal(0, 0);
+    if (bgLocal.x > 0)
+        gGameContainer.x = 0;
+    if (bgLocal.y > 0)
+        gGameContainer.y = 0;
+    bgLocal = gBackground.localToGlobal(gBackground.getBounds().width, 0);
+    if( bgLocal.x <  stageWidth)
+        gGameContainer.x += (stageWidth - bgLocal.x)/gGameZoom;
+    bgLocal = gBackground.localToGlobal(0, gBackground.getBounds().height);
+    if( bgLocal.y <  stageHeight)
+        gGameContainer.y += (stageHeight - bgLocal.y)/gGameZoom;
+}
+
 //=======================================Functions =========================
 function loadData() {
     var manifest = [
@@ -414,6 +446,8 @@ function loadDataCompleted(evt) {
     gGoldSheet = new createjs.SpriteSheet(gLoader.getResult("gold"));
     startGame();
 }
+
+
 
 
 </script>
