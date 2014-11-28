@@ -1,6 +1,9 @@
 //this.createjs = this.createjs || {};
 
 var MAP_SIZE = 80;
+var ZONE_PER_ROW = 8;
+var ZONE_PER_COLUMN = 8;
+var ZONE_SIZE = 10;
 
 var IsoState = function () {
     this.initialize();
@@ -20,6 +23,8 @@ p.product_gold = [];
 p._genId = 0;
 p._characterPoints = [];
 p.characters = [];
+p._zoneMap = null;
+p._zones = [];
 
 // =========================== functions ======================================
 p.handleOnStageMove = function (evt) {
@@ -562,15 +567,186 @@ p.removeCharacter = function(character){
     gIsoContainer.removeChild(character);
 };
 
+p.unlockZone = function(blockId){
+
+    var beginX = Math.floor((blockId - 1) / ZONE_PER_ROW);
+    var beginY = Math.floor((blockId - 1) % ZONE_PER_ROW);
+    this._zoneMap[beginX][beginY] = blockId;
+
+    beginX *= ZONE_SIZE;
+    beginY *= ZONE_SIZE;
+    var endX = beginX + ZONE_SIZE;
+    var endY = beginY + ZONE_SIZE;
+
+    for (var i = beginX; i < endX; i++)
+    {
+        for (var j = beginY; j < endY; j++)
+        {
+            this.map_data[i][j] = 0;
+        }
+    }
+
+    this._zones.push(blockId);
+};
+
+p.validZonePos = function(cellX, cellY){
+    return !!(cellX >= 0 && cellX < ZONE_PER_COLUMN && cellY >= 0 && cellY < ZONE_PER_ROW);
+};
+
+p.renderMyZoneBorders = function(){
+
+    gGridContainer.removeAllChildren();
+    var g = new createjs.Graphics().beginStroke("#FFF");
+    var s = new createjs.Shape(g);
+//    gGridContainer.addChild(s);
+
+//    g.beginFill("#ff0000");
+//    g.drawRect(0,0,100,100);
+//
+//    var ppoint = cellToScreen(0, 0);
+//    g.moveTo();
+
+
+    var _this = this;
+    this._zones.forEach(function (elemment, index, array) {
+        var i = Math.floor((elemment - 1) / ZONE_PER_ROW);
+        var j = Math.floor((elemment - 1) % ZONE_PER_ROW);
+
+        var _x;
+        var _y;
+
+        var top = 0;
+        var bottom = 0;
+        var left = 0;
+        var right = 0;
+
+        _x = i - 1;
+        _y = j;
+        if (_this.validZonePos(_x, _y))
+        {
+            top = _this._zoneMap[_x][_y];
+        }
+
+        _x = i + 1;
+        _y = j;
+        if (_this.validZonePos(_x, _y))
+        {
+            bottom = _this._zoneMap[_x][_y];
+        }
+
+        _x = i;
+        _y = j - 1;
+        if (_this.validZonePos(_x, _y))
+        {
+            left = _this._zoneMap[_x][_y];
+        }
+
+        _x = i;
+        _y = j + 1;
+        if (_this.validZonePos(_x, _y))
+        {
+            right = _this._zoneMap[_x][_y];
+        }
+
+        if (top == 0 || bottom == 0 || left == 0 || right == 0)
+        {
+
+            var beginX;
+            var beginY;
+            var endX;
+            var endY;
+            var p;
+
+            if (top == 0)
+            {
+                beginX = i * ZONE_SIZE;
+                beginY = j * ZONE_SIZE;
+
+                endX = beginX;
+                endY = beginY + ZONE_SIZE;
+
+                p = cellToScreen(beginX, beginY);
+                g.moveTo(p.e(1), p.e(2));
+                p = cellToScreen(endX, endY);
+                g.lineTo(p.e(1), p.e(2));
+            }
+
+            if (bottom == 0)
+            {
+                beginX = (i + 1) * ZONE_SIZE;
+                beginY = j * ZONE_SIZE;
+
+                endX = beginX;
+                endY = beginY + ZONE_SIZE;
+
+                p = cellToScreen(beginX, beginY);
+                g.moveTo(p.e(1), p.e(2));
+                p = cellToScreen(endX, endY);
+                g.lineTo(p.e(1), p.e(2));
+            }
+
+            if (left == 0)
+            {
+                beginX = i * ZONE_SIZE;
+                beginY = j * ZONE_SIZE;
+
+                endX = beginX + ZONE_SIZE;
+                endY = beginY;
+
+                p = cellToScreen(beginX, beginY);
+                g.moveTo(p.e(1), p.e(2));
+                p = cellToScreen(endX, endY);
+                g.lineTo(p.e(1), p.e(2));
+            }
+
+            if (right == 0)
+            {
+                beginX = i * ZONE_SIZE;
+                beginY = (j + 1) * ZONE_SIZE;
+
+                endX = beginX + ZONE_SIZE;
+                endY = beginY;
+
+                p = cellToScreen(beginX, beginY);
+                g.moveTo(p.e(1), p.e(2));
+                p = cellToScreen(endX, endY);
+                g.lineTo(p.e(1), p.e(2));
+            }
+        }
+    });
+
+    gGridContainer.addChild(s);
+
+};
+
 p.initialize = function () {
     this.map_data = [];
     for (var i = 0; i < MAP_SIZE; i++) {
         this.map_data[i] = [];
         for (var j = 0; j < MAP_SIZE; j++) {
-            this.map_data[i][j] = 0;
+            this.map_data[i][j] = -1;
         }
     }
     this.createEnities();
     this.centerOnCell(0, 0);
+
+    this._zoneMap = [];
+    for ( i = 0; i < ZONE_PER_ROW; i++) {
+        this._zoneMap[i] = [];
+        for ( j = 0; j < ZONE_PER_COLUMN; j++) {
+            this._zoneMap[i][j] = 0;
+        }
+    }
+    this._zones = [];
+
+    var _this = this;
+    var unlockZone = [1,2,3,4,5,6,9,10,11,12,13,14,17,18,19,20,21,22,25,26,27,28,29,30,33,34,35,36,37,38,41,42,43,44,45,46];
+    unlockZone.forEach(function (elemment, index, array) {
+
+        _this.unlockZone(elemment);
+
+    });
+
+    this.renderMyZoneBorders()
 
 };
