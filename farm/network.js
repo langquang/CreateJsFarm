@@ -49,6 +49,9 @@ socket.on(_msg_login_, function (res) {
 
     //================================ end map editor ==================================
 
+    // create character
+    gIsoState.createCharacters();
+
 });
 
 socket.on(_msg_buy_, function (res) {

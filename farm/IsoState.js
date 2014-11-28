@@ -18,6 +18,8 @@ p.children = [];
 p.zorderList = [];
 p.product_gold = [];
 p._genId = 0;
+p._characterPoints = [];
+p.characters = [];
 
 // =========================== functions ======================================
 p.handleOnStageMove = function (evt) {
@@ -130,6 +132,9 @@ p.createIsoEntity = function (shop_data, cellX, cellY) {
     else if (shop_data.type == ENTITY_TYPE_BUILDING) {
         entity = new IsoBuidling(shop_data, this._genId);
     }
+    else if (shop_data.type == ENTITY_TYPE_CHARACTER) {
+        entity = new Character(this._genId);
+    }
     else {
         entity = new IsoEntity(shop_data, this._genId);
     }
@@ -182,7 +187,7 @@ p.canAdd = function (isoEntity) {
  * @return true if success
  */
 p.add = function (isoEntity) {
-    if (!this.canAdd(isoEntity)) {
+    if (isoEntity.entityType != ENTITY_TYPE_CHARACTER &&  !this.canAdd(isoEntity)) {
         return false;
     }
 
@@ -210,6 +215,10 @@ p.add = function (isoEntity) {
     else if( isoEntity.entityType == ENTITY_TYPE_DECO ){
         gIsoContainer.addChild(isoEntity);
         this.zorderList.push(isoEntity);
+    }
+    else if( isoEntity.entityType == ENTITY_TYPE_CHARACTER ){
+         var exception;
+         console.log(exception.error);
     }
 
     return true;
@@ -248,6 +257,9 @@ p.remove = function (isoEntity) {
         }
     }else if( isoEntity.entityType == ENTITY_TYPE_ROAD ){
         gRoadsContainer.removeChild(isoEntity);
+    }else if( isoEntity.entityType == ENTITY_TYPE_CHARACTER ){
+        var exception;
+        console.log(exception.error);
     }
 
 
@@ -260,6 +272,7 @@ p.removeAll = function(){
     gRoadsContainer.removeAllChildren();
     this.children = [];
     this.zorderList = [];
+    this._characterPoints = [];
 };
 
 p.getEntityAt = function (cellX, cellY) {
@@ -380,6 +393,174 @@ p.execRoad = function (road, recursive) {
 
 };
 
+p.createCharacters = function(){
+    this.findAllCharacterPoints();
+    var length = this._characterPoints.length < 20 ? this._characterPoints.length : 20;
+    for (var i = 0; i < length; i++) {
+        var character = this.createIsoEntity({type: ENTITY_TYPE_CHARACTER}, this._characterPoints[i].e(1), this._characterPoints[i].e(2));
+        this.addCharacter(character);
+    }
+};
+
+p.findAllCharacterPoints = function(){
+    this._characterPoints = [];
+    for (var i = 0; i < MAP_SIZE; i++)
+    {
+        for (var j = 0; j < MAP_SIZE; j++)
+        {
+            var road = this.getRoadAt(i, j);
+            if (road != null)
+            {
+                var top = this.getRoadAt(i, j - 1);
+                var bottom = this.getRoadAt(i, j + 1);
+                var left = this.getRoadAt(i - 1, j);
+                var right = this.getRoadAt(i + 1, j);
+
+                if (left == null && top == null && right != null && bottom != null)	// left-top
+                {
+                    this._characterPoints.push($V([i, j]));
+                }
+                else if (left == null && top != null && right != null && bottom == null)	// left-bottom
+                {
+                    this._characterPoints.push($V([i, j]));
+                }
+                else if (left != null && top == null && right == null && bottom != null)	// right-top
+                {
+                    this._characterPoints.push($V([i, j]));
+                }
+                else if (left != null && top != null && right == null && bottom == null)	// right-bottom
+                {
+                    this._characterPoints.push($V([i, j]));
+                }
+                else if(left != null && top != null && right != null && bottom != null){
+                    var left_bottom = this.getRoadAt(i-1, j + 1);
+                    if( left_bottom == null ){
+                        this._characterPoints.push($V([i, j]));
+                    }
+
+                    var right_bottom = this.getRoadAt(i+1, j + 1);
+                    if( right_bottom == null ){
+                        this._characterPoints.push($V([i, j]));
+                    }
+
+                    var left_top = this.getRoadAt(i-1, j - 1);
+                    if( left_top == null ){
+                        this._characterPoints.push($V([i, j]));
+                    }
+
+                    var right_top = this.getRoadAt(i+1, j - 1);
+                    if( left_top == null ){
+                        this._characterPoints.push($V([i, j]));
+                    }
+                }
+            }
+        }
+    }
+};
+
+p.findNextWalkingPoint = function(src)
+{
+    if( src.e(1) == 57 && src.e(2) == 14 )
+    {
+        var aa =0
+        aa++;
+    }
+    var targetPoints = [];
+    var j, begin, end, add;
+    for(var i = 0; i< this._characterPoints.length; i++)
+    {
+        var p = this._characterPoints[i];
+        add = false;
+        if ((p.e(1) != src.e(1) && p.e(2) == src.e(2)))
+        {
+            add = true;
+            if(p.e(1) < src.e(1) )
+            {
+                begin = p.e(1);
+                end = src.e(1);
+                for(j=begin; j<end;j++){
+                    if( this.getRoadAt(j, p.e(2)) == null){
+                        add = false;
+                        break;
+                    }
+                }
+
+            }
+            else{
+                begin = src.e(1);
+                end = p.e(1);
+                for(j=begin; j<end;j++){
+                    if( this.getRoadAt(j, p.e(2)) == null){
+                        add = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if((p.e(1) == src.e(1) && p.e(2) != src.e(2)))
+        {
+            add = true;
+            if(p.e(2) < src.e(2) )
+            {
+                begin = p.e(2);
+                end = src.e(2);
+                for(j=begin; j<end;j++){
+                    if( this.getRoadAt(p.e(1), j) == null){
+                        add = false;
+                        break;
+                    }
+                }
+            }
+            else{
+                begin = src.e(2);
+                end = p.e(2);
+                for(j=begin; j<end;j++){
+                    if( this.getRoadAt(p.e(1),j) == null){
+                        add = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if( add )
+        {
+            targetPoints.push($V([p.e(1), p.e(2), 0]));
+        }
+    }
+
+    if (targetPoints.length == 0)
+    {
+        return null;
+    }
+
+    return targetPoints[getRandomInt(0, targetPoints.length - 1)];
+};
+
+p.getRandomCharacterPoint = function(){
+    return this._characterPoints[getRandomInt(0, this._characterPoints.length - 1)];
+};
+
+
+p.addCharacter = function(character){
+    this.characters.push(character);
+    gIsoContainer.addChild(character);
+    this.zorderList.push(character);
+};
+
+p.removeCharacter = function(character){
+    var index = this.characters.indexOf(character);
+    if (index > -1) {
+        this.characters.splice(index, 1);
+    }
+
+    index = this.zorderList.indexOf(character);
+    if (index > -1) {
+        this.zorderList.splice(index, 1);
+    }
+
+    gIsoContainer.removeChild(character);
+};
 
 p.initialize = function () {
     this.map_data = [];

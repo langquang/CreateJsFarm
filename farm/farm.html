@@ -76,6 +76,7 @@
 <script type="text/javascript" src="Road.js"></script>
 <script type="text/javascript" src="Deco.js"></script>
 <script type="text/javascript" src="Building.js"></script>
+<script type="text/javascript" src="Character.js"></script>
 <script type="text/javascript" src="Helper.js"></script>
 <script type="text/javascript" src="Cursor.js"></script>
 <script type="text/javascript" src="IsoState.js"></script>
@@ -282,7 +283,7 @@ function init() {
         var isoP = stageToIso(evt.stageX, evt.stageY);
 //                stageLocLabel.text += "iso: " + isoP.e(1) + "," + isoP.e(2) + "\t\t";
         var cell = stageToCell(evt.stageX, evt.stageY);
-//                stageLocLabel.text += "cell: " + cell.e(1) + "," + cell.e(2) + "\t\t";
+                stageLocLabel.text += "cell: " + cell.e(1) + "," + cell.e(2) + "\t\t";
 
         stageLocLabel2.text = stageLocLabel.text;
 
@@ -328,7 +329,10 @@ function tick(event) {
         zorder(gIsoState.zorderList);
         gIsoState.product_gold.forEach(function (elemment, index, array) {
             elemment.checkHarvest(gCur_seconds);
-        })
+        });
+        gIsoState.characters.forEach(function (elemment, index, array) {
+            elemment.onWalking();
+        });
     }
     if (gEntityInfo) {
         gEntityInfo.update(gCur_seconds);
