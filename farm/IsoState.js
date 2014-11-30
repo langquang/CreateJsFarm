@@ -465,11 +465,6 @@ p.findAllCharacterPoints = function(){
 
 p.findNextWalkingPoint = function(src)
 {
-    if( src.e(1) == 57 && src.e(2) == 14 )
-    {
-        var aa =0
-        aa++;
-    }
     var targetPoints = [];
     var j, begin, end, add;
     for(var i = 0; i< this._characterPoints.length; i++)
