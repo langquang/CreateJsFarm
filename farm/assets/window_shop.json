@@ -14,7 +14,7 @@
     "2": {
       "texture": "road",
       "name": "Đường Phố",
-      "price": 500,
+      "price": 100,
       "income": 200,
       "time": 300,
       "type": "road",
@@ -25,7 +25,7 @@
     "3": {
       "texture": "boutique",
       "name": "Cửa Hàng",
-      "price": 500,
+      "price": 800,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -36,7 +36,7 @@
     "4": {
       "texture": "club",
       "name": "Bar Club",
-      "price": 500,
+      "price": 1000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -47,7 +47,7 @@
     "5": {
       "texture": "concert_hall",
       "name": "Phòng Hòa Nhạc",
-      "price": 500,
+      "price": 2000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -58,7 +58,7 @@
     "6": {
       "texture": "flower_shop",
       "name": "Tiệm Hoa",
-      "price": 500,
+      "price": 2500,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -69,7 +69,7 @@
     "7": {
       "texture": "hotel",
       "name": "Khách Sạn",
-      "price": 500,
+      "price": 1500,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -80,7 +80,7 @@
     "8": {
       "texture": "house",
       "name": "Nhà Tranh",
-      "price": 500,
+      "price": 300,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -91,7 +91,7 @@
     "9": {
       "texture": "mansion",
       "name": "Biệt Thự",
-      "price": 500,
+      "price": 1000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -102,7 +102,7 @@
     "10": {
       "texture": "police",
       "name": "Sở Cảnh Sát",
-      "price": 500,
+      "price": 5000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -113,7 +113,7 @@
     "11": {
       "texture": "school",
       "name": "Trường Học",
-      "price": 500,
+      "price": 3500,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -124,7 +124,7 @@
     "12": {
       "texture": "shop_shoes",
       "name": "Tiệp Giầy",
-      "price": 500,
+      "price": 2000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -135,7 +135,7 @@
     "13": {
       "texture": "slims_villa",
       "name": "Biệt Thự 2",
-      "price": 500,
+      "price": 2500,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -146,7 +146,7 @@
     "14": {
       "texture": "tennis_court",
       "name": "Sân Tennis",
-      "price": 500,
+      "price": 4500,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -157,7 +157,7 @@
     "15": {
       "texture": "tokyo_tower",
       "name": "Tháp Tokyo",
-      "price": 500,
+      "price": 10000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -168,7 +168,7 @@
     "16": {
       "texture": "villa",
       "name": "Biệt Thự 3",
-      "price": 500,
+      "price": 5000,
       "income": 200,
       "time": 300,
       "type": "building",
@@ -203,7 +203,7 @@
     "20": {
       "texture": "tuongcaoboi",
       "name": "Tượng Cao Bồi",
-      "price": 10,
+      "price": 200,
       "type": "deco",
       "width": 1,
       "height": 1
@@ -211,7 +211,7 @@
     "21": {
       "texture": "tuongsutu",
       "name": "Tượng Sư Tử",
-      "price": 10,
+      "price": 200,
       "type": "deco",
       "width": 2,
       "height": 3

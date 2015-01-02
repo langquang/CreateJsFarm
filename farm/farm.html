@@ -260,21 +260,21 @@ function init() {
     stageLocLabel.x = 10;
     stageLocLabel.y = 5;
     stageLocLabel.outline = 4;
-    gStage.addChild(stageLocLabel);
+    //gStage.addChild(stageLocLabel);
 
     var stageLocLabel2 = stageLocLabel.clone();
     stageLocLabel2.outline = false;
     stageLocLabel2.color = "#fff";
-    gStage.addChild(stageLocLabel2);
+    //gStage.addChild(stageLocLabel2);
 
     // add a text object to output the current FPS:
     fpsLabel = new createjs.Text("-- fps", "bold 14px Arial", "#FFF");
-    gStage.addChild(fpsLabel);
+    //gStage.addChild(fpsLabel);
     fpsLabel.x = 10;
     fpsLabel.y = 20;
 
     // start the tick and point it at the window so we can do some work before updating the gStage:
-    createjs.Ticker.setFPS(60);
+    createjs.Ticker.setFPS(30);
     createjs.Ticker.addEventListener("tick", tick);
     gStage.on("stagemousemove", function (evt) {
         stageLocLabel.text = "stage: " + evt.stageX + "," + evt.stageY + "\t\t";
